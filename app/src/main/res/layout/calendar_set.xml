@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_grey">
+
+    <RelativeLayout
+        android:id="@+id/calendar_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/bg_blue"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp">
+            <ImageView
+                android:id="@+id/calendar_headericon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar_header"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thời khóa biểu"
+                android:textSize="25dp"
+                android:fontFamily="@font/merriweathersanswght"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/calendar_headericon"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/setting_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="0"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendar_toolbar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/arsenalbold"
+                        android:gravity="center_vertical"
+                        android:text="Học kỳ:"
+                        android:textSize="18dp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white"
+                        app:cardCornerRadius="10dp">
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center_vertical"
+                    android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
+                    android:fontFamily="@font/KarmaMedium"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:divider="@color/grey"
+                android:padding=""
+                android:showDividers="middle">
+
+                <TableRow
+                    android:background="@color/tb_grey"
+                    android:divider="@color/grey"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Column 1"
+                        android:padding="5dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Column 2"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Column 3"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:divider="@color/grey"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Row 1, Column 1"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Row 1, Column 2"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Row 1, Column 3"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:divider="@color/grey"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="Row 2, Column 1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Row 2, Column 2"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Row 2, Column 3"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:text="Tổng số môn học đăng ký: [N/A]\nTổng số tín chỉ đăng ký: [N/A]"
+                android:fontFamily="@font/signika"
+                android:textSize="13dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </ScrollView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:cardCornerRadius="40dp"
+        android:layout_margin="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="0"
+                    android:src="@drawable/grey_home" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Trang chủ"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/ARIALNB"
+                    android:textSize="18dp"
+                    android:textColor="@color/grey"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="0"
+                    android:src="@drawable/search_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Tra cứu"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/ARIALNB"
+                    android:textSize="18dp"
+                    android:textColor="@color/grey"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="0"
+                    android:src="@drawable/profile_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Hồ sơ"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/ARIALNB"
+                    android:textSize="18dp"
+                    android:textColor="@color/grey"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
