@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/grey_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/search_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -210,7 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/profile_icon" />
                 <TextView
                     android:layout_width="wrap_content"
