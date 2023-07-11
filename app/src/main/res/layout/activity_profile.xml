@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hồ sơ cá nhân"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:fontFamily="@font/merriweathersanswght"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/profile_headericon"
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Full Name"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <EditText
                     android:id="@+id/user_name"
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Phone Number"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <EditText
                     android:id="@+id/user_number"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Email"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/user_email"
@@ -174,8 +174,8 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Trang chủ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
-                    android:textSize="18dp"
+                    android:fontFamily="@font/arialnb"
+                    android:textSize="18sp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
             <LinearLayout
@@ -196,8 +196,8 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Tra cứu"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
-                    android:textSize="18dp"
+                    android:fontFamily="@font/arialnb"
+                    android:textSize="18sp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
             <LinearLayout
@@ -218,8 +218,8 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Hồ sơ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
-                    android:textSize="18dp"
+                    android:fontFamily="@font/arialnb"
+                    android:textSize="18sp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
         </RelativeLayout>

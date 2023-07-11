@@ -12,38 +12,48 @@
         android:id="@+id/calendar_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/bg_blue"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="15dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp">
+
             <ImageView
                 android:id="@+id/calendar_headericon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/calendar_header"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/calendar_header" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/calendar_headericon"
+                android:fontFamily="@font/merriweathersanswght"
                 android:text="Thời khóa biểu"
                 android:textSize="25dp"
-                android:fontFamily="@font/merriweathersanswght"
-                android:textStyle="bold"
-                android:layout_toRightOf="@id/calendar_headericon"
-                android:layout_marginLeft="10dp"
-                android:layout_centerVertical="true"/>
+                android:textStyle="bold" />
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/setting_icon"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="0"/>
+                android:background="0"
+                android:src="@drawable/setting_icon" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -79,7 +89,7 @@
                         android:fontFamily="@font/arsenalbold"
                         android:gravity="center_vertical"
                         android:text="Học kỳ:"
-                        android:textSize="18dp" />
+                        android:textSize="18sp" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -100,7 +110,7 @@
                     android:layout_marginTop="30dp"
                     android:gravity="center_vertical"
                     android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
-                    android:fontFamily="@font/KarmaMedium"
+                    android:fontFamily="@font/karmamedium"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -111,7 +121,6 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@color/white"
                 android:divider="@color/grey"
-                android:padding=""
                 android:showDividers="middle">
 
                 <TableRow
@@ -241,7 +250,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Trang chủ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
@@ -263,7 +272,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Tra cứu"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
@@ -285,7 +294,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Hồ sơ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
