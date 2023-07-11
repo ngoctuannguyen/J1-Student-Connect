@@ -43,7 +43,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="0"/>
+                android:background="@null"/>
         </RelativeLayout>
     </RelativeLayout>
 
@@ -100,7 +100,7 @@
                     android:layout_marginTop="30dp"
                     android:gravity="center_vertical"
                     android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
-                    android:fontFamily="@font/KarmaMedium"
+                    android:fontFamily="@font/karmamedium"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -111,7 +111,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@color/white"
                 android:divider="@color/grey"
-                android:padding=""
+                android:padding="0dp"
                 android:showDividers="middle">
 
                 <TableRow
@@ -233,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/grey_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -241,7 +241,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Trang chủ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
@@ -255,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/search_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -263,7 +263,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Tra cứu"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>
@@ -277,7 +277,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/profile_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -285,7 +285,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Hồ sơ"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ARIALNB"
+                    android:fontFamily="@font/arialnb"
                     android:textSize="18dp"
                     android:textColor="@color/grey"/>
             </LinearLayout>

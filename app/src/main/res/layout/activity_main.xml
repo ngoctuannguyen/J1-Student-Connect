@@ -50,7 +50,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="15dp"
-                android:background="0"
+                android:background="@null"
                 android:src="@drawable/baseline_notifications_24" />
         </RelativeLayout>
 
@@ -79,7 +79,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/dogg"
-                    android:background="0"
+                    android:background="@null"
                     android:scaleType="centerCrop"/>
 
                 <RelativeLayout
@@ -113,6 +113,7 @@
                         android:layout_below="@+id/name"/>
 
                     <ImageButton
+                        android:contentDescription="Lịch"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -121,7 +122,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="-19dp"
-                        android:background="0"
+                        android:background="@null"
                         android:src="@drawable/calendar" />
 
                 </RelativeLayout>
@@ -130,7 +131,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="0"
+                android:background="@null"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
@@ -160,7 +161,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="8dp"
-                            android:background="0"
+                            android:background="@null"
                             android:src="@drawable/close_icon" />
                     </RelativeLayout>
 
@@ -194,7 +195,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -231,7 +232,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -266,9 +267,10 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
+                                    android:contentDescription="number"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/blue_fullfillcircle" />
 
                                 <TextView
@@ -305,7 +307,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -342,7 +344,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -379,7 +381,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -416,7 +418,7 @@
                                 <ImageButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="0"
+                                    android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
                                 <TextView
@@ -724,7 +726,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/blue_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -746,7 +748,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/search_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -768,7 +770,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="0"
+                    android:background="@null"
                     android:src="@drawable/profile_icon" />
                 <TextView
                     android:layout_width="wrap_content"
