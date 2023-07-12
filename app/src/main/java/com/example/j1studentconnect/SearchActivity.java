@@ -5,25 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
-    private ImageButton btnSearch;
+    private ImageButton btnGreyHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.in4_search);
 
-        btnSearch = (ImageButton) findViewById(R.id.homeSearch);
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
+        btnGreyHome = (ImageButton) findViewById(R.id.greyHomeSearch);
+        btnGreyHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                startActivity(new Intent(SearchActivity.this, MainActivity.class));
             }
         });
     }
-
 }

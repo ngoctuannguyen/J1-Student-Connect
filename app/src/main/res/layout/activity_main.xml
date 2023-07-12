@@ -727,6 +727,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/blueHome"
                     android:src="@drawable/blue_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -749,6 +750,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/homeSearch"
                     android:src="@drawable/search_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -771,6 +773,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/homeProfile"
                     android:src="@drawable/profile_icon" />
                 <TextView
                     android:layout_width="wrap_content"
