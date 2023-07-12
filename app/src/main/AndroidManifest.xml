@@ -14,7 +14,9 @@
         tools:targetApi="31">
         <activity
             android:name=".SearchActivity"
-            android:exported="false" />
+            android:exported="true" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".CalendarActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

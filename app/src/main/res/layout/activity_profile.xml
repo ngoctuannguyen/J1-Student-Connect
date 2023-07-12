@@ -173,7 +173,7 @@
                     android:layout_height="38dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:id="@+id/home"
+                    android:id="@+id/homeProfile"
                     android:padding="10dp"
                     android:src="@drawable/grey_home" />
 
@@ -196,7 +196,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/searchIcon"
+                    android:id="@+id/searchProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
