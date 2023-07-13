@@ -8,13 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
                         btnCalendarHotkey, btnAvatar, btnX;
 
-    CardView ConvenientCard;
+    private CardView ConvenientCard;
+    private TextView txtToday, txtRecover;
+    private Calendar today = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +28,20 @@ public class MainActivity extends AppCompatActivity {
         ConstructButton();
         ClickButton();
         ConstructLayout();
+        ConstructTextView();
+        RenderToday();
+    }
+
+    private void ConstructTextView(){
+
+        txtToday = (TextView) findViewById(R.id.today);
+        txtRecover = (TextView) findViewById(R.id.recover);
+    }
+
+    private void RenderToday(){
+        String date;
+        date = today.get(Calendar.DATE) + " Tháng " + (today.get(Calendar.MONTH) + 1) + ", " + today.get(Calendar.YEAR);
+        txtToday.setText(date);
     }
 
     private void ConstructButton(){
@@ -81,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConvenientCard.setVisibility(View.GONE);
-
+                txtRecover.setVisibility(View.VISIBLE);
             }
         });
 
