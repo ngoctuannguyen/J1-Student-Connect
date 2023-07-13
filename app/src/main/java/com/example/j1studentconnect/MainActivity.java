@@ -1,4 +1,5 @@
 package com.example.j1studentconnect;
+//import State.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -16,26 +17,26 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
                         btnCalendarHotkey, btnAvatar, btnX;
-
+    private Button btnRecover;
     private CardView ConvenientCard;
-    private TextView txtToday, txtRecover;
+    private TextView txtToday;
     private Calendar today = Calendar.getInstance();
+    public static boolean recover = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ConstructLayout();
         ConstructButton();
         ClickButton();
-        ConstructLayout();
-        ConstructTextView();
-        RenderToday();
     }
 
     private void ConstructTextView(){
 
+        //txtRecover = (TextView) findViewById(R.id.recover);
         txtToday = (TextView) findViewById(R.id.today);
-        txtRecover = (TextView) findViewById(R.id.recover);
+
     }
 
     private void RenderToday(){
@@ -58,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
     private void ConstructLayout(){
 
         ConvenientCard = (CardView) findViewById(R.id.convenientNoti);
+        btnRecover = (Button) findViewById(R.id.recover);
+        if (recover == false) {
+
+            ConstructTextView();
+            RenderToday();
+        }
+        else {
+            ConvenientCard.setVisibility(View.GONE);
+            btnRecover.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -98,10 +109,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnX.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                ConvenientCard.setVisibility(View.GONE);
-                txtRecover.setVisibility(View.VISIBLE);
+
+                if (recover == false){
+                    recover = true;
+                    ConvenientCard.setVisibility(View.GONE);
+                    btnRecover.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        btnRecover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConvenientCard.setVisibility(View.VISIBLE);
+                btnRecover.setVisibility(View.GONE);
+                recover = false;
             }
         });
 

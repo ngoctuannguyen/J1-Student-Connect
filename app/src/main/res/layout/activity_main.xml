@@ -592,16 +592,17 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/BehindTheMiniCalen"
+                android:textSize="10dp"
                 android:fontFamily="@font/arsenalbold"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="20dp"
                 android:id="@+id/recover"
                 android:textColor="@color/red"
-                android:background="@color/yellow"
                 android:gravity="center"/>
 
             <LinearLayout
