@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ProfileActivity extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     private ImageButton btnHomeProfile, btnSearchProfile;
     @Override
@@ -22,14 +22,14 @@ public class ProfileActivity extends AppCompatActivity {
         btnHomeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                startActivity(new Intent(Profile.this, MainActivity.class));
             }
         });
 
         btnSearchProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, SearchActivity.class));
+                startActivity(new Intent(Profile.this, Search.class));
             }
         });
 

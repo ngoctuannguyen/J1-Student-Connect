@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">J1 Student Connect</string>
+    <string name="login">Đăng nhập</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
     <string name="notify">Menu item title</string>
     <string-array name="spinner_semester">
         <item>Học kỳ 1 năm 2022 - 2023</item>
@@ -10,5 +13,7 @@
         <string name="Recovery">Khôi phục</string>
         <string name="MiniCalendar">Mini Calendar</string>
     </string>
+    <string name="ClickToLogin">Bấm để đăng nhập</string>
+
 
 </resources>

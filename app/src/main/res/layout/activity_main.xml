@@ -20,7 +20,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/logoUET"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -44,8 +43,9 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:contentDescription="notification"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_alignTop="@+id/J1SC"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
@@ -80,6 +80,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:contentDescription="avatar"
                     android:id="@+id/dogAvt"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -88,7 +89,6 @@
                     android:src="@drawable/dogg" />
 
                 <RelativeLayout
-                    android:id="@+id/nameFrame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -122,8 +122,8 @@
 
                     <ImageButton
                         android:id="@+id/calendarHotKey"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="57dp"
@@ -168,9 +168,11 @@
                             android:textSize="20sp" />
 
                         <ImageButton
+
+                            android:contentDescription="cancel"
                             android:id="@+id/x"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="8dp"
@@ -206,8 +208,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -243,8 +246,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -280,8 +284,8 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:contentDescription="number"
                                     android:src="@drawable/blue_fullfillcircle" />
@@ -318,8 +322,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -355,8 +360,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -392,8 +398,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -429,8 +436,9 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:contentDescription="days"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:background="@null"
                                     android:src="@drawable/fullfillcircle" />
 
@@ -630,6 +638,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
+                                android:contentDescription="time-table"
                                 android:id="@+id/TimeTable"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -663,7 +672,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
-                                android:id="@+id/MakeRequest"
+                                android:contentDescription="request"
                                 android:layout_width="match_parent"
                                 android:layout_height="94dp"
                                 android:background="@color/white"
@@ -703,7 +712,6 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
-                                android:id="@+id/LearningResults"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
@@ -736,7 +744,6 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
-                                android:id="@+id/LearningRegister"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
@@ -780,11 +787,11 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:contentDescription="home"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:id="@+id/blueHome"
                     android:src="@drawable/blue_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -803,8 +810,9 @@
                 android:orientation="vertical"
                 android:layout_centerInParent="true">
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:contentDescription="search"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
                     android:id="@+id/homeSearch"
@@ -826,8 +834,9 @@
                 android:layout_alignParentEnd="true"
                 android:orientation="vertical">
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:contentDescription="profile"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
                     android:id="@+id/homeProfile"
