@@ -5,4 +5,10 @@
         <item>Học kỳ 1 năm 2022 - 2023</item>
         <item>Học kỳ 2 năm 2022 - 2023</item>
     </string-array>
+    <string name="inspiredSentences">Trên bước đường thành công không có dấu chân của kẻ lười biếng</string>
+    <string name="BehindTheMiniCalen">
+        <string name="Recovery">Khôi phục</string>
+        <string name="MiniCalendar">Mini Calendar</string>
+    </string>
+
 </resources>

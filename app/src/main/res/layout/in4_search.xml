@@ -75,7 +75,7 @@
                     android:paddingRight="10sp"
                     android:paddingTop="5sp"
                     android:paddingBottom="5sp"
-                    android:text="VD: INT3120 50"
+                    android:hint="VD: INT3120 50"
                     android:textColor="@color/grey"
                     android:background="@drawable/edit_text_background"/>
                 <LinearLayout
@@ -294,6 +294,7 @@
                 android:orientation="vertical">
                 <ImageButton
                     android:layout_width="48sp"
+                    android:id="@+id/greyHomeSearch"
                     android:layout_height="48sp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
@@ -316,6 +317,7 @@
                 android:orientation="vertical"
                 android:layout_centerInParent="true">
                 <ImageButton
+                    android:id="@+id/greySearchSearch"
                     android:layout_width="48sp"
                     android:layout_height="48sp"
                     android:layout_gravity="center_horizontal"
@@ -343,6 +345,7 @@
                     android:layout_height="48sp"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/greyProfileSearch"
                     android:contentDescription="Tìm kiếm"
                     android:src="@drawable/profile_icon" />
                 <TextView
