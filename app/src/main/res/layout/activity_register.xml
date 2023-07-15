@@ -27,7 +27,7 @@
         android:src="@drawable/logo_uet" />
 
     <TextView
-        android:text="@string/login"
+        android:text="@string/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
@@ -41,11 +41,11 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/student_id"
+            android:id="@+id/register_id"
             android:hint="@string/student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-                        />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -54,8 +54,21 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/register_password"
             android:hint="@string/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/retype_password"
+            android:hint="@string/retype_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
@@ -68,16 +81,16 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_login"
-        android:text="@string/login"
+        android:id="@+id/btn_register"
+        android:text="@string/register"
         android:contentDescription="Login"
         android:layout_marginTop="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
 
     <TextView
-        android:id="@+id/register_redirect"
-        android:text="@string/register_redirect"
+        android:id="@+id/login_redirect"
+        android:text="@string/login_redirect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="17sp"

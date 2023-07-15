@@ -16,75 +16,103 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
-    TextInputEditText editTextEmail, editTextPassword;
+    TextInputEditText editTextId, editTextPassword;
     Button buttonLogin;
-    FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+    TextView registerRedirect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-        editTextEmail = findViewById(R.id.email);
+        editTextId = findViewById(R.id.student_id);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
+        registerRedirect = findViewById(R.id.register_redirect);
         progressBar = findViewById(R.id.progressBar);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
-                email = String.valueOf(editTextEmail.getText());
-                password = String.valueOf(editTextPassword.getText());
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Nhập email", Toast.LENGTH_SHORT).show();
+                if (!validateUsername() || !validatePassword()) {
+                    progressBar.setVisibility(View.GONE);
                     return;
+                } else {
+                    checkUser();
                 }
+            }
+        });
 
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Login.this, "Nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                    return;
+        registerRedirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public Boolean validateUsername() {
+        String student_id = editTextId.getText().toString();
+        if (student_id.isEmpty()) {
+            Toast.makeText(Login.this, "Hãy nhập mã sinh viên", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public Boolean validatePassword(){
+        String password = editTextPassword.getText().toString();
+        if (password.isEmpty()) {
+            Toast.makeText(Login.this, "Hãy nhập mật khẩu", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public void checkUser(){
+        String student_id = editTextId.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+        Query checkUserDatabase = reference.orderByChild("student_id").equalTo(student_id);
+        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressBar.setVisibility(View.GONE);
+                if (snapshot.exists()){
+                    editTextId.setError(null);
+                    String password_from_DB = snapshot.child(student_id).child("password").getValue(String.class);
+                    if (password_from_DB.equals(password)) {
+                        editTextId.setError(null);
+                        String id_from_DB = snapshot.child(student_id).child("student_id").getValue(String.class);
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.putExtra("student_id", id_from_DB);
+                        intent.putExtra("password", password_from_DB);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(Login.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                        editTextPassword.requestFocus();
+                    }
+                } else {
+                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ", Toast.LENGTH_SHORT).show();
+                    editTextId.requestFocus();
                 }
-
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(Login.this, "Đăng nhập thất bại",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }

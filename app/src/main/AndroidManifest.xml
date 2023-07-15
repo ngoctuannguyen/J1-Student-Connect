@@ -39,6 +39,16 @@
                 android:value=""/>
         </activity>
 
+        <!--Register-->
+        <activity
+            android:name=".Register"
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value=""/>
+        </activity>
+
         <!--Main-->
         <activity
             android:name=".MainActivity"
