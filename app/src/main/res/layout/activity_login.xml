@@ -24,6 +24,7 @@
         android:layout_width="75sp"
         android:layout_height="75sp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
         android:src="@drawable/logo_uet" />
 
     <TextView
