@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class SearchActivity extends AppCompatActivity {
+public class Search extends AppCompatActivity {
 
     private ImageButton btnSearchHome, btnSearchProfile;
     @Override
@@ -20,14 +20,14 @@ public class SearchActivity extends AppCompatActivity {
         btnSearchHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SearchActivity.this, MainActivity.class));
+                startActivity(new Intent(Search.this, MainActivity.class));
             }
         });
 
         btnSearchProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SearchActivity.this, ProfileActivity.class));
+                startActivity(new Intent(Search.this, Profile.class));
             }
         });
     }

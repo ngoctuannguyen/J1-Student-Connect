@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "481431509732",
+    "project_id": "j1-student-connect",
+    "storage_bucket": "j1-student-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481431509732:android:83c524b383addca6d42af1",
+        "android_client_info": {
+          "package_name": "com.example.j1studentconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481431509732-nic3rq3nude4apj44l9m91m280f9uegt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKoab3CIgfMXa2JPhKSsm5nx9qthPOWtc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481431509732-nic3rq3nude4apj44l9m91m280f9uegt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

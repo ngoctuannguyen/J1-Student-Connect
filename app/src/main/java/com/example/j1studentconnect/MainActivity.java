@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRecover;
     private CardView ConvenientCard;
     private TextView txtToday;
-    private Calendar today = Calendar.getInstance();
+    private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
 
     @Override
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void RenderToday(){
         String date;
-        date = today.get(Calendar.DATE) + " Tháng " + (today.get(Calendar.MONTH) + 1) + ", " + today.get(Calendar.YEAR);
+        date = today.get(java.util.Calendar.DATE) + " Tháng " + (today.get(java.util.Calendar.MONTH) + 1) + ", " + today.get(java.util.Calendar.YEAR);
         txtToday.setText(date);
     }
 
@@ -77,34 +75,34 @@ public class MainActivity extends AppCompatActivity {
         btnAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, Profile.class));
             }
         });
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+                startActivity(new Intent(MainActivity.this, Calendar.class));
             }
         });
 
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, Profile.class));
             }
         });
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                startActivity(new Intent(MainActivity.this, Search.class));
             }
         });
 
         btnCalendarHotkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+                startActivity(new Intent(MainActivity.this, Calendar.class));
             }
         });
 
