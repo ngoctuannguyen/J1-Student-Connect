@@ -97,9 +97,19 @@ public class Login extends AppCompatActivity {
                     if (password_from_DB.equals(password)) {
                         editTextId.setError(null);
                         String id_from_DB = snapshot.child(student_id).child("student_id").getValue(String.class);
+                        String name_from_DB = snapshot.child(student_id).child("name").getValue(String.class);
+                        String gender_from_DB = snapshot.child(student_id).child("gender").getValue(String.class);
+                        String email_from_DB = snapshot.child(student_id).child("email").getValue(String.class);
+                        String birthday_from_DB = snapshot.child(student_id).child("birthday").getValue(String.class);
+                        String class_from_DB = snapshot.child(student_id).child("student_class").getValue(String.class);
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         intent.putExtra("student_id", id_from_DB);
                         intent.putExtra("password", password_from_DB);
+                        intent.putExtra("name", name_from_DB);
+                        intent.putExtra("gender", gender_from_DB);
+                        intent.putExtra("email", email_from_DB);
+                        intent.putExtra("student_class", class_from_DB);
+                        intent.putExtra("birthday", birthday_from_DB);
                         startActivity(intent);
                         finish();
                     } else {

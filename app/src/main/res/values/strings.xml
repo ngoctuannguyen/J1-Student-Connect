@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">J1 Student Connect</string>
+
+
+    <!-- Login and Register strings-->
+
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
     <string name="student_id">Mã sinh viên</string>
@@ -8,6 +12,17 @@
     <string name="select_login_type">Lựa chọn phương thức đăng nhập</string>
     <string name="login_redirect">Đã có tài khoản ? Đăng nhập ngay</string>
     <string name="register_redirect">Chưa có tài khoản ? Đăng ký ngay</string>
+
+    <!-- Profile strings-->
+    <string name="student_name">Họ và tên</string>
+    <string name="birthday">Ngày sinh</string>
+    <string name="gender">Giới tính</string>
+    <string name="student_class">Lớp</string>
+    <string name="email">Email</string>
+    <string name="edit_profile">Chỉnh sửa</string>
+    <string name="logout">Đăng xuất</string>
+
+    <string name="blank">Trống</string>
     <string name="notify">Menu item title</string>
     <string-array name="spinner_semester">
         <item>Học kỳ 1 năm 2022 - 2023</item>

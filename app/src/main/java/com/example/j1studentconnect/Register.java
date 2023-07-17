@@ -45,7 +45,7 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                HelperClass helperClass = new HelperClass(student_id, password);
+                HelperClass helperClass = new HelperClass(student_id, password, "Trống", "Trống", "Trống", "Trống", "Trống");
                 reference.child(student_id).setValue(helperClass);
                 Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Register.this, Login.class);

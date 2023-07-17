@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private void ConstructTextView(){
 
         //txtRecover = (TextView) findViewById(R.id.recover);
-        txtToday = (TextView) findViewById(R.id.today);
+        txtToday = findViewById(R.id.today);
 
     }
 
@@ -45,19 +45,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void ConstructButton(){
 
-        btnSearch = (ImageButton) findViewById(R.id.homeSearch);
-        btnProfile = (ImageButton) findViewById(R.id.homeProfile);
-        btnCalendar = (ImageButton) findViewById(R.id.TimeTable);
-        btnCalendarHotkey = (ImageButton) findViewById(R.id.calendarHotKey);
-        btnAvatar = (ImageButton) findViewById(R.id.dogAvt);
-        btnX = (ImageButton) findViewById(R.id.x);
+        btnSearch = findViewById(R.id.homeSearch);
+        btnProfile = findViewById(R.id.homeProfile);
+        btnCalendar = findViewById(R.id.TimeTable);
+        btnCalendarHotkey =  findViewById(R.id.calendarHotKey);
+        btnAvatar = findViewById(R.id.dogAvt);
+        btnX = findViewById(R.id.x);
 
     }
 
     private void ConstructLayout(){
 
-        ConvenientCard = (CardView) findViewById(R.id.convenientNoti);
-        btnRecover = (Button) findViewById(R.id.recover);
+        ConvenientCard = findViewById(R.id.convenientNoti);
+        btnRecover = findViewById(R.id.recover);
         if (recover == false) {
 
             ConstructTextView();
@@ -89,7 +89,24 @@ public class MainActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Profile.class));
+                Intent intentBefore = getIntent();
+                String user_name = intentBefore.getStringExtra("name");
+                String user_email = intentBefore.getStringExtra("email");
+                String user_id = intentBefore.getStringExtra("student_id");
+                String user_password = intentBefore.getStringExtra("password");
+                String user_gender = intentBefore.getStringExtra("gender");
+                String user_class = intentBefore.getStringExtra("student_class");
+                String user_birthday = intentBefore.getStringExtra("birthday");
+
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                intent.putExtra("student_id", user_id);
+                intent.putExtra("password", user_password);
+                intent.putExtra("name", user_name);
+                intent.putExtra("gender", user_gender);
+                intent.putExtra("email", user_email);
+                intent.putExtra("student_class", user_class);
+                intent.putExtra("birthday", user_birthday);
+                startActivity(intent);
             }
         });
         btnSearch.setOnClickListener(new View.OnClickListener() {
