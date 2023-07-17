@@ -103,11 +103,11 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(Login.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
                         editTextPassword.requestFocus();
                     }
                 } else {
-                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ.", Toast.LENGTH_SHORT).show();
                     editTextId.requestFocus();
                 }
             }
