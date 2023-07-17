@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity {
                         editTextPassword.requestFocus();
                     }
                 } else {
-                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ.", Toast.LENGTH_SHORT).show();
                     editTextId.requestFocus();
                 }
             }

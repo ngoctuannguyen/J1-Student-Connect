@@ -44,7 +44,6 @@
 
             <ImageButton
                 android:contentDescription="notification"
-                android:id="@+id/Notification"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignTop="@+id/J1SC"
@@ -681,6 +680,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
+                                android:id="@+id/request"
                                 android:contentDescription="request"
                                 android:layout_width="match_parent"
                                 android:layout_height="94dp"
@@ -721,6 +721,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
+                                android:id="@+id/grades"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
@@ -753,6 +754,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageButton
+                                android:id="@+id/courses"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
