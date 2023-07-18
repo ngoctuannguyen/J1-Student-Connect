@@ -65,7 +65,6 @@ public class Profile extends AppCompatActivity {
                 return;
             }
         });
-
     }
 
     public void showAllUserData() {
