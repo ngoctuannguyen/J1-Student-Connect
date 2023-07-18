@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private void ConstructTextView(){
 
         //txtRecover = (TextView) findViewById(R.id.recover);
-        txtToday = (TextView) findViewById(R.id.today);
+        txtToday = findViewById(R.id.today);
 
     }
 
@@ -46,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void ConstructButton(){
 
-        btnSearch = (ImageButton) findViewById(R.id.homeSearch);
-        btnProfile = (ImageButton) findViewById(R.id.homeProfile);
-        btnCalendar = (ImageButton) findViewById(R.id.TimeTable);
-        btnCalendarHotkey = (ImageButton) findViewById(R.id.calendarHotKey);
-        btnAvatar = (ImageButton) findViewById(R.id.dogAvt);
-        btnX = (ImageButton) findViewById(R.id.x);
-        btnNotification = (ImageButton) findViewById(R.id.Notification);
+        btnSearch = findViewById(R.id.homeSearch);
+        btnProfile = findViewById(R.id.homeProfile);
+        btnCalendar = findViewById(R.id.TimeTable);
+        btnCalendarHotkey =  findViewById(R.id.calendarHotKey);
+        btnAvatar = findViewById(R.id.dogAvt);
+        btnX = findViewById(R.id.x);
+
     }
 
     private void ConstructLayout(){
 
-        ConvenientCard = (CardView) findViewById(R.id.convenientNoti);
-        btnRecover = (Button) findViewById(R.id.recover);
+        ConvenientCard = findViewById(R.id.convenientNoti);
+        btnRecover = findViewById(R.id.recover);
         if (recover == false) {
 
             ConstructTextView();
@@ -90,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Profile.class));
+                Intent intentBefore = getIntent();
+                String user_id = intentBefore.getStringExtra("student_id");
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                intent.putExtra("student_id", user_id);
+                startActivity(intent);
             }
         });
         btnSearch.setOnClickListener(new View.OnClickListener() {
