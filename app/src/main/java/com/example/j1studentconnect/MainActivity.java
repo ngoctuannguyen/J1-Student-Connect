@@ -14,7 +14,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
-                        btnCalendarHotkey, btnAvatar, btnX;
+                        btnCalendarHotkey, btnAvatar, btnX,
+                        btnNotification;
     private Button btnRecover;
     private CardView ConvenientCard;
     private TextView txtToday;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btnCalendarHotkey = (ImageButton) findViewById(R.id.calendarHotKey);
         btnAvatar = (ImageButton) findViewById(R.id.dogAvt);
         btnX = (ImageButton) findViewById(R.id.x);
-
+        btnNotification = (ImageButton) findViewById(R.id.Notification);
     }
 
     private void ConstructLayout(){
@@ -127,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
                 recover = false;
             }
         });
+
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+            }
+        });
+
+
 
     }
 

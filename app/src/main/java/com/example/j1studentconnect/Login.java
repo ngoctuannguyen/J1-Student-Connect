@@ -85,21 +85,30 @@ public class Login extends AppCompatActivity {
     public void checkUser(){
         String student_id = editTextId.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
-        Query checkUserDatabase = reference.orderByChild("student_id").equalTo(student_id);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.GONE);
-                if (snapshot.exists()){
+                if (snapshot.hasChildren()){
                     editTextId.setError(null);
-                    String password_from_DB = snapshot.child(student_id).child("password").getValue(String.class);
+                    String password_from_DB = snapshot.child("password").getValue().toString();
                     if (password_from_DB.equals(password)) {
                         editTextId.setError(null);
-                        String id_from_DB = snapshot.child(student_id).child("student_id").getValue(String.class);
+                        String id_from_DB = snapshot.child("student_id").getValue().toString();
+                        String name_from_DB = snapshot.child("name").getValue().toString();
+                        String gender_from_DB = snapshot.child("gender").getValue().toString();
+                        String email_from_DB = snapshot.child("email").getValue().toString();
+                        String birthday_from_DB = snapshot.child("birthday").getValue().toString();
+                        String class_from_DB = snapshot.child("student_class").getValue().toString();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         intent.putExtra("student_id", id_from_DB);
                         intent.putExtra("password", password_from_DB);
+                        intent.putExtra("name", name_from_DB);
+                        intent.putExtra("gender", gender_from_DB);
+                        intent.putExtra("email", email_from_DB);
+                        intent.putExtra("student_class", class_from_DB);
+                        intent.putExtra("birthday", birthday_from_DB);
                         startActivity(intent);
                         finish();
                     } else {
