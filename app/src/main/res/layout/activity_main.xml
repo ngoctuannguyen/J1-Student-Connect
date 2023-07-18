@@ -44,6 +44,7 @@
 
             <ImageButton
                 android:contentDescription="notification"
+                android:id="@+id/Notification"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignTop="@+id/J1SC"
