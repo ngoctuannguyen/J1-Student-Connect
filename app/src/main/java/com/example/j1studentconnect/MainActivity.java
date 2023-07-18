@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
-                        btnCalendarHotkey, btnAvatar, btnX, btnRequest;
+                        btnCalendarHotkey, btnAvatar, btnX, btnBell, btnRequest;
     private Button btnRecover;
     private CardView ConvenientCard;
     private TextView txtToday;
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         btnCalendarHotkey =  findViewById(R.id.calendarHotKey);
         btnAvatar = findViewById(R.id.dogAvt);
         btnX = findViewById(R.id.x);
-        btnRequest = findViewById(R.id.request);
 
     }
 
@@ -137,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
                 ConvenientCard.setVisibility(View.VISIBLE);
                 btnRecover.setVisibility(View.GONE);
                 recover = false;
+            }
+        });
+
+        btnBell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
             }
         });
 
