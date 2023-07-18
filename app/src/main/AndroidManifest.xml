@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -14,64 +14,57 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.J1StudentConnect"
         tools:targetApi="31">
-        <activity
-            android:name=".NotificationActivity"
-            android:exported="false" />
-      
-        <!-- LoginLauncher -->
+
+        <!--LoginLauncher-->
         <activity
             android:name=".LoginLauncher"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- Login -->
-      
+                android:value=""/>
+        </activity>
+
+        <!--Login-->
         <activity
             android:name=".Login"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
-        </activity> 
-      
-      <!-- Register -->
+                android:value=""/>
+        </activity>
+
+        <!--Register-->
         <activity
             android:name=".Register"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- Main -->
-      
+                android:value=""/>
+        </activity>
+
+        <!--Main-->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+            android:exported="true"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- Search -->
-      
+                android:value=""/>
+        </activity>
+
+        <!--Search-->
         <activity
             android:name=".Search"
-            android:exported="true" />  <!--Profile-->
-      
+            android:exported="true" />
+
+        <!--Profile-->
         <activity
             android:name=".Profile"
             android:exported="true"
@@ -79,8 +72,9 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value=""/>
-        </activity> <!--EditProfile-->
-        
+        </activity>
+
+        <!--EditProfile-->
         <activity
             android:name=".EditProfile"
             android:exported="true"
@@ -88,15 +82,14 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value=""/>
-        </activity> <!-- Calendar -->
-        
+        </activity>
+
+        <!-- Calendar -->
         <activity android:name=".Calendar" /> <!-- Grades -->
-      
         <activity android:name=".Grades" /> <!-- Courses -->
-      
         <activity android:name=".Courses" /> <!-- Request -->
-      
         <activity android:name=".Request" />
+
     </application>
 
 </manifest>
