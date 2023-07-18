@@ -20,9 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
-    TextView name, email, student_id, password, gender, birthday, student_class;
+    TextView name, email, student_id, password, gender, birthday, student_class, phone;
+    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
+
     TextView title_name;
     Button edit_profile, logout;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,70 +36,58 @@ public class Profile extends AppCompatActivity {
         birthday = findViewById(R.id.birthday);
         student_class = findViewById(R.id.student_class);
         email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
         title_name = findViewById(R.id.title_name);
         edit_profile = findViewById(R.id.btn_edit_profile);
         logout = findViewById(R.id.btn_logout);
+
+        Intent intentBefore = getIntent();
+        student_id_child = intentBefore.getStringExtra("student_id").toString();
+        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
 
         showAllUserData();
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                passUserData();
+                Intent intent = new Intent(Profile.this, EditProfile.class);
+                intent.putExtra("student_id", user_id);
+                intent.putExtra("name", user_name);
+                intent.putExtra("phone", user_phone);
+                intent.putExtra("email", user_email);
+                startActivity(intent);
             }
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                passUserData();
+                return;
             }
         });
 
     }
 
-    public void showAllUserData(){
-        Intent intent = getIntent();
-        String user_name = intent.getStringExtra("name");
-        String user_email = intent.getStringExtra("email");
-        String user_id = intent.getStringExtra("student_id");
-        String user_password = intent.getStringExtra("password");
-        String user_gender = intent.getStringExtra("gender");
-        String user_class = intent.getStringExtra("student_class");
-        String user_birthday = intent.getStringExtra("birthday");
-
-        title_name.setText(user_name);
-        name.setText(user_name);
-        email.setText(user_email);
-        student_id.setText(user_id);
-        birthday.setText(user_birthday);
-        gender.setText(user_gender);
-        student_class.setText(user_class);
-    }
-    public void passUserData(){
-        String user_id = student_id.getText().toString().trim();
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
-        Query checkUserDatabase = reference.orderByChild("student_id").equalTo(user_id);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void showAllUserData() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    String id_from_DB = snapshot.child(user_id).child("student_id").getValue(String.class);
-                    String name_from_DB = snapshot.child(user_id).child("name").getValue(String.class);
-                    String email_from_DB = snapshot.child(user_id).child("email").getValue(String.class);
-                    String password_from_DB = snapshot.child(user_id).child("password").getValue(String.class);
-                    String gender_from_DB = snapshot.child(user_id).child("gender").getValue(String.class);
-                    String class_from_DB = snapshot.child(user_id).child("student_class").getValue(String.class);
-                    String birthday_from_DB = snapshot.child(user_id).child("birthday").getValue(String.class);
-                    Intent intent = new Intent(Profile.this, MainActivity.class);
-                    intent.putExtra("name", name_from_DB);
-                    intent.putExtra("email", email_from_DB);
-                    intent.putExtra("student_id", id_from_DB);
-                    intent.putExtra("password", password_from_DB);
-                    intent.putExtra("gender", email_from_DB);
-                    intent.putExtra("student_class", id_from_DB);
-                    intent.putExtra("birthday", password_from_DB);
-                    startActivity(intent);
+                if (snapshot.hasChildren()) {
+                    user_id = snapshot.child("student_id").getValue().toString();
+                    user_name = snapshot.child("name").getValue().toString();
+                    user_email = snapshot.child("email").getValue().toString();
+                    user_gender = snapshot.child("gender").getValue().toString();
+                    user_class = snapshot.child("student_class").getValue().toString();
+                    user_birthday = snapshot.child("birthday").getValue().toString();
+                    user_phone = snapshot.child("phone").getValue().toString();
+                    title_name.setText(user_name);
+                    name.setText(user_name);
+                    email.setText(user_email);
+                    student_id.setText(user_id);
+                    birthday.setText(user_birthday);
+                    gender.setText(user_gender);
+                    student_class.setText(user_class);
+                    phone.setText(user_phone);
                 }
             }
             @Override

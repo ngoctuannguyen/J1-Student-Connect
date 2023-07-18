@@ -90,22 +90,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentBefore = getIntent();
-                String user_name = intentBefore.getStringExtra("name");
-                String user_email = intentBefore.getStringExtra("email");
                 String user_id = intentBefore.getStringExtra("student_id");
-                String user_password = intentBefore.getStringExtra("password");
-                String user_gender = intentBefore.getStringExtra("gender");
-                String user_class = intentBefore.getStringExtra("student_class");
-                String user_birthday = intentBefore.getStringExtra("birthday");
-
                 Intent intent = new Intent(MainActivity.this, Profile.class);
                 intent.putExtra("student_id", user_id);
-                intent.putExtra("password", user_password);
-                intent.putExtra("name", user_name);
-                intent.putExtra("gender", user_gender);
-                intent.putExtra("email", user_email);
-                intent.putExtra("student_class", user_class);
-                intent.putExtra("birthday", user_birthday);
                 startActivity(intent);
             }
         });

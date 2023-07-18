@@ -1,7 +1,7 @@
 package com.example.j1studentconnect;
 
 public class HelperClass {
-    String student_id, password, name, gender, student_class, email, birthday;
+    String student_id, password, name, gender, student_class, email, birthday, phone;
 
     public String getStudent_id() {
         return student_id;
@@ -56,7 +56,15 @@ public class HelperClass {
         this.student_class = student_class;
     }
 
-    public HelperClass(String student_id, String password, String name, String student_class, String gender, String email, String birthday) {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public HelperClass(String student_id, String password, String name, String student_class, String gender, String email, String birthday, String phone) {
         this.student_id = student_id;
         this.password = password;
         this.name = name;
@@ -64,6 +72,7 @@ public class HelperClass {
         this.gender = gender;
         this.email = email;
         this.birthday = birthday;
+        this.phone = phone;
     }
     public HelperClass() {
     }
