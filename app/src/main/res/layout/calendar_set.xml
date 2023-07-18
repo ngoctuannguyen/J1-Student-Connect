@@ -100,7 +100,8 @@
 
                         <Spinner
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            tools:ignore="TouchTargetSizeCheck" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
@@ -1114,6 +1115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/TimeTableHome"
                     android:src="@drawable/grey_home" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -1136,6 +1138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/TimeTableSearch"
                     android:src="@drawable/search_icon" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -1158,6 +1161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
+                    android:id="@+id/TimeTableProfile"
                     android:src="@drawable/profile_icon" />
                 <TextView
                     android:layout_width="wrap_content"
