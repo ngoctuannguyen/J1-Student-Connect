@@ -62,6 +62,12 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="Nhớ mật khẩu" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="gone"

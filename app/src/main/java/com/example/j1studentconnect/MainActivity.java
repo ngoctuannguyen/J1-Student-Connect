@@ -9,13 +9,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
-                        btnCalendarHotkey, btnAvatar, btnX, btnRequest;
+                        btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades;
     private Button btnRecover;
+    //private LinearLayout
     private CardView ConvenientCard;
     private TextView txtToday;
     private java.util.Calendar today = java.util.Calendar.getInstance();
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnAvatar = findViewById(R.id.dogAvt);
         btnX = findViewById(R.id.x);
         btnRequest = findViewById(R.id.request);
+        btnGrades = findViewById(R.id.grades);
 
     }
 
@@ -137,6 +140,13 @@ public class MainActivity extends AppCompatActivity {
                 ConvenientCard.setVisibility(View.VISIBLE);
                 btnRecover.setVisibility(View.GONE);
                 recover = false;
+            }
+        });
+
+        btnGrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Grades.class));
             }
         });
 

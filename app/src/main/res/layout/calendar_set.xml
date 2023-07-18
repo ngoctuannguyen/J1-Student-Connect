@@ -1090,88 +1090,102 @@
                 android:textStyle="bold"/>
         </LinearLayout>
     </ScrollView>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white"
-        app:cardCornerRadius="40dp"
-        android:layout_margin="10dp">
+        app:cardCornerRadius="40dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
+
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
                     android:id="@+id/TimeTableHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
                     android:src="@drawable/grey_home" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
                     android:text="Trang chủ"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/arialnb"
+                    android:textColor="@color/grey"
                     android:textSize="18dp"
-                    android:textColor="@color/grey"/>
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_centerInParent="true">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:id="@+id/TimeTableSearch"
-                    android:src="@drawable/search_icon" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Tra cứu"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/arialnb"
-                    android:textSize="18dp"
-                    android:textColor="@color/grey"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_alignParentEnd="true"
                 android:orientation="vertical">
+
                 <ImageButton
+                    android:id="@+id/TimeTableSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:id="@+id/TimeTableProfile"
-                    android:src="@drawable/profile_icon" />
+                    android:src="@drawable/search_icon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Hồ sơ"
-                    android:textStyle="bold"
                     android:fontFamily="@font/arialnb"
+                    android:text="Tra cứu"
+                    android:textColor="@color/grey"
                     android:textSize="18dp"
-                    android:textColor="@color/grey"/>
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/TimeTableProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:src="@drawable/profile_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
+                    android:text="Hồ sơ"
+                    android:textColor="@color/grey"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
