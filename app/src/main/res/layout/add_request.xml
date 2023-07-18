@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_grey">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/request_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:background="@color/bg_blue">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/add_request_bar"
+                android:layout_width="200dp"
+                android:layout_height="54dp"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_top_cardview">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/add_request"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Tạo yêu cầu"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/merriweathersanswght"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/request_handing_bar"
+                android:layout_width="200dp"
+                android:layout_height="54dp"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/add_request_bar">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/handling"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Xử lý yêu cầu"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/merriweathersanswght"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_below="@+id/request_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
+                android:fontFamily="@font/karmamedium"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                android:layout_marginTop="30dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yêu cầu 1"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/k2d_exb"
+                        android:textSize="30dp" />
+
+                    <Spinner
+                        android:id="@+id/request_type_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:padding="10dp"
+                        android:background="@drawable/request_option"
+                        android:entries="@array/request_type_arrays"/>
+
+                    <EditText
+                        android:id="@+id/request_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:padding="20dp"
+                        android:background="@drawable/request_option"
+                        android:hint="Lý do"
+                        android:textSize="20sp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/attach_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:padding="10dp"
+                            android:text="📎 Đính kèm tệp"></Button>
+
+                        <Button
+                            android:id="@+id/btn_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:padding="10dp"
+                            android:text="Submit"
+                            android:onClick="submitData"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_request_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="110dp"
+        android:src="@drawable/add"
+        android:backgroundTint="@color/bg_blue"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="10sp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="40sp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="50sp"
+            android:layout_marginBottom="10sp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/RequestHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:src="@drawable/grey_home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
+                    android:text="Trang chủ"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/RequestSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:src="@drawable/search_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
+                    android:text="Tra cứu"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/RequestProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:src="@drawable/profile_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
+                    android:text="Hồ sơ"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
