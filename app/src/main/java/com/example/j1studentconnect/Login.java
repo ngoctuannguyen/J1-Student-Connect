@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Console;
+
 public class Login extends AppCompatActivity {
 
     TextInputEditText editTextId, editTextPassword;
@@ -96,19 +98,8 @@ public class Login extends AppCompatActivity {
                     if (password_from_DB.equals(password)) {
                         editTextId.setError(null);
                         String id_from_DB = snapshot.child("student_id").getValue().toString();
-                        String name_from_DB = snapshot.child("name").getValue().toString();
-                        String gender_from_DB = snapshot.child("gender").getValue().toString();
-                        String email_from_DB = snapshot.child("email").getValue().toString();
-                        String birthday_from_DB = snapshot.child("birthday").getValue().toString();
-                        String class_from_DB = snapshot.child("student_class").getValue().toString();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         intent.putExtra("student_id", id_from_DB);
-                        intent.putExtra("password", password_from_DB);
-                        intent.putExtra("name", name_from_DB);
-                        intent.putExtra("gender", gender_from_DB);
-                        intent.putExtra("email", email_from_DB);
-                        intent.putExtra("student_class", class_from_DB);
-                        intent.putExtra("birthday", birthday_from_DB);
                         startActivity(intent);
                         finish();
                     } else {
@@ -116,7 +107,7 @@ public class Login extends AppCompatActivity {
                         editTextPassword.requestFocus();
                     }
                 } else {
-                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Mã sinh viên không hợp lệ", Toast.LENGTH_SHORT).show();
                     editTextId.requestFocus();
                 }
             }
