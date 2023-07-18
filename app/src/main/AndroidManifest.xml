@@ -84,8 +84,11 @@
                 android:value=""/>
         </activity>
 
-        <!--Calendar-->
-        <activity android:name=".Calendar"/>
+        <!-- Calendar -->
+        <activity android:name=".Calendar" /> <!-- Grades -->
+        <activity android:name=".Grades" /> <!-- Courses -->
+        <activity android:name=".Courses" /> <!-- Request -->
+        <activity android:name=".Request" />
 
     </application>
 
