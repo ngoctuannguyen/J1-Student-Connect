@@ -30,6 +30,9 @@
                 android:value=""/>
         </activity>
 
+        <activity android:name=".NotificationActivity"
+            android:exported="true"/>
+
         <!--Login-->
         <activity
             android:name=".Login"
