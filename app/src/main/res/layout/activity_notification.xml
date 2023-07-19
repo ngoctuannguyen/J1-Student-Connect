@@ -32,7 +32,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/TimeTableHome"
+                    android:id="@+id/HomeNoti"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -58,7 +58,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/TimeTableSearch"
+                    android:id="@+id/SearchNoti"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -84,7 +84,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/TimeTableProfile"
+                    android:id="@+id/ProfileNoti"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
