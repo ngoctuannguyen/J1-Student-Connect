@@ -102,6 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/InfoinTB"
                 android:fontFamily="@font/karmamedium"
                 android:gravity="center_vertical"
                 android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
@@ -113,7 +114,8 @@
             android:id="@+id/TimeTableList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="100dp"/>
+            android:layout_marginBottom="100dp"
+            android:layoutDirection="rtl"/>
 
 
         <TextView

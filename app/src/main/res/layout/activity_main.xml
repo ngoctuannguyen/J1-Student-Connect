@@ -65,7 +65,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="100dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="-218dp">
@@ -112,6 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/name"
                         android:gravity="bottom"
+                        android:id="@+id/student_id_in_main"
                         android:text="  |  21020337"
                         android:textColor="@color/grey" />
 
@@ -119,6 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/name"
+                        android:id="@+id/class_id"
                         android:gravity="top"
                         android:text="QH-2021-I/CQ-C-B"
                         android:textColor="@color/grey" />
@@ -617,11 +619,13 @@
                 android:layout_gravity="center"
                 android:text="@string/BehindTheMiniCalen"
                 android:textSize="10dp"
+                android:shadowColor="@color/black"
+                android:backgroundTint="@color/blue"
                 android:fontFamily="@font/arsenalbold"
                 android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:id="@+id/recover"
-                android:textColor="@color/red"
+                android:textColor="@color/yellow"
                 android:gravity="center"/>
 
             <LinearLayout
