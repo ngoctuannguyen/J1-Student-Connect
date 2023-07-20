@@ -57,118 +57,76 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendar_toolbar"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="690dp"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:fontFamily="@font/arsenalbold"
-                        android:gravity="center_vertical"
-                        android:text="Học kỳ:"
-                        android:textSize="18sp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/white"
-                        app:cardCornerRadius="10dp">
-
-                        <Spinner
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:ignore="TouchTargetSizeCheck" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                android:layout_marginTop="100dp"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/arsenalbold"
+                    android:gravity="center_vertical"
+                    android:text="Học kỳ:"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center_vertical"
-                    android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
-                    android:fontFamily="@font/karmamedium"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/white"
+                    app:cardCornerRadius="10dp">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/calendar_toolbar"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"/>
-
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableMon"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableTue"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableWed"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableThu" />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableFri"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SpinnerTimeTableSat"/>
-
-
             <TextView
-                android:layout_gravity="left"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/signika"
-                android:text="Tổng số môn học đăng ký: [N/A]\nTổng số tín chỉ đăng ký: [N/A]"
-                android:textSize="13dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/karmamedium"
+                android:gravity="center_vertical"
+                android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
+                android:textSize="16dp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
+
+        <ExpandableListView
+            android:id="@+id/TimeTableList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/signika"
+            android:text="Tổng số môn học đăng ký: [N/A]\nTổng số tín chỉ đăng ký: [N/A]"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
