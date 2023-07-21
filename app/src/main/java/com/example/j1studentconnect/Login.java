@@ -14,8 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +36,14 @@ public class Login extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
     TextView registerRedirect;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        auth = FirebaseAuth.getInstance();
 
         parameterConstruct();
         buttonsConstruct();
@@ -99,18 +106,31 @@ public class Login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.GONE);
-                if (snapshot.hasChildren()){
+                if (snapshot.hasChildren()) {
                     editTextId.setError(null);
-                    String password_from_DB = snapshot.child("password").getValue().toString();
-                    if (password_from_DB.equals(password)) {
-                        editTextId.setError(null);
-                        String id_from_DB = snapshot.child("student_id").getValue().toString();
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        intent.putExtra("student_id", id_from_DB);
-                        startActivity(intent);
-                        finish();
+                    String email = snapshot.child("email").getValue().toString();
+                    if (!password.isEmpty()) {
+                        auth.signInWithEmailAndPassword(email, password)
+                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                    @Override
+                                    public void onSuccess(AuthResult authResult) {
+                                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        editTextId.setError(null);
+                                        String id_from_DB = snapshot.child("student_id").getValue().toString();
+                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        intent.putExtra("student_id", id_from_DB);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Login.this, "Mã sinh viên hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     } else {
-                        Toast.makeText(Login.this, "Mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Hãy nhập mật khẩu.", Toast.LENGTH_SHORT).show();
                         editTextPassword.requestFocus();
                     }
                 } else {
