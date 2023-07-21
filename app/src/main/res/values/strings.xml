@@ -58,6 +58,8 @@
     <string name="student_class_name">Tên môn học</string>
     <string name="student_class_id">Mã \nlớp học</string>
     <string name="portal_number">Số \ntín chỉ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
