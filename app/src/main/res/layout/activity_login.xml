@@ -44,6 +44,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/student_id"
             android:hint="@string/student_id"
+            android:maxLines="1"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
                         />
@@ -57,10 +59,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:hint="@string/password"
+            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="Nhớ mật khẩu" />
 
     <ProgressBar
         android:id="@+id/progressBar"

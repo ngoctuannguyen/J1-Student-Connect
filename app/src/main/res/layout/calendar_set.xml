@@ -57,1121 +57,174 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendar_toolbar"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="690dp"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:fontFamily="@font/arsenalbold"
-                        android:gravity="center_vertical"
-                        android:text="Học kỳ:"
-                        android:textSize="18sp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/white"
-                        app:cardCornerRadius="10dp">
-
-                        <Spinner
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:ignore="TouchTargetSizeCheck" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                android:layout_marginTop="100dp"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/arsenalbold"
+                    android:gravity="center_vertical"
+                    android:text="Học kỳ:"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center_vertical"
-                    android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
-                    android:fontFamily="@font/karmamedium"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/white"
+                    app:cardCornerRadius="10dp">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/calendar_toolbar"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"/>
-
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:shrinkColumns="0,1,2,3,4,5,6,7"
-                android:divider="@color/grey"
-                android:showDividers="middle">
-
-                <TableRow
-                    android:background="@color/tb_grey"
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 1"
-                        android:padding="5dp"
-                        android:layout_gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 4"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 5"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 6"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 7"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Column 7"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 1"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 1, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 3, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 3, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 3, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 3, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 3, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 4, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 4, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 5, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 5, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 6, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 6, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 7 Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 7, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 8, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 8, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 9, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 9, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 10, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 10, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 11, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 11, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 12, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 12, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 13, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 13, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:divider="@color/grey"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 14, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 14, Column 2"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Row 2, Column 3"
-                        android:padding="5dp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="5dp"
-                        android:text="Row 2, Column 1" />
-
-                </TableRow>
-
-            </TableLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:text="Tổng số môn học đăng ký: [N/A]\nTổng số tín chỉ đăng ký: [N/A]"
-                android:fontFamily="@font/signika"
-                android:textSize="13dp"
-                android:textStyle="bold"/>
+                android:layout_marginTop="10dp"
+                android:id="@+id/InfoinTB"
+                android:fontFamily="@font/karmamedium"
+                android:gravity="center_vertical"
+                android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
+                android:textSize="16dp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
+
+        <ExpandableListView
+            android:id="@+id/TimeTableList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
+            android:layoutDirection="rtl"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/signika"
+            android:text="Tổng số môn học đăng ký: [N/A]\nTổng số tín chỉ đăng ký: [N/A]"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white"
-        app:cardCornerRadius="40dp"
-        android:layout_margin="10dp">
+        app:cardCornerRadius="40dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
+
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
                     android:id="@+id/TimeTableHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
                     android:src="@drawable/grey_home" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
                     android:text="Trang chủ"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/arialnb"
+                    android:textColor="@color/grey"
                     android:textSize="18dp"
-                    android:textColor="@color/grey"/>
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_centerInParent="true">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:id="@+id/TimeTableSearch"
-                    android:src="@drawable/search_icon" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Tra cứu"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/arialnb"
-                    android:textSize="18dp"
-                    android:textColor="@color/grey"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_alignParentEnd="true"
                 android:orientation="vertical">
+
                 <ImageButton
+                    android:id="@+id/TimeTableSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:id="@+id/TimeTableProfile"
-                    android:src="@drawable/profile_icon" />
+                    android:src="@drawable/search_icon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Hồ sơ"
-                    android:textStyle="bold"
                     android:fontFamily="@font/arialnb"
+                    android:text="Tra cứu"
+                    android:textColor="@color/grey"
                     android:textSize="18dp"
-                    android:textColor="@color/grey"/>
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/TimeTableProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:src="@drawable/profile_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/arialnb"
+                    android:text="Hồ sơ"
+                    android:textColor="@color/grey"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
