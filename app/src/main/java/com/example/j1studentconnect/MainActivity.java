@@ -1,9 +1,13 @@
 package com.example.j1studentconnect;
 //import State.*;
 
+//import static com.example.j1studentconnect.CalendarUtils.daysInWeekArray;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnSearch, btnProfile, btnCalendar,
@@ -30,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
 
+    private RecyclerView calendarRecyclerView;
+
     DatabaseReference reference;
 
     @Override
@@ -39,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
         ConstructLayout();
         CreateAndShowInfoStudent();
         ConstructButton();
+//        initWidgets();
+//        setWeekView();
         ClickButton();
+
     }
 
     private void CreateAndShowInfoStudent() {
-        TextView Name = (TextView) findViewById(R.id.name);
-        TextView student_id = (TextView) findViewById(R.id.student_id_in_main);
-        TextView class_id = (TextView) findViewById(R.id.class_id);
+        TextView Name = findViewById(R.id.name);
+        TextView student_id = findViewById(R.id.student_id_in_main);
+        TextView class_id = findViewById(R.id.class_id);
 
         Intent intentBefore = getIntent();
         String student_id_child = intentBefore.getStringExtra("student_id").toString();
@@ -186,5 +198,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+//    //Weekly Calendar
+//    private void initWidgets(){
+//        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
+//        //monthYearText = findViewById(R.id.monthYearTV);
+//    }
+//
+//
+//    private void setWeekView()
+//    {
+//        //monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+//        ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
+//        CalendarAdapter calendarAdapter = new CalendarAdapter(days, (CalendarAdapter.OnItemListener) this);
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+//        calendarRecyclerView.setLayoutManager(layoutManager);
+//        calendarRecyclerView.setAdapter(calendarAdapter);
+//        //setEventAdpater();
+//    }
+//
+//    public void previousWeekAction(View view)
+//    {
+//        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+//        setWeekView();
+//    }
+//
+//    public void nextWeekAction(View view)
+//    {
+//        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+//        setWeekView();
+//    }
+
 
 }
