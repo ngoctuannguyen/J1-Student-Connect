@@ -37,6 +37,15 @@
         <string name="MiniCalendar">Mini Calendar</string>
     </string>
     <string name="ClickToLogin">Bấm để đăng nhập</string>
-
+    <string-array name="request_type_arrays">
+        <item>Chọn loại yêu cầu</item>
+        <item>Cấp bảng điểm</item>
+        <item>Đề nghị hoãn thi</item>
+        <item>Xem lại bài thi</item>
+        <item>Cấp lại thẻ sinh viên</item>
+        <item>Đề nghị làm vé xe bus</item>
+        <item>Xin thôi học</item>
+        <item>Xin cấp CN tốt nghiệp tạm thời</item>
+    </string-array>
 
 </resources>
