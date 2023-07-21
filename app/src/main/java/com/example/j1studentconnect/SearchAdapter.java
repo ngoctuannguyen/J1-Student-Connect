@@ -47,6 +47,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         return 0;
     }
 
+    public void filter_List(List<StudentForSearch> filterList) {
+        stdSearch = filterList;
+        notifyDataSetChanged();
+    }
+
     public class SearchViewHolder extends RecyclerView.ViewHolder{
 
         private RecyclerView recyclerView;
