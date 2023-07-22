@@ -54,6 +54,8 @@
         </activity>
 
         <!--Main-->
+
+        <!--Main-->
         <activity
             android:name=".MainActivity"
             android:exported="true"
