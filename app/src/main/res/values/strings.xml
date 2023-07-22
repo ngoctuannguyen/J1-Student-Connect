@@ -2,7 +2,7 @@
     <string name="app_name">J1 Student Connect</string>
 
 
-    <!-- Login and Register strings-->
+    <!-- Login and Register strings -->
 
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
@@ -13,7 +13,12 @@
     <string name="login_redirect">Đã có tài khoản ? Đăng nhập ngay</string>
     <string name="register_redirect">Chưa có tài khoản ? Đăng ký ngay</string>
 
-    <!-- Profile strings-->
+    <!-- Login and Register strings -->
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="forgot_tutor">Chúng tôi sẽ gửi thông tin về thủ tục lấy lại mật khẩu tới email đã liên kết với tài khoản của bạn</string>
+    <string name="send_email">Gửi email</string>
+
+    <!-- Profile strings -->
     <string name="student_name">Tên hiển thị</string>
     <string name="birthday">Ngày sinh</string>
     <string name="gender">Giới tính</string>

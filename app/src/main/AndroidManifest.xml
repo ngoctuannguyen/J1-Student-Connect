@@ -18,7 +18,7 @@
 
         <!--LoginLauncher-->
         <activity
-            android:name=".LoginLauncher"
+            android:name=".authentication.LoginLauncher"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <intent-filter>
@@ -35,7 +35,7 @@
 
         <!--Login-->
         <activity
-            android:name=".Login"
+            android:name=".authentication.Login"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
@@ -45,7 +45,7 @@
 
         <!--Register-->
         <activity
-            android:name=".Register"
+            android:name=".authentication.Register"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
@@ -53,7 +53,15 @@
                 android:value=""/>
         </activity>
 
-        <!--Main-->
+        <!--ForgotPassword-->
+        <activity
+            android:name=".authentication.ForgotPassword"
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value=""/>
+        </activity>
 
         <!--Main-->
         <activity

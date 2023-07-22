@@ -1,8 +1,7 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,21 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.j1studentconnect.MainActivity;
+import com.example.j1studentconnect.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.Console;
 
 public class Login extends AppCompatActivity {
 
@@ -35,8 +32,19 @@ public class Login extends AppCompatActivity {
     Button buttonLogin;
     ProgressBar progressBar;
     TextView textView;
-    TextView registerRedirect;
+    TextView registerRedirect, forgotRedirect;
     FirebaseAuth auth;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class Login extends AppCompatActivity {
         editTextId = findViewById(R.id.student_id);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
+        forgotRedirect = findViewById(R.id.forgot_redirect);
         registerRedirect = findViewById(R.id.register_redirect);
         progressBar = findViewById(R.id.progressBar);
     }
@@ -75,6 +84,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
+            }
+        });
+
+        forgotRedirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, ForgotPassword.class);
                 startActivity(intent);
             }
         });
