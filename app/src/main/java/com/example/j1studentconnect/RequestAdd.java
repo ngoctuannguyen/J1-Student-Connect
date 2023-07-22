@@ -1,5 +1,6 @@
 package com.example.j1studentconnect;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,9 +45,11 @@ public class RequestAdd extends AppCompatActivity {
     private static final int PICKFILE_REQUEST_CODE = 1;
     private String path;
 
+    private TextView InfoAddRequest;
     private LinearLayout btnRequestProcessing;
     private ImageButton btnRHome, btnRSearch, btnRProfile;
 
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,7 @@ public class RequestAdd extends AppCompatActivity {
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
         addListenerOnButton();
+        CreateAndShowInfoStudent();
     }
 
     private void ClickButtonInRequest() {
@@ -183,6 +193,27 @@ public class RequestAdd extends AppCompatActivity {
             }
         };
         Volley.newRequestQueue(this).add(request);
+    }
+
+    private void CreateAndShowInfoStudent() {
+        InfoAddRequest = findViewById(R.id.InfoAddRequest);
+        //Intent intentBefore = getActivity().getIntent();
+        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        String student_id_child = "12345678";
+        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()){
+                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
+                    InfoAddRequest.setText(strshow);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
 

@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
+                android:id="@+id/InfoProcessingRequest"
                 android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
                 android:fontFamily="@font/karmamedium"
                 android:textSize="16dp"
