@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Login"
+    tools:context=".authentication.Login"
     android:padding="15sp">
 
     <TextView
@@ -44,6 +44,20 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_id"
             android:hint="@string/student_id"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_email"
+            android:hint="@string/email"
             android:inputType="text"
             android:maxLines="1"
             android:layout_width="match_parent"

@@ -1,8 +1,7 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,17 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.j1studentconnect.MainActivity;
+import com.example.j1studentconnect.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.Console;
 
 public class Login extends AppCompatActivity {
 
@@ -31,19 +32,41 @@ public class Login extends AppCompatActivity {
     Button buttonLogin;
     ProgressBar progressBar;
     TextView textView;
-    TextView registerRedirect;
+    TextView registerRedirect, forgotRedirect;
+    FirebaseAuth auth;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        auth = FirebaseAuth.getInstance();
+
+        parameterConstruct();
+        buttonsConstruct();
+    }
+
+    private void parameterConstruct() {
         editTextId = findViewById(R.id.student_id);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
+        forgotRedirect = findViewById(R.id.forgot_redirect);
         registerRedirect = findViewById(R.id.register_redirect);
         progressBar = findViewById(R.id.progressBar);
+    }
 
+    private void buttonsConstruct() {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +84,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
+            }
+        });
+
+        forgotRedirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, ForgotPassword.class);
                 startActivity(intent);
             }
         });
@@ -92,29 +123,31 @@ public class Login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.GONE);
-                if (snapshot.hasChildren()){
+                if (snapshot.hasChildren()) {
                     editTextId.setError(null);
-                    String password_from_DB = snapshot.child("password").getValue().toString();
-                    if (password_from_DB.equals(password)) {
-                        editTextId.setError(null);
-                        String id_from_DB = snapshot.child("student_id").getValue().toString();
-                        String name_from_DB = snapshot.child("name").getValue().toString();
-                        String gender_from_DB = snapshot.child("gender").getValue().toString();
-                        String email_from_DB = snapshot.child("email").getValue().toString();
-                        String birthday_from_DB = snapshot.child("birthday").getValue().toString();
-                        String class_from_DB = snapshot.child("student_class").getValue().toString();
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        intent.putExtra("student_id", id_from_DB);
-                        intent.putExtra("password", password_from_DB);
-                        intent.putExtra("name", name_from_DB);
-                        intent.putExtra("gender", gender_from_DB);
-                        intent.putExtra("email", email_from_DB);
-                        intent.putExtra("student_class", class_from_DB);
-                        intent.putExtra("birthday", birthday_from_DB);
-                        startActivity(intent);
-                        finish();
+                    String email = snapshot.child("email").getValue().toString();
+                    if (!password.isEmpty()) {
+                        auth.signInWithEmailAndPassword(email, password)
+                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                    @Override
+                                    public void onSuccess(AuthResult authResult) {
+                                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        editTextId.setError(null);
+                                        String id_from_DB = snapshot.child("student_id").getValue().toString();
+                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        intent.putExtra("student_id", id_from_DB);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Login.this, "Mã sinh viên hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     } else {
-                        Toast.makeText(Login.this, "Mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Hãy nhập mật khẩu.", Toast.LENGTH_SHORT).show();
                         editTextPassword.requestFocus();
                     }
                 } else {
