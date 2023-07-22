@@ -62,8 +62,10 @@
             android:id="@+id/info_student"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="116dp"
             android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
@@ -71,6 +73,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@null"
+                android:layout_marginLeft="20dp"
                 android:contentDescription="avatar"
                 android:scaleType="centerCrop"
                 android:src="@drawable/dogg" />
@@ -79,10 +82,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/name1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -92,33 +96,33 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/student_id_in_main"
+                    android:id="@+id/student_id_in_main1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/name"
+                    android:layout_toRightOf="@id/name1"
                     android:gravity="bottom"
                     android:text="  |  21020337"
                     android:textColor="@color/grey" />
 
                 <TextView
-                    android:id="@+id/class_id"
+                    android:id="@+id/class_id1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
+                    android:layout_below="@+id/name1"
                     android:gravity="top"
                     android:text="QH-2021-I/CQ-C-B"
                     android:textColor="@color/grey" />
 
                 <ImageButton
                     android:id="@+id/calendarHotKey"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="67dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="57dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="-19dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@null"
                     android:contentDescription="Lịch"
                     android:src="@drawable/calendar" />
@@ -151,7 +155,7 @@
                 android:id="@+id/convenientNoti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="1dp"
                 android:background="@null"
                 android:visibility="visible"
                 app:cardCornerRadius="10dp">

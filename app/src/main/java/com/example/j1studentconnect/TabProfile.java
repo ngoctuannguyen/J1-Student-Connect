@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,10 @@ public class TabProfile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView name, email, student_id, password, gender, birthday, student_class, phone;
+
+    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
 
     public TabProfile() {
         // Required empty public constructor
