@@ -18,6 +18,7 @@ import java.util.List;
 public class Calendar extends AppCompatActivity {
 
     private ImageButton btnTBHome, btnTBSearch, btnTBProfile;
+    private Spinner SpinnerSemester;
     TimeTableAdapter TimeTable;
     ExpandableListView expandableListView;
     List<String> dayList;
@@ -31,6 +32,8 @@ public class Calendar extends AppCompatActivity {
         btnTBHome = (ImageButton) findViewById(R.id.TimeTableHome);
         btnTBSearch = (ImageButton) findViewById(R.id.TimeTableSearch);
         btnTBProfile = (ImageButton) findViewById(R.id.TimeTableProfile);
+        //Choose semester
+        SpinnerSemester = (Spinner) findViewById(R.id.spinner_semester);
         // ExpandableListView
         expandableListView = findViewById(R.id.TimeTableList);
 

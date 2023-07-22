@@ -48,4 +48,18 @@
         <item>Xin cấp CN tốt nghiệp tạm thời</item>
     </string-array>
 
+    <string-array name="Semester">
+        <item>Học kì I</item>
+        <item>Học kì II</item>
+        <item>Học kì hè</item>
+    </string-array>
+
+    <string name="student_info_string">Thông tin\n sinh viên</string>
+    <string name="student_class_name">Tên môn học</string>
+    <string name="student_class_id">Mã \nlớp học</string>
+    <string name="portal_number">Số \ntín chỉ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
