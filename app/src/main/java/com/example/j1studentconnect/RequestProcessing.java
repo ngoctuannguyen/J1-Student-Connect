@@ -3,6 +3,7 @@ package com.example.j1studentconnect;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,22 +18,82 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class RequestProcessing extends AppCompatActivity {
 
     private ImageButton btnRPHome, btnRPSearch, btnRPProfile;
     private LinearLayout btnRequestAdd;
+
+    RequestProcessingAdapter requestProcessingAdapter;
+    ExpandableListView expandableListView1;
+    List<String> RequestTypeList;
+    HashMap<String, List<String>> StateRequestList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.process_request);
 
-        btnRPHome = (ImageButton) findViewById(R.id.RequestProcessHome);
-        btnRPSearch = (ImageButton) findViewById(R.id.RequestProcessSearch);
-        btnRPProfile = (ImageButton) findViewById(R.id.RequestProcessProfile);
-        btnRequestAdd = (LinearLayout) findViewById(R.id.add_request_bar);
+        btnRPHome = findViewById(R.id.RequestProcessHome);
+        btnRPSearch = findViewById(R.id.RequestProcessSearch);
+        btnRPProfile = findViewById(R.id.RequestProcessProfile);
+        btnRequestAdd = findViewById(R.id.add_request_bar);
         CreateAndShowInfoStudent();
         ClickButtonInRequestProcessing();
+        expandableListView1 = findViewById(R.id.StateRequestList1);
+
+        showList();
+
+        requestProcessingAdapter = new RequestProcessingAdapter(this, RequestTypeList, StateRequestList);
+        expandableListView1.setAdapter(requestProcessingAdapter);
+
+
+    }
+
+    private void showList() {
+        RequestTypeList = new ArrayList<String>();
+        StateRequestList = new HashMap<String, List<String>>();
+
+        RequestTypeList.add("Monday");
+        RequestTypeList.add("Tuesday");
+        RequestTypeList.add("Wednesday");
+        RequestTypeList.add("Thursday");
+        RequestTypeList.add("Friday");
+        RequestTypeList.add("Saturday");
+
+        List<String> subjectMon = new ArrayList<>();
+        subjectMon.add("DSA");
+        subjectMon.add("Mobile");
+
+        List<String> subjectTue = new ArrayList<>();
+        subjectTue.add("DSA");
+        subjectTue.add("Mobile");
+
+        List<String> subjectWed = new ArrayList<>();
+        subjectWed.add("DSA");
+        subjectWed.add("Mobile");
+
+        List<String> subjectThu = new ArrayList<>();
+        subjectThu.add("DSA");
+        subjectThu.add("Mobile");
+
+        List<String> subjectFri = new ArrayList<>();
+        subjectFri.add("DSA");
+        subjectFri.add("Mobile");
+
+        List<String> subjectSat = new ArrayList<>();
+        subjectSat.add("DSA");
+        subjectSat.add("Mobile");
+
+        StateRequestList.put(RequestTypeList.get(0), subjectMon);
+        StateRequestList.put(RequestTypeList.get(1), subjectTue);
+        StateRequestList.put(RequestTypeList.get(2), subjectWed);
+        StateRequestList.put(RequestTypeList.get(3), subjectThu);
+        StateRequestList.put(RequestTypeList.get(4), subjectFri);
+        StateRequestList.put(RequestTypeList.get(5), subjectSat);
     }
 
     private void ClickButtonInRequestProcessing() {

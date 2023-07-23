@@ -104,76 +104,233 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="15dp"
-                android:layout_marginTop="30dp"
-                app:cardBackgroundColor="@color/white">
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:columnCount="4"
+                android:rowCount="4">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Yêu cầu 1"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/k2d_exb"
-                        android:textSize="30dp" />
-
-                    <Spinner
-                        android:id="@+id/request_type_select"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:padding="10dp"
-                        android:background="@drawable/request_option"
-                        android:entries="@array/request_type_arrays"/>
-
-                    <EditText
-                        android:id="@+id/request_reason"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:padding="20dp"
-                        android:background="@drawable/request_option"
-                        android:hint="Lý do"
-                        android:textSize="20sp"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="0"
+                    android:layout_column="0">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_width="wrap_content"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/attach_button"
+                        <TextView
+                            android:id="@+id/provideresult"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
                             android:padding="10dp"
-                            android:text="📎 Đính kèm tệp"></Button>
+                            android:text="CẤP BẢNG ĐIỂM" />
 
-                        <Button
-                            android:id="@+id/btn_submit"
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/provideresult" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="0"
+                    android:layout_column="1">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/postponerequest"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
                             android:padding="10dp"
-                            android:text="Submit"
-                            android:onClick="submitData"
-                            android:layout_alignParentEnd="true"/>
+                            android:text="ĐỀ NGHỊ HOÃN THI" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/postponerequest" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="0"
+                    android:layout_column="2">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/reviewrequest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
+                            android:padding="10dp"
+                            android:text="XEM LẠI BÀI THI" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/postponerequest" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="1"
+                    android:layout_column="0">
+
+                    <RelativeLayout
+                        android:layout_width="119dp"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/studentcard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
+                            android:padding="10dp"
+                            android:text="CẤP LẠI THẺ SINH VIÊN" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/studentcard" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="1"
+                    android:layout_column="1">
+
+                    <RelativeLayout
+                        android:layout_width="140dp"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/busrequest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
+                            android:padding="10dp"
+                            android:text="ĐỀ NGHỊ LÀM VÉ XE BUS" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/busrequest" />
+
                     </RelativeLayout>
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="1"
+                    android:layout_column="2">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/stoplearning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="66dp"
+                        android:padding="10dp"
+                        android:text="XIN THÔI HỌC" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/stoplearning" />
+
+                </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_row="2"
+                    android:layout_column="0">
+
+                    <RelativeLayout
+                        android:layout_width="153dp"
+                        android:layout_height="101dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/qualification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="66dp"
+                            android:padding="10dp"
+                            android:text="CẤP CHỨNG CHỈ TỐT NGHIỆP TẠM THỜI" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/qualification" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+
         </LinearLayout>
 
     </ScrollView>

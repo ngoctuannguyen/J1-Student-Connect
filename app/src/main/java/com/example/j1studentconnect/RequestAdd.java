@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ExpandedMenuView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -55,7 +57,7 @@ public class RequestAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_request);
-        attachButton = findViewById(R.id.attach_button);
+        //attachButton = findViewById(R.id.attach_button);
 
         btnRHome = (ImageButton) findViewById(R.id.RequestHome);
         btnRSearch = (ImageButton) findViewById(R.id.RequestSearch);
@@ -63,10 +65,10 @@ public class RequestAdd extends AppCompatActivity {
 
         ConstructButton();
         ClickButtonInRequest();
-        initifinal();
-        addListenerOnButton();
-        addListenerOnSpinnerItemSelection();
-        addListenerOnButton();
+        //initifinal();
+        //addListenerOnButton();
+        //addListenerOnSpinnerItemSelection();
+        //addListenerOnButton();
         CreateAndShowInfoStudent();
     }
 
@@ -104,96 +106,96 @@ public class RequestAdd extends AppCompatActivity {
         btnRequestProcessing = (LinearLayout) findViewById(R.id.request_handing_bar);
     }
 
-    private void addListenerOnButton() {
-        attachButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
-            }
-        });
-    }
+//    private void addListenerOnButton() {
+//        attachButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("*/*");
+//                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+//            }
+//        });
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            path = getRealPathFromURI(uri);
-            // Đính kèm tệp đó vào email, tin nhắn hoặc in-app storage của ứng dụng
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            Uri uri = data.getData();
+//            path = getRealPathFromURI(uri);
+//            // Đính kèm tệp đó vào email, tin nhắn hoặc in-app storage của ứng dụng
+//        }
+//    }
 
-    private String getRealPathFromURI(Uri contentUri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        if (cursor == null) return null;
-        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String path = cursor.getString(columnIndex);
-        cursor.close();
-        return path;
-    }
+//    private String getRealPathFromURI(Uri contentUri) {
+//        String[] projection = { MediaStore.Images.Media.DATA };
+//        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
+//        if (cursor == null) return null;
+//        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        String path = cursor.getString(columnIndex);
+//        cursor.close();
+//        return path;
+//    }
 
-    private void addListenerOnSpinnerItemSelection() {
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"OnItemSelectedListener: " + adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
-            }
+//    private void addListenerOnSpinnerItemSelection() {
+//        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(getApplicationContext(),"OnItemSelectedListener: " + adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
-
-    private void initifinal() {
-        spinner1 = (Spinner) findViewById(R.id.request_type_select);
-    }
-
-    public void submitRequest(View view) {
-        // Lấy dữ liệu từ Spinner
-        Spinner requestTypeSpinner = findViewById(R.id.request_type_select);
-        String requestType = requestTypeSpinner.getSelectedItem().toString();
-
-        // Lấy dữ liệu từ EditText
-        EditText editTextTitle = findViewById(R.id.request_reason);
-        String title = editTextTitle.getText().toString();
-
-        // Gửi dữ liệu lên server
-        // Code để gửi dữ liệu lên server
-
-        // Sử dụng thư viện Volley để gửi POST request
-        String url = "https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app";
-        StringRequest request = new StringRequest(Request.Method.POST, url,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(RequestAdd.this, "Request submitted", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RequestAdd.this, "Error submitting request", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                // Truyền dữ liệu vào request
-                Map<String, String> params = new HashMap<>();
-                params.put("request_type", requestType);
-                params.put("title", title);
-                params.put("attachment", path); // Thêm đường dẫn của tệp đính kèm vào request
-                // Thêm các tham số khác nếu cần
-                return params;
-            }
-        };
-        Volley.newRequestQueue(this).add(request);
-    }
+//    private void initifinal() {
+//        spinner1 = (Spinner) findViewById(R.id.request_type_select);
+//    }
+//
+//    public void submitRequest(View view) {
+//        // Lấy dữ liệu từ Spinner
+//        Spinner requestTypeSpinner = findViewById(R.id.request_type_select);
+//        String requestType = requestTypeSpinner.getSelectedItem().toString();
+//
+//        // Lấy dữ liệu từ EditText
+//        EditText editTextTitle = findViewById(R.id.request_reason);
+//        String title = editTextTitle.getText().toString();
+//
+//        // Gửi dữ liệu lên server
+//        // Code để gửi dữ liệu lên server
+//
+//        // Sử dụng thư viện Volley để gửi POST request
+//        String url = "https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app";
+//        StringRequest request = new StringRequest(Request.Method.POST, url,
+//                new com.android.volley.Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Toast.makeText(RequestAdd.this, "Request submitted", Toast.LENGTH_SHORT).show();
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(RequestAdd.this, "Error submitting request", Toast.LENGTH_SHORT).show();
+//                    }
+//                }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                // Truyền dữ liệu vào request
+//                Map<String, String> params = new HashMap<>();
+//                params.put("request_type", requestType);
+//                params.put("title", title);
+//                params.put("attachment", path); // Thêm đường dẫn của tệp đính kèm vào request
+//                // Thêm các tham số khác nếu cần
+//                return params;
+//            }
+//        };
+//        Volley.newRequestQueue(this).add(request);
+//    }
 
     private void CreateAndShowInfoStudent() {
         InfoAddRequest = findViewById(R.id.InfoAddRequest);
