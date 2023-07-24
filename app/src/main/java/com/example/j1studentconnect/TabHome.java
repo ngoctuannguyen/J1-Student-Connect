@@ -145,12 +145,12 @@ public class TabHome extends Fragment {
 
     private void ClickButton(){
 
-        btnAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
+//        btnAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), Profile.class));
+//            }
+//        });
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -31,12 +31,12 @@ public class Grades extends AppCompatActivity {
 
     private void ClickGradesButton() {
 
-        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Grades.this, Profile.class));
-            }
-        });
+//        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Grades.this, Profile.class));
+//            }
+//        });
 
         btnGradesHome.setOnClickListener(new View.OnClickListener() {
             @Override
