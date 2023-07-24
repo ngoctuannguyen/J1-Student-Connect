@@ -81,12 +81,12 @@ public class TabHome extends Fragment {
         return rootView;
     }
     private void CreateAndShowInfoStudent() {
-        TextView Name = rootView.findViewById(R.id.name);
-        TextView student_id = rootView.findViewById(R.id.student_id_in_main);
-        TextView class_id = rootView.findViewById(R.id.class_id);
+        TextView Name = rootView.findViewById(R.id.name1);
+        TextView student_id = rootView.findViewById(R.id.student_id_in_main1);
+        TextView class_id = rootView.findViewById(R.id.class_id1);
 
-//        Intent intentBefore = getActivity().getIntent();
-//        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        //Intent intentBefore = getActivity().getIntent();
+        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
         String student_id_child = "12345678";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
