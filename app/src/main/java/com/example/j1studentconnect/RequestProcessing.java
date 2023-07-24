@@ -57,36 +57,34 @@ public class RequestProcessing extends AppCompatActivity {
         RequestTypeList = new ArrayList<String>();
         StateRequestList = new HashMap<String, List<String>>();
 
-        RequestTypeList.add("Monday");
-        RequestTypeList.add("Tuesday");
-        RequestTypeList.add("Wednesday");
-        RequestTypeList.add("Thursday");
-        RequestTypeList.add("Friday");
-        RequestTypeList.add("Saturday");
+        RequestTypeList.add("Cấp bảng điểm");
+        RequestTypeList.add("Đề nghị hoãn thi");
+        RequestTypeList.add("Xem lại bài thi");
+        RequestTypeList.add("Cấp lại thẻ sinh viên");
+        RequestTypeList.add("Đề nghị làm vé xe bus");
+        RequestTypeList.add("Xin thôi học");
+        RequestTypeList.add("Cấp chứng chỉ tốt nghiệp tạm thời");
 
         List<String> subjectMon = new ArrayList<>();
-        subjectMon.add("DSA");
-        subjectMon.add("Mobile");
+        String date = "Ngày tạo : 24/7/2023\n";
+        String file = "Tệp đính kèm: \n";
+        String reason = "Lý do:";
+        subjectMon.add(date + file + reason);
 
         List<String> subjectTue = new ArrayList<>();
         subjectTue.add("DSA");
-        subjectTue.add("Mobile");
 
         List<String> subjectWed = new ArrayList<>();
         subjectWed.add("DSA");
-        subjectWed.add("Mobile");
 
         List<String> subjectThu = new ArrayList<>();
         subjectThu.add("DSA");
-        subjectThu.add("Mobile");
 
         List<String> subjectFri = new ArrayList<>();
         subjectFri.add("DSA");
-        subjectFri.add("Mobile");
 
         List<String> subjectSat = new ArrayList<>();
         subjectSat.add("DSA");
-        subjectSat.add("Mobile");
 
         StateRequestList.put(RequestTypeList.get(0), subjectMon);
         StateRequestList.put(RequestTypeList.get(1), subjectTue);

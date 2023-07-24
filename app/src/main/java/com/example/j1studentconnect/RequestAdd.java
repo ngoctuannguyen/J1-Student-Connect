@@ -4,12 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +29,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ExpandedMenuView;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -51,6 +59,8 @@ public class RequestAdd extends AppCompatActivity {
     private LinearLayout btnRequestProcessing;
     private ImageButton btnRHome, btnRSearch, btnRProfile;
 
+    private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree;
+
     DatabaseReference reference;
 
     @Override
@@ -65,11 +75,142 @@ public class RequestAdd extends AppCompatActivity {
 
         ConstructButton();
         ClickButtonInRequest();
+        ConstructCardButton();
         //initifinal();
         //addListenerOnButton();
         //addListenerOnSpinnerItemSelection();
         //addListenerOnButton();
+        addClickOnCardRequest();
         CreateAndShowInfoStudent();
+    }
+
+    private void ConstructCardButton() {
+        cardResults = findViewById(R.id.card_study_results);
+        cardPostpone = findViewById(R.id.card_postpone);
+        cardReview = findViewById(R.id.card_review);
+        cardStudentRequest = findViewById(R.id.card_student_card);
+        cardBusRequest = findViewById(R.id.card_bus_request);
+        cardStopLearning = findViewById(R.id.card_stop_learning);
+        cardDegree = findViewById(R.id.card_degree_request);
+    }
+
+    private void addClickOnCardRequest() {
+        cardResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 1);
+            }
+        });
+
+        cardPostpone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 2);
+            }
+        });
+
+        cardReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 3);
+            }
+        });
+        cardStudentRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 4);
+            }
+        });
+
+        cardBusRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 5);
+            }
+        });
+
+        cardStopLearning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 6);
+            }
+        });
+
+        cardDegree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 7);
+            }
+        });
+
+    }
+
+    private void openRequest(int gravity, int type) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_request);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+            return;
+
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+//        if (Gravity.BOTTOM == gravity)
+//            dialog.setCancelable(true);
+//        else dialog.setCancelable(false);
+
+        TextView txtTitleOfDialog = dialog.findViewById(R.id.dialog_title);
+        switch (type){
+
+            case 1:
+                txtTitleOfDialog.setText("Cấp bảng điểm");
+                break;
+            case 2:
+                txtTitleOfDialog.setText("Đề nghị hoãn thi");
+                break;
+            case 3:
+                txtTitleOfDialog.setText("Xem lại bài thi");
+                break;
+            case 4:
+                txtTitleOfDialog.setText("Cấp lại thẻ sinh viên");
+                break;
+            case 5:
+                txtTitleOfDialog.setText("Đề nghị làm vé xe bus");
+                break;
+            case 6:
+                txtTitleOfDialog.setText("Xin thôi học");
+                break;
+            case 7:
+                txtTitleOfDialog.setText("Cấp CN tốt nghiệp tạm thời");
+                break;
+
+        }
+
+        EditText edtReason = dialog.findViewById(R.id.reason_of_dialog);
+        Button file_archive = dialog.findViewById(R.id.file_archive);
+        Button submitDialog = dialog.findViewById(R.id.submit_dialog);
+
+        dialog.show();
     }
 
     private void ClickButtonInRequest() {

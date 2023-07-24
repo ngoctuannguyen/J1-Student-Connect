@@ -85,12 +85,12 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         }
 
         TextView dateCreate = view.findViewById(R.id.cell_request_date);
-//        TextView requestFile = view.findViewById(R.id.cell_request_file);
-//        TextView reasonForRequest = view.findViewById(R.id.reason_for_request);
+        //TextView requestFile = view.findViewById(R.id.cell_request_file);
+        //TextView reasonForRequest = view.findViewById(R.id.reason_for_request);
 
         dateCreate.setText(request_cell_processing);
-//        requestFile.setText(request_cell_processing);
-//        reasonForRequest.setText(request_cell_processing);
+        //requestFile.setText(request_cell_processing);
+        //reasonForRequest.setText(request_cell_processing);
 
         return view;
     }
