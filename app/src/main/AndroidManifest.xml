@@ -79,14 +79,6 @@
             android:exported="true" />
 
         <!--Profile-->
-        <activity
-            android:name=".Profile"
-            android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value=""/>
-        </activity>
 
         <!--EditProfile-->
         <activity

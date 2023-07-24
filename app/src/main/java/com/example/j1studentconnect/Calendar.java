@@ -105,12 +105,12 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        btnTBProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Calendar.this, Profile.class));
-            }
-        });
+//        btnTBProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Calendar.this, Profile.class));
+//            }
+//        });
     }
 
 

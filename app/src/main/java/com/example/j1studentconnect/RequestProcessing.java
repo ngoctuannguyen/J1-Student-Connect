@@ -116,12 +116,12 @@ public class RequestProcessing extends AppCompatActivity {
             }
         });
 
-        btnRPProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestProcessing.this, Profile.class));
-            }
-        });
+//        btnRPProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(RequestProcessing.this, Profile.class));
+//            }
+//        });
     }
 
     private void CreateAndShowInfoStudent() {

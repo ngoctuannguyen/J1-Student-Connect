@@ -42,12 +42,12 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-        btnProfileNoti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NotificationActivity.this, Profile.class));
-            }
-        });
+//        btnProfileNoti.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(NotificationActivity.this, Profile.class));
+//            }
+//        });
 
     }
 
