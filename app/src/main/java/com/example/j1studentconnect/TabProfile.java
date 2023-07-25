@@ -189,7 +189,7 @@ public class TabProfile extends Fragment {
 
         parametersConstruct();
         buttonsConstruct();
-        showAllUserData();
+        //showAllUserData();
 
         return view;
     }
@@ -217,6 +217,9 @@ public class TabProfile extends Fragment {
                 intent.putExtra("phone", user_phone);
                 intent.putExtra("email", user_email);
                 startActivity(intent);
+
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,3 +264,4 @@ public class TabProfile extends Fragment {
         showAllUserData();
     }
 }
+

@@ -14,11 +14,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +29,15 @@ import java.util.Date;
 
 public class PomodoroActivity extends AppCompatActivity {
 
-    private Button startButton, resetTimer;
+    private Button startButton, halfAnHour, quarterHour;
     private CountDownTimer pomodoroTimer = null;
     boolean timeRunning = false;
-    TextView titlePomodoro;
+    TextView titlePomodoro, roundCount;
+
+    public static boolean quarterHourPress = false, halfHourPress = false, startButtonPress = false;
+
+    //LinearLayout linearLayout = findViewById(R.id.layoutPomodoro);
+    int cntRound = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,38 +45,52 @@ public class PomodoroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pomodoro);
         //createNotificationChannel();
         startButton = findViewById(R.id.start_button);
-        resetTimer = findViewById(R.id.resetTimer);
+        //linearLayout.setBackgroundColor(Color.RED);
+        halfAnHour = findViewById(R.id.halfAnHour);
+        halfAnHour.setVisibility(View.GONE);
+        quarterHour = findViewById(R.id.quaterAnHour);
+        quarterHour.setVisibility(View.GONE);
+
         titlePomodoro = findViewById(R.id.TitlePomodoro);
+        roundCount = findViewById(R.id.RoundCount);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!timeRunning){
-                    startTimer();
                     timeRunning = true;
-                    startButton.setText("Pause");
+                    startTimer();
+                    startButton.setText("Dừng và làm lại cuộc đời");
                 }
                 else {
                     pomodoroTimer.cancel();
                     timeRunning = false;
-                    startButton.setText("Start");
+                    cntRound = 1;
+                    roundCount.setText("1 / 4");
+                    startButton.setText("Vào bàn học thôi !!");
+                    TextView timer_text_view = findViewById(R.id.timer_text_view);
+                    timer_text_view.setText("0 : 10");
                 }
             }
         });
 
-        resetTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
 
-            }
-        });
+    private void resetTimer() {
+        TextView timer_text_view = findViewById(R.id.timer_text_view);
+        timer_text_view.setText("0 : 10");
+        startButton.setText("Vào bàn học thôi !!");
+        timeRunning = false;
+        pomodoroTimer.cancel();
     }
 
     public void startTimer() {
         long timerLength = 10 * 1000;
+        //linearLayout.setBackgroundColor(Color.RED);
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
         titlePomodoro.setText("Tập trung học bài nào !!!");
-        pomodoroTimer = new CountDownTimer(timerLength, 1000) {
+        if (timeRunning)
+            pomodoroTimer = new CountDownTimer(timerLength, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long minutes = millisUntilFinished / 1000 / 60;
@@ -84,7 +105,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 pomodoroTimer.cancel();
-                timeRunning = false;
+                //timeRunning = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
 //                builder.setMessage("Nghỉ ngơi đã")
 //                        .setPositiveButton("Okela", new DialogInterface.OnClickListener() {
@@ -111,6 +132,8 @@ public class PomodoroActivity extends AppCompatActivity {
 
     private void showNotification() {
 
+        Intent intent = new Intent(this, PomodoroActivity.class);
+
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO")
                 .setContentTitle("VNU Pomodoro Timer")
                 .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
@@ -129,44 +152,97 @@ public class PomodoroActivity extends AppCompatActivity {
 
     private void startBreakTimer() {
         long timerLength = 5 * 1000;
+        //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
-        pomodoroTimer = new CountDownTimer(timerLength, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                long minutes = millisUntilFinished / 1000 / 60;
-                long seconds = millisUntilFinished / 1000 % 60;
-                TextView timer_text_view = findViewById(R.id.timer_text_view);
-                timer_text_view.setText(minutes + ":" + seconds);
-            }
-
-            @Override
-            public void onFinish() {
-                if (pomodoroTimer != null) {
-                    pomodoroTimer.cancel();
+        //if (timeRunning)
+            pomodoroTimer = new CountDownTimer(timerLength, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    long minutes = millisUntilFinished / 1000 / 60;
+                    long seconds = millisUntilFinished / 1000 % 60;
+                    TextView timer_text_view = findViewById(R.id.timer_text_view);
+                    timer_text_view.setText(minutes + " : " + seconds);
                 }
-                boolean timerRunning = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
-//                builder.setMessage("Giữ vững tinh thần nha !!!")
-//                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                startTimer();
-//                            }
-//                        })
-//                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .show();
-                startTimer();
-            }
 
-        };
-        pomodoroTimer.start();
+                @Override
+                public void onFinish() {
+                    if (pomodoroTimer != null) {
+                        pomodoroTimer.cancel();
+                    }
+                    boolean timerRunning = false;
+
+                    if (cntRound == 4){
+                        cntRound = 1;
+                        roundCount.setText(cntRound + " / 4");
+                        quarterHour.setVisibility(View.VISIBLE);
+                        halfAnHour.setVisibility(View.VISIBLE);
+                        chooseQuaterOrHalf();
+                        quarterHour.setVisibility(View.GONE);
+                        halfAnHour.setVisibility(View.GONE);
+                    }
+
+                    //if (!startButtonPress){
+                        cntRound++;
+                        roundCount.setText(cntRound + " / 4");
+                        startButtonPress = true;
+                    //}
+
+                   // startButtonPress = false;
+                   // roundCount.setText(cntRound + " / 4");
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+    //                builder.setMessage("Giữ vững tinh thần nha !!!")
+    //                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
+    //                            public void onClick(DialogInterface dialog, int which) {
+    //                                startTimer();
+    //                            }
+    //                        })
+    //                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
+    //                            public void onClick(DialogInterface dialog, int which) {
+    //                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
+    //                            }
+    //                        })
+    //                        .show();
+
+                        startTimer();
+                }
+
+            };
+            pomodoroTimer.start();
+    }
+
+    private void chooseQuaterOrHalf() {
+
+        halfAnHour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView timer_text_view = findViewById(R.id.timer_text_view);
+                //halfHourPress = true;
+                timer_text_view.setText("30 : 00");
+            }
+        });
+
+        quarterHour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView timer_text_view = findViewById(R.id.timer_text_view);
+                timer_text_view.setText("15 : 00");
+            }
+        });
+
+        startTimer();
+
     }
 
     private int getNotiID(){
         return (int) new Date().getTime();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (pomodoroTimer != null)
+            pomodoroTimer.cancel();
+
+    }
 }
