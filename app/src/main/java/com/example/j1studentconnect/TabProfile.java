@@ -22,12 +22,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TabProfile extends Fragment {
 
     TextView name, email, student_id, password, gender, birthday, student_class, phone, title_name;
 
-    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
+    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child, profile_imageURL;
+    CircleImageView profile_image;
 
     Button logout, edit_profile;
     View view;
@@ -96,6 +100,10 @@ public class TabProfile extends Fragment {
                     user_class = snapshot.child("student_class").getValue().toString();
                     user_birthday = snapshot.child("birthday").getValue().toString();
                     user_phone = snapshot.child("phone").getValue().toString();
+                    if (snapshot.hasChild("imageURL")) {
+                        profile_imageURL = snapshot.child("imageURL").getValue().toString();
+                        Picasso.get().load(profile_imageURL).into(profile_image);
+                    }
                     title_name.setText(user_name);
                     name.setText(user_name);
                     email.setText(user_email);
@@ -104,6 +112,7 @@ public class TabProfile extends Fragment {
                     gender.setText(user_gender);
                     student_class.setText(user_class);
                     phone.setText(user_phone);
+
                 }
             }
             @Override
