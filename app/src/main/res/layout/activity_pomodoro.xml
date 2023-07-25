@@ -16,9 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Làm Việc Thôi !"
+            android:text="Tập trung học bài nào !!!"
             android:id="@+id/TitlePomodoro"
-            android:textSize="40sp"/>
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:textSize="35sp"/>
 
         <TextView
             android:id="@+id/timer_text_view"
@@ -28,7 +30,7 @@
             android:gravity="center"
             android:layout_marginBottom="10dp"
             android:text="25:00"
-            android:textSize="36sp" />
+            android:textSize="100sp" />
 
         <Button
             android:id="@+id/start_button"
@@ -38,6 +40,17 @@
             android:layout_marginTop="5dp"
             android:background="@color/main_green"
             android:text="Start" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main_green"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Reset"
+            android:id="@+id/resetTimer"/>
+
+
     </LinearLayout>
 
 </RelativeLayout>

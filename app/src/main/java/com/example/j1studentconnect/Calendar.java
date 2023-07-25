@@ -7,9 +7,17 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +50,10 @@ public class Calendar extends AppCompatActivity {
         TimeTable = new TimeTableAdapter(this, dayList, subjectList);
         expandableListView.setAdapter(TimeTable);
 
+        CreateAndShowInfoStudent();
+
         ClickButtonInCalen();
+
     }
 
     private void showList() {
@@ -109,6 +120,27 @@ public class Calendar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Calendar.this, Profile.class));
+            }
+        });
+    }
+
+    private void CreateAndShowInfoStudent() {
+        TextView InfoTBStudent = findViewById(R.id.InfoinTB);
+        //Intent intentBefore = getActivity().getIntent();
+        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        String student_id_child = "22026521";
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()){
+                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
+                    InfoTBStudent.setText(strshow);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
