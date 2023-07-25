@@ -92,7 +92,7 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/karmab"
                     android:gravity="bottom"
-                    android:text="Mikasa Ackerman"
+                    android:text=""
                     android:textSize="16sp" />
 
                 <TextView
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/name1"
                     android:gravity="bottom"
-                    android:text="  |  21020337"
+                    android:text=""
                     android:textColor="@color/grey" />
 
                 <TextView
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name1"
                     android:gravity="top"
-                    android:text="QH-2021-I/CQ-C-B"
+                    android:text=""
                     android:textColor="@color/grey" />
 
                 <ImageButton
@@ -734,6 +734,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
@@ -763,38 +764,7 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="60dp"
-                        android:orientation="vertical">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@color/white"
-                            app:cardCornerRadius="10dp">
-
-                            <ImageButton
-                                android:id="@+id/courses"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:padding="7dp"
-                                android:src="@drawable/enrollcourse" />
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/arsenalbold"
-                            android:text="Đăng ký học"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

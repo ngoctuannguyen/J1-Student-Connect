@@ -72,8 +72,8 @@ public class TabHome extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
-        ConstructLayout();
         CreateAndShowInfoStudent();
+        ConstructLayout();
         ConstructButton();
 //        initWidgets();
 //        setWeekView();
@@ -87,7 +87,7 @@ public class TabHome extends Fragment {
 
         //Intent intentBefore = getActivity().getIntent();
         //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "12345678";
+        String student_id_child = "22026521";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -169,7 +169,7 @@ public class TabHome extends Fragment {
         btnCalendarHotkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Calendar.class));
+                startActivity(new Intent(getActivity(), PomodoroActivity.class));
             }
         });
 
