@@ -169,7 +169,7 @@ public class TabHome extends Fragment {
         btnCalendarHotkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Calendar.class));
+                startActivity(new Intent(getActivity(), PomodoroActivity.class));
             }
         });
 

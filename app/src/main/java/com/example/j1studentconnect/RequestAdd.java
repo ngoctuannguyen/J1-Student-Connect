@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +53,7 @@ import java.util.Map;
 
 public class RequestAdd extends AppCompatActivity {
     private Spinner spinner1;
+    private Context context;
     private Button attachButton;
     private static final int PICKFILE_REQUEST_CODE = 1;
     private String path;
@@ -61,17 +64,21 @@ public class RequestAdd extends AppCompatActivity {
 
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree;
 
+//    private EditText edtReason;
+//    private Button file_archive, submitDialog;
+
     DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_request);
-        //attachButton = findViewById(R.id.attach_button);
+        ///attachButton = findViewById(R.id.attach_button);
 
         btnRHome = (ImageButton) findViewById(R.id.RequestHome);
         btnRSearch = (ImageButton) findViewById(R.id.RequestSearch);
         btnRProfile = (ImageButton) findViewById(R.id.RequestProfile);
+
 
         ConstructButton();
         ClickButtonInRequest();
@@ -209,6 +216,17 @@ public class RequestAdd extends AppCompatActivity {
         EditText edtReason = dialog.findViewById(R.id.reason_of_dialog);
         Button file_archive = dialog.findViewById(R.id.file_archive);
         Button submitDialog = dialog.findViewById(R.id.submit_dialog);
+//
+        file_archive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+                Toast.makeText(context, "This is a message", Toast.LENGTH_LONG).show();
+
+            }
+        });
 
         dialog.show();
     }
@@ -247,15 +265,17 @@ public class RequestAdd extends AppCompatActivity {
         btnRequestProcessing = (LinearLayout) findViewById(R.id.request_handing_bar);
     }
 
-//    private void addListenerOnButton() {
-//        attachButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("*/*");
-//                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
-//            }
-//        });
+//    public void addListenerOnButton() {
+////        file_archive.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+////                intent.setType("*/*");
+////                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+////                Toast.makeText(context, "This is a message", Toast.LENGTH_LONG).show();
+////
+////            }
+////        });
 //    }
 
 //    @Override
