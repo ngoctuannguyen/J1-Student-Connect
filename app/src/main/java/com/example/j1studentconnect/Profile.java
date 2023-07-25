@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
+    // No usage
     TextView name, email, student_id, password, gender, birthday, student_class, phone;
     String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
     TextView title_name;
