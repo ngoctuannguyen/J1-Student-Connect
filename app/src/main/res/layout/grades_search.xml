@@ -66,7 +66,7 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/arsenalbold"
                 android:gravity="center_vertical"
-                android:text="Học kỳ:"
+                android:text="Năm học:"
                 android:textSize="18dp" />
 
             <androidx.cardview.widget.CardView
@@ -181,16 +181,40 @@
 
     </ScrollView>
 
-    <TextView
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="500dp"
         android:layout_marginLeft="20dp"
-        android:text="Tổng tín chỉ: [N/A]\nTổng tín chỉ tich lũy: [N/A]\nĐiểm trung bình hệ 4: "
-        android:fontFamily="@font/signika"
-        android:textSize="13dp"
-        android:textStyle="bold"/>
+        android:layout_marginRight="20dp" >
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="40"
+                android:gravity="center"
+                android:fontFamily="@font/signika"
+                android:text="Tổng tín chỉ: [N/A]\nĐiểm trung bình hệ 4: "
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="60"
+                android:gravity="center"
+                android:fontFamily="@font/signika"
+                android:text="Tổng tín chỉ tích lũy: [N/A]\nĐiểm trung bình tích lũy hệ 4: "
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+    </TableLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
