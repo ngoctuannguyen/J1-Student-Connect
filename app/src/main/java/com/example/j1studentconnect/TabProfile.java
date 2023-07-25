@@ -102,7 +102,7 @@ public class TabProfile extends Fragment {
                     user_phone = snapshot.child("phone").getValue().toString();
                     if (snapshot.hasChild("imageURL")) {
                         profile_imageURL = snapshot.child("imageURL").getValue().toString();
-                        Picasso.get().load(profile_imageURL).into(profile_image);
+                        // Picasso.get().load(profile_imageURL).into(profile_image);
                     }
                     title_name.setText(user_name);
                     name.setText(user_name);
