@@ -42,7 +42,7 @@ public class Grades extends AppCompatActivity {
     }
 
     private void ConstructGradesSpinner() {
-        String[] options = {"Học kỳ 1 năm học 2022 - 2023", "Toàn khóa"};
+        String[] options = {"2021-2022", "2022-2023"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
         Spinner spinner = findViewById(R.id.selectGrades);
         TableLayout tableLayout = findViewById(R.id.gradesTable);
@@ -56,11 +56,77 @@ public class Grades extends AppCompatActivity {
 
                 // Thực hiện các hành động tùy theo tùy chọn đã chọn
                 switch (selectedOption) {
-                    case "Học kỳ 1 năm học 2022 - 2023":
+                    case "2021-2022":
                         // Xử lý khi chọn Option 1
                         tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
+                        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("results");
+                        // Đọc dữ liệu từ Firebase
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        // Xóa hết các hàng dữ liệu cũ trước khi hiển thị dữ liệu mới
+                                        tableLayout.removeAllViews();
+
+                                        int stt = 1;
+
+                                        // Duyệt qua các dữ liệu trong dataSnapshot
+                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                            // Lấy giá trị từ mỗi dữ liệu trong Firebase
+                                            String name = snapshot.child("class_id").getValue(String.class);
+                                            String score = snapshot.child("class_id2").getValue(String.class);
+
+                                            // Tạo một TableRow mới
+                                            TableRow row = new TableRow(getApplicationContext());
+
+                                            // Tạo các TextView chứa dữ liệu và thêm vào TableRow
+                                            TextView textViewColumn1 = new TextView(getApplicationContext());
+                                            textViewColumn1.setText(String.valueOf(stt));
+                                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.1f));
+                                            textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            row.addView(textViewColumn1);
+
+                                            TextView textViewColumn2 = new TextView(getApplicationContext());
+                                            textViewColumn2.setText(name);
+                                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.35f));
+                                            textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            row.addView(textViewColumn2);
+
+                                            TextView textViewColumn3 = new TextView(getApplicationContext());
+                                            textViewColumn3.setText("3");
+                                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                                            textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            row.addView(textViewColumn3);
+
+                                            TextView textViewColumn4 = new TextView(getApplicationContext());
+                                            textViewColumn4.setText(score);
+                                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                                            textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            row.addView(textViewColumn4);
+
+                                            TextView textViewColumn5 = new TextView(getApplicationContext());
+                                            textViewColumn5.setText("aaa");
+                                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
+                                            textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            row.addView(textViewColumn5);
+
+                                            // Thêm TableRow vào TableLayout
+                                            tableLayout.addView(row);
+
+                                            stt++;
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        // Xử lý khi có lỗi xảy ra
+                                    }
+                                });
 
                         // Tạo các hàng và cột cho bảng tương ứng với Option 1
+                        break;
+                    case "2022-2023":
+                        // Xử lý khi chọn Option 2
+                        tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
+                        // Tạo các hàng và cột cho bảng tương ứng với Option 2
                         for (int i = 0; i < 10; i++) {
                             TableRow row = new TableRow(getApplicationContext());
 
@@ -90,26 +156,10 @@ public class Grades extends AppCompatActivity {
                             row.addView(textViewColumn4);
 
                             TextView textViewColumn5 = new TextView(getApplicationContext());
-                            textViewColumn5.setText("aaaaaaaa");
+                            textViewColumn5.setText("aaa");
                             textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
                             textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
                             row.addView(textViewColumn5);
-
-                            // Thêm TableRow vào TableLayout
-                            tableLayout.addView(row);
-                        }
-                        break;
-                    case "Toàn khóa":
-                        // Xử lý khi chọn Option 2
-                        tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-                        // Tạo các hàng và cột cho bảng tương ứng với Option 2
-                        for (int i = 0; i < 1; i++) {
-                            TableRow row = new TableRow(getApplicationContext());
-
-                            // Thêm các TextView vào TableRow để hiển thị dữ liệu trong các cột
-                            TextView textViewColumn1 = new TextView(getApplicationContext());
-                            textViewColumn1.setText("Kết quả học tập toàn khóa");
-                            row.addView(textViewColumn1);
 
                             // Thêm TableRow vào TableLayout
                             tableLayout.addView(row);
