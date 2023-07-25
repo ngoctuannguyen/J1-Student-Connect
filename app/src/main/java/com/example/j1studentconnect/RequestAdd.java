@@ -34,12 +34,7 @@ import androidx.appcompat.view.menu.ExpandedMenuView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -253,12 +248,12 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
-        btnRProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestAdd.this, Profile.class));
-            }
-        });
+//        btnRProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(RequestAdd.this, Profile.class));
+//            }
+//        });
     }
 
     private void ConstructButton() {

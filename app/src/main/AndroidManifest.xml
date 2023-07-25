@@ -67,7 +67,8 @@
         </activity> <!-- Search -->
         <activity
             android:name=".Search"
-            android:exported="true" /> <!-- Profile -->
+            android:exported="true" /> 
+      <!-- Profile -->
 <!--        <activity-->
 <!--            android:name=".Profile"-->
 <!--            android:exported="true"-->

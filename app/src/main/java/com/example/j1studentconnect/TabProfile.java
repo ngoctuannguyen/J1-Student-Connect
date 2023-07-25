@@ -169,7 +169,7 @@ public class TabProfile extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,7 +178,7 @@ public class TabProfile extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_tab_profile, container, false);
@@ -217,9 +217,6 @@ public class TabProfile extends Fragment {
                 intent.putExtra("phone", user_phone);
                 intent.putExtra("email", user_email);
                 startActivity(intent);
-
-            }
-        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
