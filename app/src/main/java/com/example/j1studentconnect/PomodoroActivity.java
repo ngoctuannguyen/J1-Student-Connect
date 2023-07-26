@@ -27,17 +27,19 @@ import android.widget.Toast;
 import java.text.BreakIterator;
 import java.util.Date;
 
+import kotlin.OverloadResolutionByLambdaReturnType;
+
 public class PomodoroActivity extends AppCompatActivity {
 
     private Button startButton, halfAnHour, quarterHour;
     private CountDownTimer pomodoroTimer = null;
-    boolean timeRunning = false;
+    static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false;
     TextView titlePomodoro, roundCount;
 
-    public static boolean quarterHourPress = false, halfHourPress = false, startButtonPress = false;
+    public static boolean fourtimes = false;
 
     //LinearLayout linearLayout = findViewById(R.id.layoutPomodoro);
-    int cntRound = 1;
+    public static int cntRound = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +64,13 @@ public class PomodoroActivity extends AppCompatActivity {
                     startButton.setText("Dừng và làm lại cuộc đời");
                 }
                 else {
-                    pomodoroTimer.cancel();
                     timeRunning = false;
                     cntRound = 1;
                     roundCount.setText("1 / 4");
                     startButton.setText("Vào bàn học thôi !!");
                     TextView timer_text_view = findViewById(R.id.timer_text_view);
                     timer_text_view.setText("0 : 10");
+                    pomodoroTimer.cancel();
                 }
             }
         });
@@ -89,24 +91,27 @@ public class PomodoroActivity extends AppCompatActivity {
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
         titlePomodoro.setText("Tập trung học bài nào !!!");
-        if (timeRunning)
+        //if (timeRunning)
+        if (timeRunning && !fourtimes) {
             pomodoroTimer = new CountDownTimer(timerLength, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                long minutes = millisUntilFinished / 1000 / 60;
-                long seconds = millisUntilFinished / 1000 % 60;
-                timer_text_view.setText(minutes + " : " + seconds);
-            }
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //if (timeRunning && !fourtimes) {
+                    long minutes = millisUntilFinished / 1000 / 60;
+                    long seconds = millisUntilFinished / 1000 % 60;
+                    timer_text_view.setText(minutes + " : " + seconds);
+                    //}
+                }
 
-            @Override
-            public void onFinish() {
+                @Override
+                public void onFinish() {
 //                Intent intent = new Intent(PomodoroActivity.this, PomodoroNoti.class);
 //                PendingIntent pendingIntent = PendingIntent.getBroadcast(PomodoroActivity.this, 0, intent, 0);
-                //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                pomodoroTimer.cancel();
-                //timeRunning = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+                    pomodoroTimer.cancel();
+                    //timeRunning = false;
+                    //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
 //                builder.setMessage("Nghỉ ngơi đã")
 //                        .setPositiveButton("Okela", new DialogInterface.OnClickListener() {
 //                            @Override
@@ -123,11 +128,27 @@ public class PomodoroActivity extends AppCompatActivity {
 //                            }
 //                        }).show();
 
-                showNotification();
-                startBreakTimer();
-            }
-        };
-        pomodoroTimer.start();
+                    // if (cntRound != 4)
+                    showNotification();
+
+                    if (cntRound == 4) {
+                        cntRound = 1;
+                        timeRunning = false;
+                        fourtimes = true;
+                        //roundCount.setText(cntRound + " / 4");
+                        quarterHour.setVisibility(View.VISIBLE);
+                        halfAnHour.setVisibility(View.VISIBLE);
+                        halfHourPress = true;
+                        chooseQuaterOrHalf();
+                        //timeRunning = true;
+                    }
+
+                    startBreakTimer();
+                }
+            };
+            if (!halfHourPress)
+                pomodoroTimer.start();
+        }
     }
 
     private void showNotification() {
@@ -139,14 +160,14 @@ public class PomodoroActivity extends AppCompatActivity {
                 .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
                 .setSmallIcon(R.drawable.icon_learning_pomodoro)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
-                //  .setAutoCancel(true);
-                //.setSound(Uri.parse("https://firebasestorage.googleapis.com/v0/b/mynotes-8b6d5.appspot.com/o/mixkit-scanning-sci-fi-alarm-905.wav?alt=media&token=5bebfd2b-3bc3-45a4-8a2d-acb2f3f0e182"));
+        //  .setAutoCancel(true);
+        //.setSound(Uri.parse("https://firebasestorage.googleapis.com/v0/b/mynotes-8b6d5.appspot.com/o/mixkit-scanning-sci-fi-alarm-905.wav?alt=media&token=5bebfd2b-3bc3-45a4-8a2d-acb2f3f0e182"));
 
         // Display the notification
         //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PomodoroActivity.this);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null)
-                notificationManager.notify(getNotiID(), notification.build());
+            notificationManager.notify(getNotiID(), notification.build());
     }
 
 
@@ -154,14 +175,17 @@ public class PomodoroActivity extends AppCompatActivity {
         long timerLength = 5 * 1000;
         //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
-        //if (timeRunning)
+        if (timeRunning && !fourtimes) {
             pomodoroTimer = new CountDownTimer(timerLength, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    long minutes = millisUntilFinished / 1000 / 60;
-                    long seconds = millisUntilFinished / 1000 % 60;
-                    TextView timer_text_view = findViewById(R.id.timer_text_view);
-                    timer_text_view.setText(minutes + " : " + seconds);
+                    if (timeRunning && !fourtimes) {
+                        long minutes = millisUntilFinished / 1000 / 60;
+                        long seconds = millisUntilFinished / 1000 % 60;
+                        TextView timer_text_view = findViewById(R.id.timer_text_view);
+                        timer_text_view.setText(minutes + " : " + seconds);
+                    }
+
                 }
 
                 @Override
@@ -169,56 +193,59 @@ public class PomodoroActivity extends AppCompatActivity {
                     if (pomodoroTimer != null) {
                         pomodoroTimer.cancel();
                     }
-                    boolean timerRunning = false;
-
-                    if (cntRound == 4){
-                        cntRound = 1;
-                        roundCount.setText(cntRound + " / 4");
-                        quarterHour.setVisibility(View.VISIBLE);
-                        halfAnHour.setVisibility(View.VISIBLE);
-                        chooseQuaterOrHalf();
-                        quarterHour.setVisibility(View.GONE);
-                        halfAnHour.setVisibility(View.GONE);
-                    }
+                    //boolean timerRunning = false;
 
                     //if (!startButtonPress){
-                        cntRound++;
-                        roundCount.setText(cntRound + " / 4");
-                        startButtonPress = true;
+                    cntRound++;
+                    roundCount.setText(cntRound + " / 4");
+                    //astartButtonPress = true;
+
                     //}
 
-                   // startButtonPress = false;
-                   // roundCount.setText(cntRound + " / 4");
+                    // startButtonPress = false;
+                    // roundCount.setText(cntRound + " / 4");
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
-    //                builder.setMessage("Giữ vững tinh thần nha !!!")
-    //                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
-    //                            public void onClick(DialogInterface dialog, int which) {
-    //                                startTimer();
-    //                            }
-    //                        })
-    //                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
-    //                            public void onClick(DialogInterface dialog, int which) {
-    //                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
-    //                            }
-    //                        })
-    //                        .show();
+                    //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+                    //                builder.setMessage("Giữ vững tinh thần nha !!!")
+                    //                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
+                    //                            public void onClick(DialogInterface dialog, int which) {
+                    //                                startTimer();
+                    //                            }
+                    //                        })
+                    //                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
+                    //                            public void onClick(DialogInterface dialog, int which) {
+                    //                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
+                    //                            }
+                    //                        })
+                    //                        .show();
 
-                        startTimer();
+                    startTimer();
                 }
 
             };
-            pomodoroTimer.start();
+            if (!halfHourPress)
+             pomodoroTimer.start();
+        }
     }
 
     private void chooseQuaterOrHalf() {
 
+        roundCount.setText("1 / 4");
+        titlePomodoro.setText("Nghỉ ngơi chút nhé !");
+        fourtimes = false;
         halfAnHour.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
-                //halfHourPress = true;
+                //halfHourPress = true
                 timer_text_view.setText("30 : 00");
+                halfAnHour.setVisibility(View.GONE);
+                quarterHour.setVisibility(View.GONE);
+                halfHourPress = false;
+                quarterHourPress = false;
+                timeRunning = true;
+                //startTimer();
             }
         });
 
@@ -227,10 +254,16 @@ public class PomodoroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
                 timer_text_view.setText("15 : 00");
+                quarterHour.setVisibility(View.GONE);
+                halfAnHour.setVisibility(View.GONE);
+                halfHourPress = false;
+                quarterHourPress = false;
+                timeRunning = false;
+                //startTimer();
             }
         });
 
-        startTimer();
+
 
     }
 
