@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class RequestProcessing extends AppCompatActivity {
 
     private ImageButton btnRPHome, btnRPSearch, btnRPProfile;
     private LinearLayout btnRequestAdd;
+
+    private java.util.Calendar today = java.util.Calendar.getInstance();
 
     RequestProcessingAdapter requestProcessingAdapter;
     ExpandableListView expandableListView1;
@@ -66,9 +69,9 @@ public class RequestProcessing extends AppCompatActivity {
         RequestTypeList.add("Cấp chứng chỉ tốt nghiệp tạm thời");
 
         List<String> subjectMon = new ArrayList<>();
-        String date = "Ngày tạo : 24/7/2023\n";
+        String date = "Ngày tạo : " + today.get(java.util.Calendar.DATE) + " / " + (today.get(java.util.Calendar.MONTH) + 1) + " / " + today.get(java.util.Calendar.YEAR) + "\n";
         String file = "Tệp đính kèm: \n";
-        String reason = "Lý do:";
+        String reason = "Lý do: " + RequestAdd.strRequest;
         subjectMon.add(date + file + reason);
 
         List<String> subjectTue = new ArrayList<>();
