@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,7 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RequestAdd extends AppCompatActivity {
-    private Spinner spinner1;
+    //private Spinner spinner1;
     private Context context;
     private Button attachButton;
     private static final int PICKFILE_REQUEST_CODE = 1;
@@ -59,8 +60,10 @@ public class RequestAdd extends AppCompatActivity {
 
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree;
 
-//    private EditText edtReason;
-//    private Button file_archive, submitDialog;
+    private EditText edtReason;
+    private Button file_archive, submitDialog;
+
+    public static String strRequest = "";
 
     DatabaseReference reference;
 
@@ -73,7 +76,6 @@ public class RequestAdd extends AppCompatActivity {
         btnRHome = (ImageButton) findViewById(R.id.RequestHome);
         btnRSearch = (ImageButton) findViewById(R.id.RequestSearch);
         btnRProfile = (ImageButton) findViewById(R.id.RequestProfile);
-
 
         ConstructButton();
         ClickButtonInRequest();
@@ -211,6 +213,8 @@ public class RequestAdd extends AppCompatActivity {
         EditText edtReason = dialog.findViewById(R.id.reason_of_dialog);
         Button file_archive = dialog.findViewById(R.id.file_archive);
         Button submitDialog = dialog.findViewById(R.id.submit_dialog);
+        TextView stateOfReason = dialog.findViewById(R.id.stateOfReason);
+        stateOfReason.setVisibility(View.GONE);
 //
         file_archive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,6 +224,24 @@ public class RequestAdd extends AppCompatActivity {
                 startActivityForResult(intent, PICKFILE_REQUEST_CODE);
                 Toast.makeText(context, "This is a message", Toast.LENGTH_LONG).show();
 
+            }
+        });
+
+        submitDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strRequest = edtReason.getText().toString();
+                if (strRequest == "") {
+                    stateOfReason.setText("Bạn chưa điền đủ lý do");
+                    stateOfReason.setVisibility(View.VISIBLE);
+                }
+                else stateOfReason.setVisibility(View.GONE);
+
+                //view = this.getCurrentFocus();
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                //Toast.makeText(context, "Bạn đã tạo yêu cầu thành công, vui lòng chờ được duyệt nhé :3", Toast.LENGTH_SHORT).show();
             }
         });
 
