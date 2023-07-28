@@ -11,7 +11,7 @@
         android:text="Cấp bảng điểm"
         android:id="@+id/txtTypeOfRequestProcessing"
         android:textSize="30sp"
-        android:gravity="center_horizontal" />
+        android:layout_marginLeft="30dp"/>
 
 
 </LinearLayout>

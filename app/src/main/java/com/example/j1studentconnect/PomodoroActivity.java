@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -33,7 +34,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
     private Button startButton, halfAnHour, quarterHour;
     private CountDownTimer pomodoroTimer = null;
-    static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false;
+    public static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false;
     TextView titlePomodoro, roundCount;
 
     public static boolean fourtimes = false;
@@ -91,8 +92,6 @@ public class PomodoroActivity extends AppCompatActivity {
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
         titlePomodoro.setText("Tập trung học bài nào !!!");
-        //if (timeRunning)
-        if (timeRunning && !fourtimes) {
             pomodoroTimer = new CountDownTimer(timerLength, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -138,18 +137,17 @@ public class PomodoroActivity extends AppCompatActivity {
                         //roundCount.setText(cntRound + " / 4");
                         quarterHour.setVisibility(View.VISIBLE);
                         halfAnHour.setVisibility(View.VISIBLE);
-                        halfHourPress = true;
+                        //halfHourPress = true;
                         chooseQuaterOrHalf();
-                        //timeRunning = true;
                     }
+                    else startBreakTimer();
 
-                    startBreakTimer();
+
                 }
             };
-            if (!halfHourPress)
+            if (timeRunning)
                 pomodoroTimer.start();
         }
-    }
 
     private void showNotification() {
 
@@ -175,16 +173,14 @@ public class PomodoroActivity extends AppCompatActivity {
         long timerLength = 5 * 1000;
         //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
-        if (timeRunning && !fourtimes) {
+        //if (timeRunning) {
             pomodoroTimer = new CountDownTimer(timerLength, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    if (timeRunning && !fourtimes) {
                         long minutes = millisUntilFinished / 1000 / 60;
                         long seconds = millisUntilFinished / 1000 % 60;
                         TextView timer_text_view = findViewById(R.id.timer_text_view);
                         timer_text_view.setText(minutes + " : " + seconds);
-                    }
 
                 }
 
@@ -223,16 +219,15 @@ public class PomodoroActivity extends AppCompatActivity {
                 }
 
             };
-            if (!halfHourPress)
-             pomodoroTimer.start();
+            if (timeRunning)
+                pomodoroTimer.start();
         }
-    }
 
     private void chooseQuaterOrHalf() {
 
         roundCount.setText("1 / 4");
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
-        fourtimes = false;
+        //fourtimes = false;
         halfAnHour.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -240,12 +235,13 @@ public class PomodoroActivity extends AppCompatActivity {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
                 //halfHourPress = true
                 timer_text_view.setText("30 : 00");
+                SystemClock.sleep(10);
                 halfAnHour.setVisibility(View.GONE);
                 quarterHour.setVisibility(View.GONE);
-                halfHourPress = false;
+                halfHourPress = true;
                 quarterHourPress = false;
                 timeRunning = true;
-                //startTimer();
+                startBreakTimer();
             }
         });
 
@@ -254,12 +250,13 @@ public class PomodoroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
                 timer_text_view.setText("15 : 00");
+                SystemClock.sleep(10);
                 quarterHour.setVisibility(View.GONE);
                 halfAnHour.setVisibility(View.GONE);
-                halfHourPress = false;
+                halfHourPress = true;
                 quarterHourPress = false;
-                timeRunning = false;
-                //startTimer();
+                timeRunning = true;
+                startBreakTimer();
             }
         });
 

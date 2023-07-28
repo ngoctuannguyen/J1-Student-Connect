@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -231,7 +232,7 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 strRequest = edtReason.getText().toString();
-                if (strRequest == "") {
+                if (TextUtils.isEmpty(edtReason.getText().toString())) {
                     stateOfReason.setText("Bạn chưa điền đủ lý do");
                     stateOfReason.setVisibility(View.VISIBLE);
                 }

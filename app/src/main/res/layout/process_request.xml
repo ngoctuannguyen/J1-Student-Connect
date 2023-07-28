@@ -86,7 +86,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="15dp"
         android:layout_below="@+id/request_toolbar">
 
         <LinearLayout
@@ -97,7 +97,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
                 android:id="@+id/InfoProcessingRequest"
@@ -115,8 +116,7 @@
                     android:id="@+id/StateRequestList1"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    android:layout_marginBottom="100dp"
-                    android:layoutDirection="rtl" />
+                    android:layout_marginBottom="100dp" />
 
             </LinearLayout>
         </LinearLayout>
