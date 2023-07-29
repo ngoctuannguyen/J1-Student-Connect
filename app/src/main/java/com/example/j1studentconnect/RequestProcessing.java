@@ -89,12 +89,17 @@ public class RequestProcessing extends AppCompatActivity {
         List<String> subjectSat = new ArrayList<>();
         subjectSat.add("DSA");
 
+        List<String> subjectSun = new ArrayList<>();
+        subjectSun.add("DSA");
+
+
         StateRequestList.put(RequestTypeList.get(0), subjectMon);
         StateRequestList.put(RequestTypeList.get(1), subjectTue);
         StateRequestList.put(RequestTypeList.get(2), subjectWed);
         StateRequestList.put(RequestTypeList.get(3), subjectThu);
         StateRequestList.put(RequestTypeList.get(4), subjectFri);
         StateRequestList.put(RequestTypeList.get(5), subjectSat);
+        StateRequestList.put(RequestTypeList.get(6), subjectSun);
     }
 
     private void ClickButtonInRequestProcessing() {

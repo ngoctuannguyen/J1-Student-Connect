@@ -49,9 +49,9 @@ public class FaceRecognitionActivity extends AppCompatActivity {
         croppedImageIv = findViewById(R.id.croppedImageIv);
 
         FaceDetectorOptions realTimeFdo = new FaceDetectorOptions.Builder()
-                                                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
-                                                .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
-                                                .build();
+                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
+                .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
+                .build();
 
         //init FaceDetectorObj
         detector = FaceDetection.getClient();
@@ -75,7 +75,7 @@ public class FaceRecognitionActivity extends AppCompatActivity {
 //                BitmapDrawable bitmapDrawable = (BitmapDrawable) originalImageIv.getDrawable();
 //                Bitmap bitmap1 = bitmapDrawable.getBitmap();
 
-                  analyzePhoto(bitmap);
+                analyzePhoto(bitmap);
             }
 
 
