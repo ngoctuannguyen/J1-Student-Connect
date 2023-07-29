@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/bg_grey"
-    tools:context=".TabHome" >
+    tools:context=".tabsinmain.TabHome" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"

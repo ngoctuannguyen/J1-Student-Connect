@@ -13,7 +13,7 @@
 
 
     <application
-        android:name=".PomodoroNoti"
+        android:name=".pomodoro.PomodoroNoti"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,10 +24,10 @@
         android:theme="@style/Base.Theme.J1StudentConnect"
         tools:targetApi="31">
         <activity
-            android:name=".TextRecognitionActivity"
+            android:name=".textrecognition.TextRecognitionActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraViewActivity"
+            android:name=".camera.CameraViewActivity"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -39,7 +39,7 @@
 
         </activity>
         <activity
-            android:name=".FaceRecognitionActivity"
+            android:name=".facerecognition.FaceRecognitionActivity"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -64,7 +64,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".NotificationActivity"
+            android:name=".notificationactivity.NotificationActivity"
             android:exported="true" /> <!-- Login -->
         <activity
             android:name=".authentication.Login"
@@ -91,14 +91,14 @@
                 android:value="" />
         </activity> <!-- Main -->
         <activity
-            android:name=".MainActivity"
+            android:name=".tabsinmain.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- Search -->
         <activity
-            android:name=".Search"
+            android:name=".searchtab.Search"
             android:exported="true" /> <!-- Profile -->
         <!-- <activity -->
         <!-- android:name=".Profile" -->
@@ -109,20 +109,20 @@
         <!-- android:value="" /> -->
         <!-- </activity> &lt;!&ndash; EditProfile &ndash;&gt; -->
         <activity
-            android:name=".EditProfile"
+            android:name=".profiletab.EditProfile"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- Calendar -->
-        <activity android:name=".Calendar" /> <!-- Grades -->
-        <activity android:name=".Grades" /> <!-- Courses -->
-        <activity android:name=".Courses" /> <!-- Request -->
-        <activity android:name=".RequestAdd" />
-        <activity android:name=".RequestProcessing" />
+        <activity android:name=".timetable.Calendar" /> <!-- Grades -->
+        <activity android:name=".studyresults.Grades" /> <!-- Courses -->
+        <!-- Request -->
+        <activity android:name=".request.RequestAdd" />
+        <activity android:name=".request.RequestProcessing" />
         <activity
-            android:name=".PomodoroActivity"
+            android:name=".pomodoro.PomodoroActivity"
             android:exported="true" />
 
         <meta-data

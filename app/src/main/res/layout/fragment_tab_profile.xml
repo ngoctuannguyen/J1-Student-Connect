@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/profile_bkg"
     android:orientation="vertical"
-    tools:context=".TabProfile">
+    tools:context=".tabsinmain.TabProfile">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
