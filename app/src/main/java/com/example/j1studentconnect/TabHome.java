@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sahana.horizontalcalendar.HorizontalCalendar;
+import com.sahana.horizontalcalendar.OnDateSelectListener;
+import com.sahana.horizontalcalendar.model.DateModel;
+//import com.harrywhewell.scrolldatepicker.DayScrollDatePicker;
+//import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
+
+import java.util.Date;
 
 public class TabHome extends Fragment {
     View rootView;
@@ -33,6 +42,8 @@ public class TabHome extends Fragment {
     private TextView txtToday;
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
+
+    String SelectedDate;
 
     private RecyclerView calendarRecyclerView;
 
@@ -75,11 +86,29 @@ public class TabHome extends Fragment {
         CreateAndShowInfoStudent();
         ConstructLayout();
         ConstructButton();
+
 //        initWidgets();
+      //SetCalendar();
 //        setWeekView();
         ClickButton();
         return rootView;
     }
+
+    private void SetCalendar() {
+
+        HorizontalCalendar mHorizontalCalendar;
+        mHorizontalCalendar = rootView.findViewById(R.id.horizontalCalendar);
+        //dayScrollDatePicker.setStartDate(29, 7, 2023);
+        mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
+            @Override
+            public void onSelect(DateModel dateModel) {
+                //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
+
+            }
+        });
+
+    }
+
     private void CreateAndShowInfoStudent() {
         TextView Name = rootView.findViewById(R.id.name1);
         TextView student_id = rootView.findViewById(R.id.student_id_in_main1);

@@ -14,6 +14,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,12 +22,14 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.BreakIterator;
 import java.util.Date;
+import java.util.Timer;
 
 import kotlin.OverloadResolutionByLambdaReturnType;
 
@@ -34,13 +37,18 @@ public class PomodoroActivity extends AppCompatActivity {
 
     private Button startButton, halfAnHour, quarterHour;
     private CountDownTimer pomodoroTimer = null;
-    public static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false;
+
+    private ImageView backFromPomodoro;
+    public static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false, breakTime = false;
     TextView titlePomodoro, roundCount;
 
     public static boolean fourtimes = false;
 
     //LinearLayout linearLayout = findViewById(R.id.layoutPomodoro);
     public static int cntRound = 1;
+    private long Endtime;
+
+    private long TimeLeftInMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,15 @@ public class PomodoroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pomodoro);
         //createNotificationChannel();
         startButton = findViewById(R.id.start_button);
+
+        backFromPomodoro = findViewById(R.id.backFromPomodoro);
+        backFromPomodoro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PomodoroActivity.this, MainActivity.class));
+            }
+        });
+
         //linearLayout.setBackgroundColor(Color.RED);
         halfAnHour = findViewById(R.id.halfAnHour);
         halfAnHour.setVisibility(View.GONE);
@@ -88,6 +105,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
     public void startTimer() {
         long timerLength = 10 * 1000;
+        Endtime = System.currentTimeMillis() + timerLength;
         //linearLayout.setBackgroundColor(Color.RED);
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
@@ -96,6 +114,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     //if (timeRunning && !fourtimes) {
+                    TimeLeftInMillis = millisUntilFinished;
                     long minutes = millisUntilFinished / 1000 / 60;
                     long seconds = millisUntilFinished / 1000 % 60;
                     timer_text_view.setText(minutes + " : " + seconds);
@@ -128,6 +147,7 @@ public class PomodoroActivity extends AppCompatActivity {
 //                        }).show();
 
                     // if (cntRound != 4)
+                    breakTime = true;
                     showNotification();
 
                     if (cntRound == 4) {
@@ -152,12 +172,15 @@ public class PomodoroActivity extends AppCompatActivity {
     private void showNotification() {
 
         Intent intent = new Intent(this, PomodoroActivity.class);
-
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO")
                 .setContentTitle("VNU Pomodoro Timer")
                 .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
                 .setSmallIcon(R.drawable.icon_learning_pomodoro)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        if (breakTime == false)
+            notification.setContentText("Nghỉ thế là đủ rồi, tiếp tục tập trung thôi !!!");
+
         //  .setAutoCancel(true);
         //.setSound(Uri.parse("https://firebasestorage.googleapis.com/v0/b/mynotes-8b6d5.appspot.com/o/mixkit-scanning-sci-fi-alarm-905.wav?alt=media&token=5bebfd2b-3bc3-45a4-8a2d-acb2f3f0e182"));
 
@@ -167,6 +190,7 @@ public class PomodoroActivity extends AppCompatActivity {
         if (notificationManager != null)
             notificationManager.notify(getNotiID(), notification.build());
     }
+
 
 
     private void startBreakTimer() {
@@ -214,7 +238,8 @@ public class PomodoroActivity extends AppCompatActivity {
                     //                            }
                     //                        })
                     //                        .show();
-
+                    breakTime = false;
+                    showNotification();
                     startTimer();
                 }
 
@@ -235,7 +260,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
                 //halfHourPress = true
                 timer_text_view.setText("30 : 00");
-                SystemClock.sleep(10);
+                SystemClock.sleep(1000);
                 halfAnHour.setVisibility(View.GONE);
                 quarterHour.setVisibility(View.GONE);
                 halfHourPress = true;
@@ -250,7 +275,7 @@ public class PomodoroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView timer_text_view = findViewById(R.id.timer_text_view);
                 timer_text_view.setText("15 : 00");
-                SystemClock.sleep(10);
+                SystemClock.sleep(1000);
                 quarterHour.setVisibility(View.GONE);
                 halfAnHour.setVisibility(View.GONE);
                 halfHourPress = true;
@@ -274,5 +299,43 @@ public class PomodoroActivity extends AppCompatActivity {
         if (pomodoroTimer != null)
             pomodoroTimer.cancel();
 
+    }
+
+    @Override
+    protected void onStop() {
+
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong("millisleft", TimeLeftInMillis);
+        editor.putBoolean("timeRunning", timeRunning);
+        editor.putLong("endTime", Endtime);
+        editor.apply();
+
+        if (pomodoroTimer != null)
+            pomodoroTimer.cancel();
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        TimeLeftInMillis = preferences.getLong("millisleft", 10000);
+        timeRunning = preferences.getBoolean("timeRunning", timeRunning);
+        if (timeRunning){
+
+            Endtime = preferences.getLong("endTime", 0);
+            TimeLeftInMillis = Endtime - System.currentTimeMillis();
+            if (TimeLeftInMillis < 0){
+                TimeLeftInMillis = 0;
+                timeRunning = false;
+                long minutes = TimeLeftInMillis / 1000 / 60;
+                long seconds = TimeLeftInMillis / 1000 % 60;
+            }
+            else startTimer();
+        }
+
+        super.onStart();
     }
 }

@@ -173,6 +173,7 @@
 
                         <TextView
                             android:id="@+id/today"
+                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
@@ -194,13 +195,17 @@
                             android:src="@drawable/close_icon" />
                     </RelativeLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/calendarRecyclerView"
+                    <com.sahana.horizontalcalendar.HorizontalCalendar
+                        android:id="@+id/horizontalCalendar"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        app:numOfDays="200"
+                        app:setTextColor="@color/white"
+                        app:setSelectedTextColor="@color/white"
+                        app:setWeekTextSize="13sp"
+                        app:setSelectedBgColor="@color/bluer"
+                        app:setMonthTextSize="17sp"/>
 
                     <!--                    <LinearLayout-->
                     <!--                        android:layout_width="match_parent"-->
@@ -765,4 +770,3 @@
     </ScrollView>
 
 </RelativeLayout>
-
