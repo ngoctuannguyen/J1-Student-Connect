@@ -1,8 +1,10 @@
 package com.example.j1studentconnect;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Editable;
@@ -12,21 +14,36 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfile extends AppCompatActivity {
     EditText name, email, phone;
-    String user_name, user_id, user_email, user_phone;
+    String user_name, user_id, user_email, user_phone, imageURL;
     Button save;
     DatabaseReference reference;
+    CircleImageView uploadImage;
+    Uri uri;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +54,7 @@ public class EditProfile extends AppCompatActivity {
         email = findViewById(R.id.edit_email);
         phone = findViewById(R.id.edit_phone_number);
         save = findViewById(R.id.btn_save_edit);
+        uploadImage = findViewById(R.id.profile_image1);
 
         Intent intentBefore = getIntent();
         user_name = intentBefore.getStringExtra("name");
@@ -47,6 +65,22 @@ public class EditProfile extends AppCompatActivity {
         name.setText(user_name);
         email.setText(user_email);
         phone.setText(user_phone);
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK){
+                            Intent data = result.getData();
+                            uri = data.getData();
+                            uploadImage.setImageURI(uri);
+                        } else {
+                            Toast.makeText(EditProfile.this, "Chọn ảnh đại diện của bạn", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
 
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +127,15 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        uploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                activityResultLauncher.launch(photoPicker);
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,5 +151,26 @@ public class EditProfile extends AppCompatActivity {
         reference.child("name").setValue(user_name);
         reference.child("email").setValue(user_email);
         reference.child("phone").setValue(user_phone);
+
+        StorageReference storageReference = FirebaseStorage.getInstance("gs://j1-student-connect.appspot.com").getReference().child("images")
+                .child(uri.getLastPathSegment());
+        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!uriTask.isComplete());
+                Uri urlImage = uriTask.getResult();
+                imageURL = urlImage.toString();
+                Toast.makeText(EditProfile.this, imageURL, Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+
+
+
+        reference.child("imageURL").setValue(imageURL);
     }
 }
