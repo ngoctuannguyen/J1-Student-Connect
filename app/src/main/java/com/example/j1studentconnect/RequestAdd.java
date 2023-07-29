@@ -1,72 +1,87 @@
 package com.example.j1studentconnect;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
+import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ExpandedMenuView;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RequestAdd extends AppCompatActivity {
-    //private Spinner spinner1;
+    private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 101;
+    private static final int MANAGE_EXTERNAL_STORAGE_REQUEST_CODE = 102;
+
+
+    private static final int PICKFILE_REQUEST_CODE = 1;
+
+
+    DatabaseReference reference;
+    FirebaseStorage storage;
+    Uri tempFile;
+    public static String strRequest = "";
+    EditText edtReason;
+    Button file_archive;
+    Button submitDialog;
+    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if (result != null) {
+                        tempFile = result;
+                    }
+                }
+            });
+    private Spinner spinner1;
     private Context context;
     private Button attachButton;
-    private static final int PICKFILE_REQUEST_CODE = 1;
+    private StorageReference storageRef;
     private String path;
-
     private TextView InfoAddRequest;
     private LinearLayout btnRequestProcessing;
     private ImageButton btnRHome, btnRSearch, btnRProfile;
-
+    //    private EditText edtReason;
+//    private Button file_archive, submitDialog;
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree;
-
-    private EditText edtReason;
-    private Button file_archive, submitDialog;
-
-    public static String strRequest = "";
-
-    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +89,13 @@ public class RequestAdd extends AppCompatActivity {
         setContentView(R.layout.add_request);
         ///attachButton = findViewById(R.id.attach_button);
 
-        btnRHome = (ImageButton) findViewById(R.id.RequestHome);
-        btnRSearch = (ImageButton) findViewById(R.id.RequestSearch);
-        btnRProfile = (ImageButton) findViewById(R.id.RequestProfile);
+        btnRHome = findViewById(R.id.RequestHome);
+        btnRSearch = findViewById(R.id.RequestSearch);
+        btnRProfile = findViewById(R.id.RequestProfile);
+
+
+        FirebaseApp.initializeApp(this);
+        storage = FirebaseStorage.getInstance();
 
         ConstructButton();
         ClickButtonInRequest();
@@ -87,6 +106,50 @@ public class RequestAdd extends AppCompatActivity {
         //addListenerOnButton();
         addClickOnCardRequest();
         CreateAndShowInfoStudent();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                requestManageExternalStoragePermission();
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PICKFILE_REQUEST_CODE);
+            }
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == READ_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Quyền truy cập được cấp, bạn có thể tiếp tục việc chọn tệp ở đây
+            } else {
+                // Quyền truy cập bị từ chối, bạn nên xử lý tùy chọn tại đây
+            }
+        }
+    }
+
+    private void requestManageExternalStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivityForResult(intent, MANAGE_EXTERNAL_STORAGE_REQUEST_CODE);
+            } catch (Exception e) {
+                // Open the application's settings to grant the permission manually
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        }
     }
 
     private void ConstructCardButton() {
@@ -185,7 +248,7 @@ public class RequestAdd extends AppCompatActivity {
 //        else dialog.setCancelable(false);
 
         TextView txtTitleOfDialog = dialog.findViewById(R.id.dialog_title);
-        switch (type){
+        switch (type) {
 
             case 1:
                 txtTitleOfDialog.setText("Cấp bảng điểm");
@@ -211,40 +274,41 @@ public class RequestAdd extends AppCompatActivity {
 
         }
 
-        EditText edtReason = dialog.findViewById(R.id.reason_of_dialog);
-        Button file_archive = dialog.findViewById(R.id.file_archive);
-        Button submitDialog = dialog.findViewById(R.id.submit_dialog);
-        TextView stateOfReason = dialog.findViewById(R.id.stateOfReason);
-        stateOfReason.setVisibility(View.GONE);
+        edtReason = dialog.findViewById(R.id.reason_of_dialog);
+        file_archive = dialog.findViewById(R.id.file_archive);
+        submitDialog = dialog.findViewById(R.id.submit_dialog);
+
+
 //
         file_archive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
-                Toast.makeText(context, "This is a message", Toast.LENGTH_LONG).show();
+                getFile.launch("*/*");
 
             }
         });
 
         submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                strRequest = edtReason.getText().toString();
-                if (TextUtils.isEmpty(edtReason.getText().toString())) {
-                    stateOfReason.setText("Bạn chưa điền đủ lý do");
-                    stateOfReason.setVisibility(View.VISIBLE);
-                }
-                else stateOfReason.setVisibility(View.GONE);
-
-                //view = this.getCurrentFocus();
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-                //Toast.makeText(context, "Bạn đã tạo yêu cầu thành công, vui lòng chờ được duyệt nhé :3", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                StorageReference referencee = storage.getReference().child("files/" + edtReason.getText().toString());
+                referencee.putFile(tempFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("UpFileError", "Upload file failed");
+                        Toast.makeText(RequestAdd.this, "Update successfully!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                    }
+                });
             }
         });
+
 
         dialog.show();
     }
@@ -271,110 +335,48 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
-//        btnRProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(RequestAdd.this, Profile.class));
-//            }
-//        });
+
     }
 
     private void ConstructButton() {
-        btnRequestProcessing = (LinearLayout) findViewById(R.id.request_handing_bar);
+        btnRequestProcessing = findViewById(R.id.request_handing_bar);
     }
 
-//    public void addListenerOnButton() {
-////        file_archive.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-////                intent.setType("*/*");
-////                startActivityForResult(intent, PICKFILE_REQUEST_CODE);
-////                Toast.makeText(context, "This is a message", Toast.LENGTH_LONG).show();
-////
-////            }
-////        });
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            Uri uri = data.getData();
-//            path = getRealPathFromURI(uri);
-//            // Đính kèm tệp đó vào email, tin nhắn hoặc in-app storage của ứng dụng
-//        }
-//    }
 
-//    private String getRealPathFromURI(Uri contentUri) {
-//        String[] projection = { MediaStore.Images.Media.DATA };
-//        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-//        if (cursor == null) return null;
-//        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        cursor.moveToFirst();
-//        String path = cursor.getString(columnIndex);
-//        cursor.close();
-//        return path;
-//    }
+        if (requestCode == MANAGE_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    // User has granted access to read and manage external storage
+                } else {
+                    // User has denied access to manage external storage
+                }
+            }
+        } else if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            path = uri.getPath();
+            Log.d("URIne", uri.toString());
+            Log.d("Path tu uri ne", path);
 
-//    private void addListenerOnSpinnerItemSelection() {
-//        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(getApplicationContext(),"OnItemSelectedListener: " + adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//    }
+            Log.d("DEBUG", "Path: " + path);
 
-//    private void initifinal() {
-//        spinner1 = (Spinner) findViewById(R.id.request_type_select);
-//    }
-//
-//    public void submitRequest(View view) {
-//        // Lấy dữ liệu từ Spinner
-//        Spinner requestTypeSpinner = findViewById(R.id.request_type_select);
-//        String requestType = requestTypeSpinner.getSelectedItem().toString();
-//
-//        // Lấy dữ liệu từ EditText
-//        EditText editTextTitle = findViewById(R.id.request_reason);
-//        String title = editTextTitle.getText().toString();
-//
-//        // Gửi dữ liệu lên server
-//        // Code để gửi dữ liệu lên server
-//
-//        // Sử dụng thư viện Volley để gửi POST request
-//        String url = "https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app";
-//        StringRequest request = new StringRequest(Request.Method.POST, url,
-//                new com.android.volley.Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(RequestAdd.this, "Request submitted", Toast.LENGTH_SHORT).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(RequestAdd.this, "Error submitting request", Toast.LENGTH_SHORT).show();
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                // Truyền dữ liệu vào request
-//                Map<String, String> params = new HashMap<>();
-//                params.put("request_type", requestType);
-//                params.put("title", title);
-//                params.put("attachment", path); // Thêm đường dẫn của tệp đính kèm vào request
-//                // Thêm các tham số khác nếu cần
-//                return params;
-//            }
-//        };
-//        Volley.newRequestQueue(this).add(request);
-//    }
+            if (path == null) {
+                Toast.makeText(RequestAdd.this, "File not found", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+            // Call the method to open the dialog and pass the 'path' to it
+            openRequest(Gravity.CENTER, 1);
+        } else {
+            path = null;
+        }
+    }
 
     private void CreateAndShowInfoStudent() {
         InfoAddRequest = findViewById(R.id.InfoAddRequest);
@@ -385,7 +387,7 @@ public class RequestAdd extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()){
+                if (snapshot.hasChildren()) {
                     String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
                     InfoAddRequest.setText(strshow);
                 }
@@ -396,7 +398,5 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
     }
-
-
 
 }
