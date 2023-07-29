@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -277,6 +278,8 @@ public class RequestAdd extends AppCompatActivity {
         edtReason = dialog.findViewById(R.id.reason_of_dialog);
         file_archive = dialog.findViewById(R.id.file_archive);
         submitDialog = dialog.findViewById(R.id.submit_dialog);
+        TextView stateOfReason = dialog.findViewById(R.id.stateOfReason);
+        stateOfReason.setVisibility(View.GONE);
 
 
 //
@@ -288,24 +291,34 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
+
         submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StorageReference referencee = storage.getReference().child("files/" + edtReason.getText().toString());
-                referencee.putFile(tempFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RequestAdd.this, RequestAdd.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("UpFileError", "Upload file failed");
-                        Toast.makeText(RequestAdd.this, "Update successfully!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RequestAdd.this, RequestAdd.class));
-                    }
-                });
+                if (tempFile == null) {
+                    stateOfReason.setText("Bạn chưa chọn tệp từ thiết bị");
+                    stateOfReason.setVisibility(View.VISIBLE);
+                } else if (TextUtils.isEmpty(edtReason.getText().toString())) {
+                    stateOfReason.setText("Bạn chưa điền đủ lý do");
+                    stateOfReason.setVisibility(View.VISIBLE);
+                } else {
+                    stateOfReason.setVisibility(View.GONE);
+                    StorageReference referencee = storage.getReference().child("files/" + edtReason.getText().toString());
+                    referencee.putFile(tempFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("UpFileError", "Upload file failed");
+                            Toast.makeText(RequestAdd.this, "Update failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 
