@@ -1,12 +1,10 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.profiletab;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,17 +18,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.j1studentconnect.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;

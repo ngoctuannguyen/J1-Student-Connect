@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rqAdd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".RequestAdd">
+    android:id="@+id/rqAdd"
+    tools:context=".request.RequestAdd"
+    android:background="@color/bg_grey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/request_toolbar"
@@ -18,34 +18,34 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/add_request_bar"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/rounded_top_cardview"
-                android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_top_cardview">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
-                    android:src="@drawable/add_request" />
+                    android:src="@drawable/add_request"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/merriweathersanswght"
                     android:text="Tạo yêu cầu"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/merriweathersanswght"
+                    android:textStyle="bold"/>
 
 
             </LinearLayout>
@@ -55,10 +55,10 @@
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/add_request_bar"
-                android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/add_request_bar">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -72,9 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/merriweathersanswght"
-                    android:gravity="center"
                     android:text="Trạng thái xử lý yêu cầu"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:textStyle="bold" />
 
 

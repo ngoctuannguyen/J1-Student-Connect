@@ -1,9 +1,8 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.timetable;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -13,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.searchtab.Search;
+import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

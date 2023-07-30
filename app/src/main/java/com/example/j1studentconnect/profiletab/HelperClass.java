@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.profiletab;
 
 public class HelperClass {
     String student_id, name, gender, student_class, email, birthday, phone;

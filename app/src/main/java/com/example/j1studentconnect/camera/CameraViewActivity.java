@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.camera;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.j1studentconnect.R;
 
 public class CameraViewActivity extends AppCompatActivity {
 

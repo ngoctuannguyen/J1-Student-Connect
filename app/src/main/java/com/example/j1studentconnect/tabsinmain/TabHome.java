@@ -1,18 +1,13 @@
-package com.example.j1studentconnect;
-
-import static android.content.Intent.getIntent;
-import static android.content.Intent.getIntentOld;
+package com.example.j1studentconnect.tabsinmain;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +15,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.j1studentconnect.timetable.Calendar;
+import com.example.j1studentconnect.studyresults.Grades;
+import com.example.j1studentconnect.pomodoro.PomodoroActivity;
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.request.RequestAdd;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +31,6 @@ import com.sahana.horizontalcalendar.model.DateModel;
 //import com.harrywhewell.scrolldatepicker.DayScrollDatePicker;
 //import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
 
-import java.util.Date;
 
 public class TabHome extends Fragment {
     View rootView;

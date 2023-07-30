@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.notificationactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.searchtab.Search;
+import com.example.j1studentconnect.tabsinmain.MainActivity;
 
 public class NotificationActivity extends AppCompatActivity {
 

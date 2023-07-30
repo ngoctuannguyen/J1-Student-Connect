@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.tabsinmain;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

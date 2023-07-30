@@ -7,11 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.j1studentconnect.MainActivity;
+import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.example.j1studentconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

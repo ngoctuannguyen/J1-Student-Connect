@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.request;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -36,6 +36,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.searchtab.Search;
+import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;

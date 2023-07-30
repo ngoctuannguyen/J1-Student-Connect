@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.studyresults;
 
 import android.content.Context;
 import android.view.View;

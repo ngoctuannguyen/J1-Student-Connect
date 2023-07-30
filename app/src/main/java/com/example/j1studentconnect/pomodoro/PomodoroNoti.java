@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.pomodoro;
 
 import android.app.Application;
 import android.app.NotificationChannel;
@@ -10,6 +10,8 @@ import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.example.j1studentconnect.R;
 
 public class PomodoroNoti extends Application {
 

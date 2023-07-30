@@ -1,22 +1,14 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.searchtab;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.j1studentconnect.R;
+
 import java.util.List;
 
 public class Search extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.tabsinmain;
 
 import android.os.Bundle;
 
@@ -15,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.searchtab.SearchAdapter;
+import com.example.j1studentconnect.searchtab.StudentForSearch;
 
 import java.util.ArrayList;
 import java.util.List;

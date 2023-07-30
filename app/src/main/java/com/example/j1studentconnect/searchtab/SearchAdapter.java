@@ -1,6 +1,5 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.searchtab;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.j1studentconnect.R;
 
 import java.util.List;
 

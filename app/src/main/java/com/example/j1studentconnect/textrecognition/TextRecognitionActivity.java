@@ -1,8 +1,10 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.textrecognition;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.j1studentconnect.R;
 
 public class TextRecognitionActivity extends AppCompatActivity {
 

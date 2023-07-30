@@ -1,14 +1,15 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.tabsinmain;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.tabsinmain.TabMenuAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

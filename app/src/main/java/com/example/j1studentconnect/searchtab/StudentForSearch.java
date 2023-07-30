@@ -1,4 +1,4 @@
-package com.example.j1studentconnect;
+package com.example.j1studentconnect.searchtab;
 
 public class StudentForSearch {
 
