@@ -19,6 +19,7 @@
         android:id="@+id/icon_tuzki"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/fightingtzukii"
             android:layout_width="170dp"
@@ -52,10 +53,10 @@
         android:id="@+id/layoutPomodoro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/icon_tuzki"
         android:layout_marginTop="1dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_below="@+id/icon_tuzki">
+        android:orientation="vertical">
 
 
         <TextView
