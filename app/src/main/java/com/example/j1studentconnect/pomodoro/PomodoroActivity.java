@@ -1,8 +1,6 @@
 package com.example.j1studentconnect.pomodoro;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
+import android.animation.ObjectAnimator;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +9,15 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
@@ -22,19 +26,19 @@ import java.util.Date;
 
 public class PomodoroActivity extends AppCompatActivity {
 
-    private Button startButton, halfAnHour, quarterHour;
-    private CountDownTimer pomodoroTimer = null;
-
-    private ImageView backFromPomodoro;
     public static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false, breakTime = false;
-    TextView titlePomodoro, roundCount;
-
     public static boolean fourtimes = false;
-
-    //LinearLayout linearLayout = findViewById(R.id.layoutPomodoro);
     public static int cntRound = 1;
+    RelativeLayout relativeLayout;
+    TextView titlePomodoro, roundCount;
+    TextView textRoundCount;
+    ImageView relaxTuzki;
+    ImageView hiTuzki;
+    ImageView fightingTuzki;
+    private TextView startButton, halfAnHour, quarterHour;
+    private CountDownTimer pomodoroTimer = null;
+    private ImageView backFromPomodoro;
     private long Endtime;
-
     private long TimeLeftInMillis;
 
     @Override
@@ -45,6 +49,20 @@ public class PomodoroActivity extends AppCompatActivity {
         startButton = findViewById(R.id.start_button);
 
         backFromPomodoro = findViewById(R.id.backFromPomodoro);
+        relativeLayout = findViewById(R.id.pomorodoLayout);
+        textRoundCount = findViewById(R.id.RoundCount);
+
+        fightingTuzki = findViewById(R.id.fightingtzukii);
+        hiTuzki = findViewById(R.id.tuzki_say_hi);
+        relaxTuzki = findViewById(R.id.tuzki_relax);
+        fightingTuzki.setVisibility(View.GONE);
+        relaxTuzki.setVisibility(View.GONE);
+        ObjectAnimator shaking_hiTuzki = ObjectAnimator.ofFloat(hiTuzki, "translationX", 0f, -30f, 30f, 0f);
+        shaking_hiTuzki.setDuration(1000);
+        shaking_hiTuzki.setInterpolator(new AccelerateDecelerateInterpolator());
+        shaking_hiTuzki.start();
+
+
         backFromPomodoro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,15 +81,15 @@ public class PomodoroActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!timeRunning){
+                if (!timeRunning) {
                     timeRunning = true;
                     startTimer();
                     startButton.setText("Dừng và làm lại cuộc đời");
-                }
-                else {
+
+                } else {
                     timeRunning = false;
                     cntRound = 1;
-                    roundCount.setText("1 / 4");
+                    roundCount.setText("1 | 4");
                     startButton.setText("Vào bàn học thôi !!");
                     TextView timer_text_view = findViewById(R.id.timer_text_view);
                     timer_text_view.setText("0 : 10");
@@ -90,6 +108,14 @@ public class PomodoroActivity extends AppCompatActivity {
         pomodoroTimer.cancel();
     }
 
+    private void startFadeInAnimation() {
+        textRoundCount.setVisibility(View.VISIBLE);
+
+        AlphaAnimation fadeInAnimation = new AlphaAnimation(0f, 1f);
+        fadeInAnimation.setDuration(1000); // Thời gian thực hiện animation (1 giây)
+        textRoundCount.startAnimation(fadeInAnimation);
+    }
+
     public void startTimer() {
         long timerLength = 10 * 1000;
         Endtime = System.currentTimeMillis() + timerLength;
@@ -97,26 +123,36 @@ public class PomodoroActivity extends AppCompatActivity {
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
         titlePomodoro.setText("Tập trung học bài nào !!!");
-            pomodoroTimer = new CountDownTimer(timerLength, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    //if (timeRunning && !fourtimes) {
-                    TimeLeftInMillis = millisUntilFinished;
-                    long minutes = millisUntilFinished / 1000 / 60;
-                    long seconds = millisUntilFinished / 1000 % 60;
-                    timer_text_view.setText(minutes + " : " + seconds);
-                    //}
-                }
+        relativeLayout.setBackgroundResource(R.drawable.bg_pinkorange);
+        hiTuzki.setVisibility(View.GONE);
+        relaxTuzki.setVisibility(View.GONE);
+        fightingTuzki.setVisibility(View.VISIBLE);
+        startZoomAnimation();
+//        ObjectAnimator shaking = ObjectAnimator.ofFloat(fightingTuzki, "translationX", 0f, -30f, 30f, 0f);
+//        shaking.setDuration(1500);
+//        shaking.setRepeatCount(ObjectAnimator.INFINITE);
+//        shaking.setInterpolator(new AccelerateDecelerateInterpolator());
+//        shaking.start();
+        pomodoroTimer = new CountDownTimer(timerLength, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                //if (timeRunning && !fourtimes) {
+                TimeLeftInMillis = millisUntilFinished;
+                long minutes = millisUntilFinished / 1000 / 60;
+                long seconds = millisUntilFinished / 1000 % 60;
+                timer_text_view.setText(minutes + " : " + seconds);
+                //}
+            }
 
-                @Override
-                public void onFinish() {
+            @Override
+            public void onFinish() {
 //                Intent intent = new Intent(PomodoroActivity.this, PomodoroNoti.class);
 //                PendingIntent pendingIntent = PendingIntent.getBroadcast(PomodoroActivity.this, 0, intent, 0);
-                    //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                    pomodoroTimer.cancel();
-                    //timeRunning = false;
-                    //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+                pomodoroTimer.cancel();
+                //timeRunning = false;
+                //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
 //                builder.setMessage("Nghỉ ngơi đã")
 //                        .setPositiveButton("Okela", new DialogInterface.OnClickListener() {
 //                            @Override
@@ -133,37 +169,31 @@ public class PomodoroActivity extends AppCompatActivity {
 //                            }
 //                        }).show();
 
-                    // if (cntRound != 4)
-                    breakTime = true;
-                    showNotification();
+                // if (cntRound != 4)
+                breakTime = true;
+                showNotification();
 
-                    if (cntRound == 4) {
-                        cntRound = 1;
-                        timeRunning = false;
-                        fourtimes = true;
-                        //roundCount.setText(cntRound + " / 4");
-                        quarterHour.setVisibility(View.VISIBLE);
-                        halfAnHour.setVisibility(View.VISIBLE);
-                        //halfHourPress = true;
-                        chooseQuaterOrHalf();
-                    }
-                    else startBreakTimer();
+                if (cntRound == 4) {
+                    cntRound = 1;
+                    timeRunning = false;
+                    fourtimes = true;
+                    //roundCount.setText(cntRound + " / 4");
+                    quarterHour.setVisibility(View.VISIBLE);
+                    halfAnHour.setVisibility(View.VISIBLE);
+                    //halfHourPress = true;
+                    chooseQuaterOrHalf();
+                } else startBreakTimer();
 
 
-                }
-            };
-            if (timeRunning)
-                pomodoroTimer.start();
-        }
+            }
+        };
+        if (timeRunning) pomodoroTimer.start();
+    }
 
     private void showNotification() {
 
         Intent intent = new Intent(this, PomodoroActivity.class);
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO")
-                .setContentTitle("VNU Pomodoro Timer")
-                .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
-                .setSmallIcon(R.drawable.icon_learning_pomodoro)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO").setContentTitle("VNU Pomodoro Timer").setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!").setSmallIcon(R.drawable.icon_learning_pomodoro).setPriority(NotificationCompat.PRIORITY_HIGH);
 
         if (breakTime == false)
             notification.setContentText("Nghỉ thế là đủ rồi, tiếp tục tập trung thôi !!!");
@@ -179,65 +209,75 @@ public class PomodoroActivity extends AppCompatActivity {
     }
 
 
-
     private void startBreakTimer() {
         long timerLength = 5 * 1000;
         //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
+        relativeLayout.setBackgroundResource(R.color.bg_blue);
+        hiTuzki.setVisibility(View.GONE);
+        fightingTuzki.setVisibility(View.GONE);
+        relaxTuzki.setVisibility(View.VISIBLE);
+        ObjectAnimator shakingRelaxTuzki = ObjectAnimator.ofFloat(relaxTuzki, "translationX", 0f, -30f, 30f, 0f);
+        shakingRelaxTuzki.setDuration(1000);
+        shakingRelaxTuzki.setRepeatCount(ObjectAnimator.INFINITE);
+        shakingRelaxTuzki.setInterpolator(new AccelerateDecelerateInterpolator());
+        shakingRelaxTuzki.start();
+
+
         //if (timeRunning) {
-            pomodoroTimer = new CountDownTimer(timerLength, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                        long minutes = millisUntilFinished / 1000 / 60;
-                        long seconds = millisUntilFinished / 1000 % 60;
-                        TextView timer_text_view = findViewById(R.id.timer_text_view);
-                        timer_text_view.setText(minutes + " : " + seconds);
+        pomodoroTimer = new CountDownTimer(timerLength, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long minutes = millisUntilFinished / 1000 / 60;
+                long seconds = millisUntilFinished / 1000 % 60;
+                TextView timer_text_view = findViewById(R.id.timer_text_view);
+                timer_text_view.setText(minutes + " : " + seconds);
 
+            }
+
+            @Override
+            public void onFinish() {
+                if (pomodoroTimer != null) {
+                    pomodoroTimer.cancel();
                 }
+                //boolean timerRunning = false;
 
-                @Override
-                public void onFinish() {
-                    if (pomodoroTimer != null) {
-                        pomodoroTimer.cancel();
-                    }
-                    //boolean timerRunning = false;
+                //if (!startButtonPress){
+                cntRound++;
+                roundCount.setText(cntRound + " | 4");
+                startFadeInAnimation();
+                //astartButtonPress = true;
 
-                    //if (!startButtonPress){
-                    cntRound++;
-                    roundCount.setText(cntRound + " / 4");
-                    //astartButtonPress = true;
+                //}
 
-                    //}
+                // startButtonPress = false;
+                // roundCount.setText(cntRound + " / 4");
 
-                    // startButtonPress = false;
-                    // roundCount.setText(cntRound + " / 4");
+                //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+                //                builder.setMessage("Giữ vững tinh thần nha !!!")
+                //                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
+                //                            public void onClick(DialogInterface dialog, int which) {
+                //                                startTimer();
+                //                            }
+                //                        })
+                //                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
+                //                            public void onClick(DialogInterface dialog, int which) {
+                //                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
+                //                            }
+                //                        })
+                //                        .show();
+                breakTime = false;
+                showNotification();
+                startTimer();
+            }
 
-                    //AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
-                    //                builder.setMessage("Giữ vững tinh thần nha !!!")
-                    //                        .setPositiveButton("Oki", new DialogInterface.OnClickListener() {
-                    //                            public void onClick(DialogInterface dialog, int which) {
-                    //                                startTimer();
-                    //                            }
-                    //                        })
-                    //                        .setNegativeButton("Hôm nay học vậy là đủ rồi", new DialogInterface.OnClickListener() {
-                    //                            public void onClick(DialogInterface dialog, int which) {
-                    //                                Toast.makeText(PomodoroActivity.this, "Lần sau tiếp tục nhé !!!", Toast.LENGTH_SHORT).show();
-                    //                            }
-                    //                        })
-                    //                        .show();
-                    breakTime = false;
-                    showNotification();
-                    startTimer();
-                }
-
-            };
-            if (timeRunning)
-                pomodoroTimer.start();
-        }
+        };
+        if (timeRunning) pomodoroTimer.start();
+    }
 
     private void chooseQuaterOrHalf() {
 
-        roundCount.setText("1 / 4");
+        roundCount.setText("1 | 4");
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
         //fourtimes = false;
         halfAnHour.setOnClickListener(new View.OnClickListener() {
@@ -273,18 +313,22 @@ public class PomodoroActivity extends AppCompatActivity {
         });
 
 
-
     }
 
-    private int getNotiID(){
+    private void startZoomAnimation() {
+        ScaleAnimation zoomAnimation = new ScaleAnimation(1f, 2f, 1f, 2f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+        zoomAnimation.setDuration(1000); // Thời gian thực hiện animation
+        fightingTuzki.startAnimation(zoomAnimation);
+    }
+
+    private int getNotiID() {
         return (int) new Date().getTime();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (pomodoroTimer != null)
-            pomodoroTimer.cancel();
+        if (pomodoroTimer != null) pomodoroTimer.cancel();
 
     }
 
@@ -298,8 +342,7 @@ public class PomodoroActivity extends AppCompatActivity {
         editor.putLong("endTime", Endtime);
         editor.apply();
 
-        if (pomodoroTimer != null)
-            pomodoroTimer.cancel();
+        if (pomodoroTimer != null) pomodoroTimer.cancel();
 
         super.onStop();
     }
@@ -310,17 +353,16 @@ public class PomodoroActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
         TimeLeftInMillis = preferences.getLong("millisleft", 10000);
         timeRunning = preferences.getBoolean("timeRunning", timeRunning);
-        if (timeRunning){
+        if (timeRunning) {
 
             Endtime = preferences.getLong("endTime", 0);
             TimeLeftInMillis = Endtime - System.currentTimeMillis();
-            if (TimeLeftInMillis < 0){
+            if (TimeLeftInMillis < 0) {
                 TimeLeftInMillis = 0;
                 timeRunning = false;
                 long minutes = TimeLeftInMillis / 1000 / 60;
                 long seconds = TimeLeftInMillis / 1000 % 60;
-            }
-            else startTimer();
+            } else startTimer();
         }
 
         super.onStart();
