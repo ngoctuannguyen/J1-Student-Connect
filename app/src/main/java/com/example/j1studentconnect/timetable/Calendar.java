@@ -2,10 +2,15 @@ package com.example.j1studentconnect.timetable;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +41,10 @@ public class Calendar extends AppCompatActivity {
     List<String> dayList;
     HashMap<String, List<String>> subjectList;
 
+    DatabaseReference reference;
+
+    FirebaseFirestore firebaseFirestore;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +56,9 @@ public class Calendar extends AppCompatActivity {
         //Choose semester
         SpinnerSemester = (Spinner) findViewById(R.id.spinner_semester);
         // ExpandableListView
-        expandableListView = findViewById(R.id.TimeTableList);
 
+        expandableListView = findViewById(R.id.TimeTableList);
+        //ConstructSpinner();
         showList();
 
         TimeTable = new TimeTableAdapter(this, dayList, subjectList);
@@ -54,11 +66,46 @@ public class Calendar extends AppCompatActivity {
 
         CreateAndShowInfoStudent();
 
+
         ClickButtonInCalen();
 
     }
 
+    private void ConstructSpinner() {
+
+        String[] options = {"2022-2023"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+        Spinner spinner = findViewById(R.id.spinner_semester);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                // Xử lý khi người dùng chọn một tùy chọn trong Spinner
+                String selectedOption = (String) adapterView.getItemAtPosition(position);
+
+                // Thực hiện các hành động tùy theo tùy chọn đã chọn
+                switch (selectedOption) {
+                    case "2022-2023":
+                        // Xử lý khi chọn Option 1
+                        expandableListView.removeAllViews(); // Xóa bảng hiện tại (nếu có)
+                        showList();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+    }
+
     private void showList() {
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        String student_id_child = "21020074";
+        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+        DocumentReference documentReference = firebaseFirestore.collection("subjectsII").document();
 
         dayList = new ArrayList<String>();
         subjectList = new HashMap<String, List<String>>();

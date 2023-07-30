@@ -178,9 +178,9 @@ public class Grades extends AppCompatActivity {
 
     private void CreateAndShowInfoStudent() {
         gradesStuInf = findViewById(R.id.gradesStuInf);
-//        Intent intent = getIntent();
-//        String student_id_child = intent.getStringExtra("student_id").toString();
-        String student_id_child = "12345678";
+        //Intent intent = getIntent();
+        //String student_id_child = intent.getStringExtra("student_id").toString();
+        String student_id_child = "21020074";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
