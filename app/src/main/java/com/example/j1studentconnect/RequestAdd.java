@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,15 +64,14 @@ public class RequestAdd extends AppCompatActivity {
     EditText edtReason;
     Button file_archive;
     Button submitDialog;
-    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri result) {
-                    if (result != null) {
-                        tempFile = result;
-                    }
-                }
-            });
+    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            if (result != null) {
+                tempFile = result;
+            }
+        }
+    });
     private Spinner spinner1;
     private Context context;
     private Button attachButton;
@@ -82,7 +82,7 @@ public class RequestAdd extends AppCompatActivity {
     private ImageButton btnRHome, btnRSearch, btnRProfile;
     //    private EditText edtReason;
 //    private Button file_archive, submitDialog;
-    private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree;
+    private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree, cardSocialAssistance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,11 +113,8 @@ public class RequestAdd extends AppCompatActivity {
                 requestManageExternalStoragePermission();
             }
         } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PICKFILE_REQUEST_CODE);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PICKFILE_REQUEST_CODE);
             }
         }
 
@@ -161,6 +158,7 @@ public class RequestAdd extends AppCompatActivity {
         cardBusRequest = findViewById(R.id.card_bus_request);
         cardStopLearning = findViewById(R.id.card_stop_learning);
         cardDegree = findViewById(R.id.card_degree_request);
+        cardSocialAssistance = findViewById(R.id.social_assistance);
     }
 
     private void addClickOnCardRequest() {
@@ -226,6 +224,13 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
+        cardSocialAssistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRequest(Gravity.CENTER, 8);
+            }
+        });
+
     }
 
     private void openRequest(int gravity, int type) {
@@ -234,8 +239,7 @@ public class RequestAdd extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_request);
 
         Window window = dialog.getWindow();
-        if (window == null)
-            return;
+        if (window == null) return;
 
         window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -272,13 +276,17 @@ public class RequestAdd extends AppCompatActivity {
             case 7:
                 txtTitleOfDialog.setText("Cấp CN tốt nghiệp tạm thời");
                 break;
+            case 8:
+                txtTitleOfDialog.setText("Đề nghị hưởng trợ cấp xã hội");
+                break;
 
         }
 
         edtReason = dialog.findViewById(R.id.reason_of_dialog);
         file_archive = dialog.findViewById(R.id.file_archive);
         submitDialog = dialog.findViewById(R.id.submit_dialog);
-        TextView stateOfReason = dialog.findViewById(R.id.stateOfReason);
+        RelativeLayout stateOfReason = dialog.findViewById(R.id.stateOfReason);
+        TextView textState = dialog.findViewById(R.id.text_stateOfReason);
         stateOfReason.setVisibility(View.GONE);
 
 
@@ -296,10 +304,11 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (tempFile == null) {
-                    stateOfReason.setText("Bạn chưa chọn tệp từ thiết bị");
+
+                    textState.setText("Bạn chưa chọn tệp từ thiết bị");
                     stateOfReason.setVisibility(View.VISIBLE);
                 } else if (TextUtils.isEmpty(edtReason.getText().toString())) {
-                    stateOfReason.setText("Bạn chưa điền đủ lý do");
+                    textState.setText("Bạn chưa điền đủ lý do");
                     stateOfReason.setVisibility(View.VISIBLE);
                 } else {
                     stateOfReason.setVisibility(View.GONE);

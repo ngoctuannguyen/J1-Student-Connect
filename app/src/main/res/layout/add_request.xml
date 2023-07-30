@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rqAdd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_grey"
     android:orientation="vertical"
-    android:id="@+id/rqAdd"
-    tools:context=".RequestAdd"
-    android:background="@color/bg_grey">
+    tools:context=".RequestAdd">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/request_toolbar"
@@ -19,34 +18,34 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
                 android:id="@+id/add_request_bar"
                 android:layout_width="200dp"
-                android:layout_height="54dp"
+                android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:paddingLeft="20dp"
-                android:paddingRight="10dp"
+                android:background="@drawable/rounded_top_cardview"
                 android:orientation="horizontal"
-                android:background="@drawable/rounded_top_cardview">
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
-                    android:src="@drawable/add_request"/>
+                    android:src="@drawable/add_request" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Tạo yêu cầu"
-                    android:textSize="20sp"
                     android:fontFamily="@font/merriweathersanswght"
-                    android:textStyle="bold"/>
+                    android:text="Tạo yêu cầu"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -54,12 +53,12 @@
             <LinearLayout
                 android:id="@+id/request_handing_bar"
                 android:layout_width="200dp"
-                android:layout_height="54dp"
+                android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_toRightOf="@+id/add_request_bar"
                 android:orientation="horizontal"
-                android:layout_toRightOf="@+id/add_request_bar">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -73,9 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/merriweathersanswght"
-                    android:text="Trạng thái xử lý yêu cầu"
-                    android:textSize="20sp"
                     android:gravity="center"
+                    android:text="Trạng thái xử lý yêu cầu"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
 
@@ -102,57 +101,64 @@
                 android:id="@+id/InfoAddRequest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/karmamedium"
                 android:gravity="center_vertical"
                 android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-            <GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:columnCount="4"
-                android:rowCount="4">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
                     android:id="@+id/card_study_results"
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
                     android:layout_row="0"
-                    android:layout_column="0">
+                    android:layout_column="0"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    app:cardCornerRadius="15dp">
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="101dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/provideresult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="66dp"
-                            android:padding="10dp"
-                            android:text="CẤP BẢNG ĐIỂM" />
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="CẤP BẢNG ĐIỂM"
+                            android:textSize="11sp"
+                            android:textStyle="bold"/>
 
 
                         <ImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_below="@+id/provideresult"
-                            android:src="@drawable/a_plus" />
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:src="@drawable/a_pluss" />
 
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
                     android:id="@+id/card_postpone"
-                    android:layout_column="1">
+                    android:layout_width="125dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="15dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -161,31 +167,165 @@
 
                         <TextView
                             android:id="@+id/postponerequest"
-                            android:layout_width="130dp"
-                            android:layout_height="41dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="159dp"
-                            android:padding="10dp"
-                            android:text="ĐỀ NGHỊ HOÃN THI" />
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="ĐỀ NGHỊ HOÃN THI"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
 
 
                         <ImageButton
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/postponerequest" />
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/postponerequest"
+                            android:src="@drawable/postpone"
+                            android:layout_centerInParent="true"
+                            android:background="@null"/>
 
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
                     android:id="@+id/card_review"
-                    android:layout_column="2">
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_alignParentRight="true"
+                    app:cardCornerRadius="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/reviewrequest"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="XEM LẠI BÀI THI"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/reviewrequest"
+                            android:background="@null"
+                            android:src="@drawable/review_exam"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_student_card"
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_below="@+id/card_study_results"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/studentcard"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="CẤP LẠI THẺ SV"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/studentcard"
+                            android:background="@null"
+                            android:src="@drawable/studentcard"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_bus_request"
+                    android:layout_width="125dp"
+                    android:layout_height="150dp"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_below="@id/card_postpone"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/busrequest"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="ĐỀ NGHỊ LÀM VÉ BUS"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/busrequest"
+                            android:background="@null"
+                            android:src="@drawable/busticket"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_stop_learning"
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:layout_below="@+id/card_review"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -193,122 +333,25 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/reviewrequest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="95dp"
-                            android:layout_marginBottom="66dp"
-                            android:padding="10dp"
-                            android:text="XEM LẠI BÀI THI" />
-
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/reviewrequest" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/card_student_card"
-                    android:layout_height="200dp"
-                    android:layout_row="1"
-                    android:layout_column="0">
-
-                    <RelativeLayout
-                        android:layout_width="119dp"
-                        android:layout_height="101dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/studentcard"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="66dp"
-                            android:padding="10dp"
-                            android:text="CẤP LẠI THẺ SINH VIÊN" />
-
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/studentcard" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:id="@+id/card_bus_request"
-                    android:layout_row="1"
-                    android:layout_column="1">
-
-                    <RelativeLayout
-                        android:layout_width="140dp"
-                        android:layout_height="101dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/busrequest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="66dp"
-                            android:padding="10dp"
-                            android:text="ĐỀ NGHỊ LÀM VÉ XE BUS" />
-
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/busrequest" />
-
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:id="@+id/card_stop_learning"
-                    android:layout_row="1"
-                    android:layout_column="2">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="101dp"
-                        android:orientation="vertical">
-
-                        <TextView
                             android:id="@+id/stoplearning"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="66dp"
-                            android:padding="10dp"
-                            android:text="XIN THÔI HỌC" />
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="XIN THÔI HỌC"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
 
 
                         <ImageButton
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/stoplearning" />
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/stoplearning"
+                            android:background="@null"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/quit_school"/>
 
                     </RelativeLayout>
 
@@ -316,52 +359,103 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
                     android:id="@+id/card_degree_request"
+                    android:layout_width="170dp"
+                    android:layout_height="150dp"
                     android:layout_row="2"
-                    android:layout_column="0">
+                    android:layout_column="0"
+                    android:layout_below="@+id/card_stop_learning"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp">
 
                     <RelativeLayout
-                        android:layout_width="119dp"
-                        android:layout_height="146dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/qualification"
                             android:layout_width="match_parent"
-                            android:layout_height="89dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="12dp"
-                            android:padding="10dp"
-                            android:text="CẤP CHỨNG CHỈ TỐT NGHIỆP TẠM THỜI" />
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="CẤP CHỨNG CHỈ TN TẠM THỜI"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
 
 
                         <ImageButton
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/qualification" />
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/qualification"
+                            android:background="@null"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/graduate"/>
 
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
-            </GridLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/social_assistance"
+                    android:layout_width="185dp"
+                    android:layout_height="150dp"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_below="@+id/card_stop_learning"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_social_assistance"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/bg_blue"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="ĐỀ NGHỊ HƯỞNG TRỢ CẤP XÃ HỘI"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/text_social_assistance"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:src="@drawable/socialassistance" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/add_request_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="110dp"-->
-<!--        android:src="@drawable/add"-->
-<!--        android:backgroundTint="@color/bg_blue"/>-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/add_request_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentRight="true"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_marginRight="20dp"-->
+    <!--        android:layout_marginBottom="110dp"-->
+    <!--        android:src="@drawable/add"-->
+    <!--        android:backgroundTint="@color/bg_blue"/>-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bottom_navigation"
