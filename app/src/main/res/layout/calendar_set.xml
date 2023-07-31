@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/bg_blue"
+        android:background="@drawable/gradient_bg_blue"
         android:orientation="vertical">
 
         <RelativeLayout

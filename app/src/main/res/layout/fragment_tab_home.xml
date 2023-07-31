@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/bg_grey"
-    tools:context=".tabsinmain.TabHome" >
+    android:orientation="vertical"
+    tools:context=".tabsinmain.TabHome">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="190dp" >
+        android:layout_height="190dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/bg_blue"
+            android:background="@drawable/gradient_bg_blue"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
@@ -72,8 +71,8 @@
                 android:id="@+id/dogAvt"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@null"
                 android:layout_marginLeft="20dp"
+                android:background="@null"
                 android:contentDescription="avatar"
                 android:scaleType="centerCrop"
                 android:src="@drawable/dogg" />
@@ -173,10 +172,10 @@
 
                         <TextView
                             android:id="@+id/today"
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/arialnb"
                             android:gravity="center_vertical"
                             android:textColor="@color/grey"
@@ -201,12 +200,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         app:numOfDays="200"
-                        app:setTextColor="@color/grey"
-                        app:setSelectedTextColor="@color/white"
-                        app:setWeekTextSize="12sp"
-                        app:setSelectedBgColor="@drawable/blue_fullfillcircle"
                         app:setBgColor="@drawable/fullfillcircle"
-                        app:setMonthTextSize="18sp"/>
+                        app:setMonthTextSize="18sp"
+                        app:setSelectedBgColor="@drawable/blue_fullfillcircle"
+                        app:setSelectedTextColor="@color/white"
+                        app:setTextColor="@color/grey"
+                        app:setWeekTextSize="12sp" />
 
                     <!--                    <LinearLayout-->
                     <!--                        android:layout_width="match_parent"-->
@@ -493,142 +492,142 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-<!--                        <androidx.cardview.widget.CardView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:layout_marginRight="15dp"-->
-<!--                            android:background="@color/bg_blue"-->
-<!--                            app:cardCornerRadius="20dp">-->
+                        <!--                        <androidx.cardview.widget.CardView-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="match_parent"-->
+                        <!--                            android:layout_marginLeft="15dp"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:layout_marginRight="15dp"-->
+                        <!--                            android:background="@color/bg_blue"-->
+                        <!--                            app:cardCornerRadius="20dp">-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:background="@color/bg_blue"-->
-<!--                                android:orientation="horizontal"-->
-<!--                                android:paddingLeft="10dp"-->
-<!--                                android:paddingTop="5dp"-->
-<!--                                android:paddingRight="10dp">-->
+                        <!--                            <LinearLayout-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:background="@color/bg_blue"-->
+                        <!--                                android:orientation="horizontal"-->
+                        <!--                                android:paddingLeft="10dp"-->
+                        <!--                                android:paddingTop="5dp"-->
+                        <!--                                android:paddingRight="10dp">-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_gravity="center_vertical"-->
-<!--                                    android:fontFamily="@font/karmab"-->
-<!--                                    android:text="7:00 - 11:00"-->
-<!--                                    android:textSize="16sp"-->
-<!--                                    android:textStyle="bold" />-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="100dp"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_gravity="center_vertical"-->
+                        <!--                                    android:fontFamily="@font/karmab"-->
+                        <!--                                    android:text="7:00 - 11:00"-->
+                        <!--                                    android:textSize="16sp"-->
+                        <!--                                    android:textStyle="bold" />-->
 
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="190dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:orientation="vertical">-->
+                        <!--                                <LinearLayout-->
+                        <!--                                    android:layout_width="190dp"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:orientation="vertical">-->
 
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="center_vertical"-->
-<!--                                        android:fontFamily="@font/karmab"-->
-<!--                                        android:text="Phát triển ứng dụng di động"-->
-<!--                                        android:textSize="13sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="TextSizeCheck" />-->
+                        <!--                                    <TextView-->
+                        <!--                                        android:layout_width="wrap_content"-->
+                        <!--                                        android:layout_height="wrap_content"-->
+                        <!--                                        android:layout_gravity="center_vertical"-->
+                        <!--                                        android:fontFamily="@font/karmab"-->
+                        <!--                                        android:text="Phát triển ứng dụng di động"-->
+                        <!--                                        android:textSize="13sp"-->
+                        <!--                                        android:textStyle="bold"-->
+                        <!--                                        tools:ignore="TextSizeCheck" />-->
 
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="center_vertical"-->
-<!--                                        android:fontFamily="@font/karmab"-->
-<!--                                        android:text="INT3120 50"-->
-<!--                                        android:textSize="14sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="TextSizeCheck" />-->
-<!--                                </LinearLayout>-->
+                        <!--                                    <TextView-->
+                        <!--                                        android:layout_width="wrap_content"-->
+                        <!--                                        android:layout_height="wrap_content"-->
+                        <!--                                        android:layout_gravity="center_vertical"-->
+                        <!--                                        android:fontFamily="@font/karmab"-->
+                        <!--                                        android:text="INT3120 50"-->
+                        <!--                                        android:textSize="14sp"-->
+                        <!--                                        android:textStyle="bold"-->
+                        <!--                                        tools:ignore="TextSizeCheck" />-->
+                        <!--                                </LinearLayout>-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_gravity="center_vertical"-->
-<!--                                    android:fontFamily="@font/karmab"-->
-<!--                                    android:text="101-G2"-->
-<!--                                    android:textSize="14sp"-->
-<!--                                    android:textStyle="bold"-->
-<!--                                    tools:ignore="TextSizeCheck" />-->
-<!--                            </LinearLayout>-->
-<!--                        </androidx.cardview.widget.CardView>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_gravity="center_vertical"-->
+                        <!--                                    android:fontFamily="@font/karmab"-->
+                        <!--                                    android:text="101-G2"-->
+                        <!--                                    android:textSize="14sp"-->
+                        <!--                                    android:textStyle="bold"-->
+                        <!--                                    tools:ignore="TextSizeCheck" />-->
+                        <!--                            </LinearLayout>-->
+                        <!--                        </androidx.cardview.widget.CardView>-->
 
-<!--                        <androidx.cardview.widget.CardView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:layout_marginRight="15dp"-->
-<!--                            android:layout_marginBottom="10dp"-->
-<!--                            android:background="@color/bg_blue"-->
-<!--                            app:cardCornerRadius="20dp">-->
+                        <!--                        <androidx.cardview.widget.CardView-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="match_parent"-->
+                        <!--                            android:layout_marginLeft="15dp"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:layout_marginRight="15dp"-->
+                        <!--                            android:layout_marginBottom="10dp"-->
+                        <!--                            android:background="@color/bg_blue"-->
+                        <!--                            app:cardCornerRadius="20dp">-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:background="@color/bg_blue"-->
-<!--                                android:orientation="horizontal"-->
-<!--                                android:paddingLeft="10dp"-->
-<!--                                android:paddingTop="5dp"-->
-<!--                                android:paddingRight="10dp">-->
+                        <!--                            <LinearLayout-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:background="@color/bg_blue"-->
+                        <!--                                android:orientation="horizontal"-->
+                        <!--                                android:paddingLeft="10dp"-->
+                        <!--                                android:paddingTop="5dp"-->
+                        <!--                                android:paddingRight="10dp">-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_gravity="center_vertical"-->
-<!--                                    android:fontFamily="@font/karmab"-->
-<!--                                    android:text="13:00 - 18:00"-->
-<!--                                    android:textSize="16sp"-->
-<!--                                    android:textStyle="bold" />-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="100dp"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_gravity="center_vertical"-->
+                        <!--                                    android:fontFamily="@font/karmab"-->
+                        <!--                                    android:text="13:00 - 18:00"-->
+                        <!--                                    android:textSize="16sp"-->
+                        <!--                                    android:textStyle="bold" />-->
 
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="190dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:orientation="vertical">-->
+                        <!--                                <LinearLayout-->
+                        <!--                                    android:layout_width="190dp"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:orientation="vertical">-->
 
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="center_vertical"-->
-<!--                                        android:fontFamily="@font/karmab"-->
-<!--                                        android:text="Thiết kế giao diện người dùng"-->
-<!--                                        android:textSize="13sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="TextSizeCheck" />-->
+                        <!--                                    <TextView-->
+                        <!--                                        android:layout_width="wrap_content"-->
+                        <!--                                        android:layout_height="wrap_content"-->
+                        <!--                                        android:layout_gravity="center_vertical"-->
+                        <!--                                        android:fontFamily="@font/karmab"-->
+                        <!--                                        android:text="Thiết kế giao diện người dùng"-->
+                        <!--                                        android:textSize="13sp"-->
+                        <!--                                        android:textStyle="bold"-->
+                        <!--                                        tools:ignore="TextSizeCheck" />-->
 
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="center_vertical"-->
-<!--                                        android:fontFamily="@font/karmab"-->
-<!--                                        android:text="INT3115 50"-->
-<!--                                        android:textSize="14sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="TextSizeCheck" />-->
-<!--                                </LinearLayout>-->
+                        <!--                                    <TextView-->
+                        <!--                                        android:layout_width="wrap_content"-->
+                        <!--                                        android:layout_height="wrap_content"-->
+                        <!--                                        android:layout_gravity="center_vertical"-->
+                        <!--                                        android:fontFamily="@font/karmab"-->
+                        <!--                                        android:text="INT3115 50"-->
+                        <!--                                        android:textSize="14sp"-->
+                        <!--                                        android:textStyle="bold"-->
+                        <!--                                        tools:ignore="TextSizeCheck" />-->
+                        <!--                                </LinearLayout>-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_gravity="center_vertical"-->
-<!--                                    android:fontFamily="@font/karmab"-->
-<!--                                    android:text="3-G3"-->
-<!--                                    android:textSize="14sp"-->
-<!--                                    android:textStyle="bold"-->
-<!--                                    tools:ignore="TextSizeCheck,TextSizeCheck" />-->
-<!--                            </LinearLayout>-->
-<!--                        </androidx.cardview.widget.CardView>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_gravity="center_vertical"-->
+                        <!--                                    android:fontFamily="@font/karmab"-->
+                        <!--                                    android:text="3-G3"-->
+                        <!--                                    android:textSize="14sp"-->
+                        <!--                                    android:textStyle="bold"-->
+                        <!--                                    tools:ignore="TextSizeCheck,TextSizeCheck" />-->
+                        <!--                            </LinearLayout>-->
+                        <!--                        </androidx.cardview.widget.CardView>-->
 
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -666,14 +665,15 @@
                         android:orientation="vertical">
 
 
-                            <ImageButton
-                                android:id="@+id/TimeTable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_button"
-                                android:contentDescription="time-table"
-                                android:padding="10dp"
-                                android:src="@drawable/calen_today" />
+                        <ImageButton
+                            android:id="@+id/TimeTable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_button"
+                            android:contentDescription="time-table"
+                            android:padding="10dp"
+                            android:src="@drawable/calen_today"
+                            android:layout_gravity="center_horizontal"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -693,15 +693,14 @@
                         android:orientation="vertical">
 
 
-
-                            <ImageButton
-                                android:id="@+id/request"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_button"
-                                android:contentDescription="request"
-                                android:padding="10dp"
-                                android:src="@drawable/request" />
+                        <ImageButton
+                            android:id="@+id/request"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_button"
+                            android:contentDescription="request"
+                            android:padding="10dp"
+                            android:src="@drawable/request" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -729,13 +728,14 @@
                         android:orientation="vertical">
 
 
-                            <ImageButton
-                                android:id="@+id/grades"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_button"
-                                android:padding="10dp"
-                                android:src="@drawable/grades" />
+                        <ImageButton
+                            android:id="@+id/grades"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_button"
+                            android:padding="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/grades" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -744,6 +744,33 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/arsenalbold"
                             android:text="Kết quả học tập"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:orientation="vertical">
+
+
+                        <ImageButton
+                            android:id="@+id/study_guide"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_button"
+                            android:contentDescription="request"
+                            android:padding="5dp"
+                            android:src="@drawable/study_guide"
+                            android:layout_gravity="center_horizontal"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/arsenalbold"
+                            android:text="Cẩm nang học tập"
                             android:textSize="17sp"
                             android:textStyle="bold" />
                     </LinearLayout>

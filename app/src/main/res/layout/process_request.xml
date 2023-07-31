@@ -12,7 +12,7 @@
         android:id="@+id/request_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:background="@color/bg_blue">
+        android:background="@drawable/gradient_bg_blue">
 
         <RelativeLayout
             android:layout_width="match_parent"
