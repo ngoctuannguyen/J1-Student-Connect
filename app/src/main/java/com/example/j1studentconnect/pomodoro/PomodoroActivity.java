@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.ScaleAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +42,10 @@ public class PomodoroActivity extends AppCompatActivity {
     private ImageView backFromPomodoro;
     private long Endtime;
     private long TimeLeftInMillis;
+
+    private long fadeInDuration,fadeOutDuration;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,9 @@ public class PomodoroActivity extends AppCompatActivity {
         quarterHour = findViewById(R.id.quaterAnHour);
         quarterHour.setVisibility(View.GONE);
 
+        TextView textView = findViewById(R.id.timer_text_view);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
         titlePomodoro = findViewById(R.id.TitlePomodoro);
         roundCount = findViewById(R.id.RoundCount);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +93,17 @@ public class PomodoroActivity extends AppCompatActivity {
                 if (!timeRunning) {
                     timeRunning = true;
                     startTimer();
+                    fadeOutDuration = 10 * 1000;
+                    fadeOut.setDuration(fadeOutDuration);
+                    textView.startAnimation(fadeOut);
                     startButton.setText("Dừng và làm lại cuộc đời");
 
                 } else {
                     timeRunning = false;
                     cntRound = 1;
+                    fadeOutDuration = 0;
+                    fadeOut.setDuration(fadeOutDuration);
+                    textView.startAnimation(fadeOut);
                     roundCount.setText("1 | 4");
                     startButton.setText("Vào bàn học thôi !!");
                     TextView timer_text_view = findViewById(R.id.timer_text_view);
@@ -119,6 +134,8 @@ public class PomodoroActivity extends AppCompatActivity {
     public void startTimer() {
         long timerLength = 10 * 1000;
         Endtime = System.currentTimeMillis() + timerLength;
+
+
         //linearLayout.setBackgroundColor(Color.RED);
         TextView timer_text_view = findViewById(R.id.timer_text_view);
         TextView tiltePomodoro = findViewById(R.id.TitlePomodoro);
@@ -211,6 +228,13 @@ public class PomodoroActivity extends AppCompatActivity {
 
     private void startBreakTimer() {
         long timerLength = 5 * 1000;
+        fadeInDuration = timerLength;
+
+        TextView textView = findViewById(R.id.timer_text_view);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeIn.setDuration(fadeInDuration);
+        textView.startAnimation(fadeIn);
+
         //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
         relativeLayout.setBackgroundResource(R.color.bg_blue);
@@ -270,6 +294,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 showNotification();
                 startTimer();
             }
+
 
         };
         if (timeRunning) pomodoroTimer.start();
