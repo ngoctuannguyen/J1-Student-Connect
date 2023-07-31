@@ -13,7 +13,7 @@
         android:id="@+id/request_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:background="@color/bg_blue">
+        android:background="@drawable/gradient_bg_blue">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="CẤP BẢNG ĐIỂM"
@@ -171,7 +171,7 @@
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
                             android:layout_alignParentTop="true"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="ĐỀ NGHỊ HOÃN THI"
@@ -211,7 +211,7 @@
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
                             android:layout_alignParentTop="true"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="XEM LẠI BÀI THI"
@@ -254,7 +254,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="CẤP LẠI THẺ SV"
@@ -295,7 +295,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="ĐỀ NGHỊ LÀM VÉ BUS"
@@ -337,7 +337,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="XIN THÔI HỌC"
@@ -379,7 +379,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="CẤP CHỨNG CHỈ TN TẠM THỜI"
@@ -420,7 +420,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="15dp"
-                            android:background="@color/bg_blue"
+                            android:background="@drawable/gradient_bg_blue"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="ĐỀ NGHỊ HƯỞNG TRỢ CẤP XÃ HỘI"
@@ -455,7 +455,7 @@
     <!--        android:layout_marginRight="20dp"-->
     <!--        android:layout_marginBottom="110dp"-->
     <!--        android:src="@drawable/add"-->
-    <!--        android:backgroundTint="@color/bg_blue"/>-->
+    <!--        android:backgroundTint="@drawable/gradient_bg_blue"/>-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bottom_navigation"
