@@ -7,13 +7,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/bg_grey"
-    tools:context=".TabSearch" >
+    tools:context=".tabsinmain.TabSearch" >
 
     <RelativeLayout
         android:id="@+id/search_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:background="@color/bg_blue"
+        android:background="@drawable/gradient_bg_blue"
         android:orientation="vertical">
 
         <RelativeLayout

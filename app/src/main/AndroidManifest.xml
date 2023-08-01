@@ -4,16 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-
     <application
-        android:name=".PomodoroNoti"
+        android:name=".pomodoro.PomodoroNoti"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,42 +22,60 @@
         android:theme="@style/Base.Theme.J1StudentConnect"
         tools:targetApi="31">
         <activity
-            android:name=".CameraViewActivity"
+            android:name=".textrecognition.ScannerActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".textrecognition.TextRecognitionActivity"
             android:exported="true">
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
 
         </activity>
         <activity
-            android:name=".FaceRecognitionActivity"
+            android:name=".camera.CameraViewActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+
+        </activity>
+        <activity
+            android:name=".facerecognition.FaceRecognitionActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity> <!-- LoginLauncher -->
         <activity
             android:name=".authentication.LoginLauncher"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".NotificationActivity"
+            android:name=".notificationactivity.NotificationActivity"
             android:exported="true" /> <!-- Login -->
         <activity
             android:name=".authentication.Login"
@@ -86,14 +102,14 @@
                 android:value="" />
         </activity> <!-- Main -->
         <activity
-            android:name=".MainActivity"
+            android:name=".tabsinmain.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- Search -->
         <activity
-            android:name=".Search"
+            android:name=".searchtab.Search"
             android:exported="true" /> <!-- Profile -->
         <!-- <activity -->
         <!-- android:name=".Profile" -->
@@ -104,20 +120,20 @@
         <!-- android:value="" /> -->
         <!-- </activity> &lt;!&ndash; EditProfile &ndash;&gt; -->
         <activity
-            android:name=".EditProfile"
+            android:name=".profiletab.EditProfile"
             android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- Calendar -->
-        <activity android:name=".Calendar" /> <!-- Grades -->
-        <activity android:name=".Grades" /> <!-- Courses -->
-        <activity android:name=".Courses" /> <!-- Request -->
-        <activity android:name=".RequestAdd" />
-        <activity android:name=".RequestProcessing" />
+        <activity android:name=".timetable.Calendar" /> <!-- Grades -->
+        <activity android:name=".studyresults.Grades" /> <!-- Courses -->
+        <!-- Request -->
+        <activity android:name=".request.RequestAdd" />
+        <activity android:name=".request.RequestProcessing" />
         <activity
-            android:name=".PomodoroActivity"
+            android:name=".pomodoro.PomodoroActivity"
             android:exported="true" />
 
         <meta-data

@@ -1,56 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
     android:layout_gravity="center"
-    android:background="@color/red"
-    android:orientation="vertical">
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <TextView
+        android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:fontFamily="@font/roboto_bold"
-        android:id="@+id/dialog_title"
-        android:textSize="20sp"
-        android:text="Cấp CN tốt nghiệp tạm thời" />
+        android:gravity="center"
+        android:text="Cấp CN tốt nghiệp tạm thời"
+        android:textSize="20sp" />
 
 
     <EditText
+        android:id="@+id/reason_of_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/reason_of_dialog"
         android:hint="Lý do" />
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/stateOfReason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bạn chưa nhập đủ thông tin"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:id="@+id/stateOfReason"
-        android:textSize="15sp" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/text_stateOfReason"
+            android:src="@drawable/roundedwarning" />
+
+        <TextView
+            android:id="@+id/text_stateOfReason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:text="Bạn chưa nhập đủ thông tin"
+            android:textSize="15sp" />
+    </RelativeLayout>
 
 
     <Button
+        android:id="@+id/file_archive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tệp đính kèm"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="7dp"
-        android:id="@+id/file_archive"/>
+        android:layout_marginTop="10dp"
+        android:text="Tệp đính kèm" />
 
     <Button
+        android:id="@+id/submit_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Submit"
         android:layout_marginLeft="7dp"
-        android:id="@+id/submit_dialog"/>
+        android:layout_marginTop="10dp"
+        android:text="Submit" />
 
 </LinearLayout>
