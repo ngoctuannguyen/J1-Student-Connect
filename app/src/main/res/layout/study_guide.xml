@@ -68,9 +68,9 @@
                     android:background="@drawable/notee22"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
-                    android:paddingTop="60dp"
+                    android:paddingTop="80dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="50dp">
+                    android:paddingBottom="70dp">
 
                     <TextView
                         android:id="@+id/maths_subject"
@@ -121,13 +121,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="160dp"
                     android:background="@drawable/note33"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
-                    android:paddingTop="60dp"
+                    android:paddingTop="80dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="50dp">
+                    android:paddingBottom="70dp">
 
                     <TextView
                         android:id="@+id/cv_templates"
@@ -259,7 +259,7 @@
                     android:background="@drawable/notene"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
-                    android:paddingTop="60dp"
+                    android:paddingTop="70dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="70dp">
 
