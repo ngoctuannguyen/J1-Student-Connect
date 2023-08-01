@@ -91,7 +91,7 @@
             android:gravity="center"
             android:paddingTop="60sp"
             android:text="25:00"
-            android:textColor="@color/white"
+            android:textColor="@color/lighter_green"
             android:textSize="70sp" />
 
         <TextView
