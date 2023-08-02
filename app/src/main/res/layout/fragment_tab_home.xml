@@ -207,7 +207,7 @@
                         app:setTextColor="@color/grey"
                         app:setWeekTextSize="12sp" />
 
-                    <ListView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:id="@+id/listViewHome"
                         android:layout_height="wrap_content" />

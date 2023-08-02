@@ -4,7 +4,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TimeTableInMain {
 
-
     String lessonTime;
     String name_of_subject;
     String id_of_subject;

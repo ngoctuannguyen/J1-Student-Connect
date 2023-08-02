@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +39,6 @@ import com.sahana.horizontalcalendar.HorizontalCalendar;
 import com.sahana.horizontalcalendar.OnDateSelectListener;
 import com.sahana.horizontalcalendar.model.DateModel;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +58,9 @@ public class TabHome extends Fragment {
 
     String SelectedDate;
 
+    ArrayList<TimeTableInMain> arrayList;
 
-    private ListView lessonInDayListView;
+    private RecyclerView lessonInDayListView;
 
     private FirebaseFirestore firebaseFirestore;
 
@@ -100,12 +100,24 @@ public class TabHome extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
-        CreateAndShowInfoStudent();
-        ConstructLayout();
-        ConstructButton();
+
+
+        //onViewCreated();
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        lessonInDayListView = view.findViewById(R.id.listViewHome);
+        lessonInDayListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        CreateAndShowInfoStudent(view);
+        ConstructLayout(view);
+        ConstructButton(view);
 
         HorizontalCalendar mHorizontalCalendar;
-        mHorizontalCalendar = rootView.findViewById(R.id.horizontalCalendar);
+        mHorizontalCalendar = view.findViewById(R.id.horizontalCalendar);
         //dayScrollDatePicker.setStartDate(29, 7, 2023);
         mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
             @Override
@@ -125,22 +137,25 @@ public class TabHome extends Fragment {
                 else if (SelectedDate == "Sat")
                     SelectedDate = "Saturday";
                 setLessonInDay(SelectedDate);
-                //Toast.makeText(getActivity(), "FFF", 1);
+                //Toast.makeText(getContext(), dateModel.dayOfWeek, Toast.LENGTH_SHORT).show();
             }
         });
 
-//        initWidgets();
-//        setWeekView();
-        ClickButton();
-        return rootView;
+//        arrayList = new ArrayList<>();
+//        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triển ứng dụng di động", "INT3120 50", "101-G2"));
+//
+//        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(arrayList);
+//        lessonInDayListView.setAdapter(tbInHomeAdapter);
+
+        ClickButton(view);
     }
 
-
     private void setLessonInDay(String Date) {
-        lessonInDayListView = rootView.findViewById(R.id.listViewHome);
-        ArrayList<TimeTableInMain> arrayList = new ArrayList<>();
+
+        arrayList = new ArrayList<>();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
-        collectionReference.document(Date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        collectionReference.document("Friday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
@@ -155,10 +170,11 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        arrayList.add(new TimeTableInMain(subject1.get(1) + '-' + subject1.get(2),
-                                                                          subject1.get(0) + "",
-                                                                        subject1.get(5) + "",
-                                                                        subject1.get(3) + ""));
+//                                        arrayList.add(new TimeTableInMain(subject1.get(1) + '-' + subject1.get(2),
+//                                                                          subject1.get(0) + "",
+//                                                                        subject1.get(5) + "",
+//                                                                        subject1.get(3) + ""));
+                                        //Toast.makeText(getContext(), subject1.get(0), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -171,16 +187,19 @@ public class TabHome extends Fragment {
             }
         });
 
-        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), R.layout.todo_cell_in_home, arrayList);
+        arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(arrayList);
 
         lessonInDayListView.setAdapter(tbInHomeAdapter);
+        //tbInHomeAdapter.notifyDataSetChanged();
 
     }
 
-    private void CreateAndShowInfoStudent() {
-        TextView Name = rootView.findViewById(R.id.name1);
-        TextView student_id = rootView.findViewById(R.id.student_id_in_main1);
-        TextView class_id = rootView.findViewById(R.id.class_id1);
+    private void CreateAndShowInfoStudent(View view) {
+        TextView Name = view.findViewById(R.id.name1);
+        TextView student_id = view.findViewById(R.id.student_id_in_main1);
+        TextView class_id = view.findViewById(R.id.class_id1);
 
         //Intent intentBefore = getActivity().getIntent();
         //String student_id_child = intentBefore.getStringExtra("student_id").toString();
@@ -202,10 +221,10 @@ public class TabHome extends Fragment {
         });
     }
 
-    private void ConstructTextView(){
+    private void ConstructTextView(View view){
 
         //txtRecover = (TextView) findViewById(R.id.recover);
-        txtToday = rootView.findViewById(R.id.today);
+        txtToday = view.findViewById(R.id.today);
 
     }
 
@@ -215,23 +234,23 @@ public class TabHome extends Fragment {
         txtToday.setText(date);
     }
 
-    private void ConstructButton(){
-        btnCalendar = rootView.findViewById(R.id.TimeTable);
-        btnCalendarHotkey =  rootView.findViewById(R.id.calendarHotKey);
-        btnAvatar = rootView.findViewById(R.id.dogAvt);
-        btnX = rootView.findViewById(R.id.x);
-        btnRequest = rootView.findViewById(R.id.request);
-        btnGrades = rootView.findViewById(R.id.grades);
-        btnGuide = rootView.findViewById(R.id.study_guide);
+    private void ConstructButton(View view){
+        btnCalendar = view.findViewById(R.id.TimeTable);
+        btnCalendarHotkey =  view.findViewById(R.id.calendarHotKey);
+        btnAvatar = view.findViewById(R.id.dogAvt);
+        btnX = view.findViewById(R.id.x);
+        btnRequest = view.findViewById(R.id.request);
+        btnGrades = view.findViewById(R.id.grades);
+        btnGuide = view.findViewById(R.id.study_guide);
     }
 
-    private void ConstructLayout(){
+    private void ConstructLayout(View view){
 
-        ConvenientCard = rootView.findViewById(R.id.convenientNoti);
-        btnRecover = rootView.findViewById(R.id.recover);
+        ConvenientCard = view.findViewById(R.id.convenientNoti);
+        btnRecover = view.findViewById(R.id.recover);
         if (recover == false) {
 
-            ConstructTextView();
+            ConstructTextView(view);
             RenderToday();
         }
         else {
@@ -241,7 +260,7 @@ public class TabHome extends Fragment {
 
     }
 
-    private void ClickButton(){
+    private void ClickButton(View view){
 
 //        btnAvatar.setOnClickListener(new View.OnClickListener() {
 //            @Override
