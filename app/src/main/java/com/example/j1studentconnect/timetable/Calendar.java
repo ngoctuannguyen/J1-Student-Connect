@@ -2,6 +2,7 @@ package com.example.j1studentconnect.timetable;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,17 +21,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Calendar extends AppCompatActivity {
 
@@ -103,9 +110,9 @@ public class Calendar extends AppCompatActivity {
     private void showList() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        String student_id_child = "21020074";
-        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
-        DocumentReference documentReference = firebaseFirestore.collection("subjectsII").document();
+        String student_id_child = "22026521";
+        //reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
         dayList = new ArrayList<String>();
         subjectList = new HashMap<String, List<String>>();
@@ -118,28 +125,249 @@ public class Calendar extends AppCompatActivity {
         dayList.add("Saturday");
 
         List<String> subjectMon = new ArrayList<>();
-        subjectMon.add("DSA");
-        subjectMon.add("Mobile");
+        collectionReference.document("Monday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Monday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Monday += element + '-';
+                                            else Monday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectMon.add(Monday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectMon.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
 
         List<String> subjectTue = new ArrayList<>();
-        subjectTue.add("DSA");
-        subjectTue.add("Mobile");
+        collectionReference.document("Tuesday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Tuesday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Tuesday += element + '-';
+                                            else Tuesday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectTue.add(Tuesday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectTue.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
 
         List<String> subjectWed = new ArrayList<>();
-        subjectWed.add("DSA");
-        subjectWed.add("Mobile");
+        collectionReference.document("Wednesday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Wednesday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Wednesday += element + '-';
+                                            else Wednesday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectWed.add(Wednesday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectWed.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
 
         List<String> subjectThu = new ArrayList<>();
-        subjectThu.add("DSA");
-        subjectThu.add("Mobile");
+        collectionReference.document("Thursday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Thursday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Thursday += element + '-';
+                                            else Thursday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectThu.add(Thursday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectThu.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
 
         List<String> subjectFri = new ArrayList<>();
-        subjectFri.add("DSA");
-        subjectFri.add("Mobile");
+        collectionReference.document("Friday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Friday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Friday += element + '-';
+                                            else Friday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectFri.add(Friday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectFri.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
 
         List<String> subjectSat = new ArrayList<>();
-        subjectSat.add("DSA");
-        subjectSat.add("Mobile");
+        collectionReference.document("Saturday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        int cnt = 0;
+                                        String Saturday = "";
+                                        for (String element : subject1) {
+                                            //subjectTue.add()
+                                            if (cnt == 1)
+                                                Saturday += element + '-';
+                                            else Saturday += element + '\n';
+                                            ++cnt;
+
+                                        }
+                                        subjectSat.add(Saturday);
+                                    }
+                                }
+                            }
+                        }
+                        else subjectSat.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
 
         subjectList.put(dayList.get(0), subjectMon);
         subjectList.put(dayList.get(1), subjectTue);

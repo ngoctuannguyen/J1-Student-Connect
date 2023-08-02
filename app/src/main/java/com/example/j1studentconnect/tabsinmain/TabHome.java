@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.j1studentconnect.guide.StudyGuide;
 import com.example.j1studentconnect.timetable.Calendar;
 import com.example.j1studentconnect.studyresults.Grades;
 import com.example.j1studentconnect.pomodoro.PomodoroActivity;
@@ -34,7 +35,7 @@ import com.sahana.horizontalcalendar.model.DateModel;
 
 public class TabHome extends Fragment {
     View rootView;
-    private ImageButton btnCalendar, btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades;
+    private ImageButton btnCalendar, btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
     //private LinearLayout
     private CardView ConvenientCard;
@@ -153,6 +154,7 @@ public class TabHome extends Fragment {
         btnX = rootView.findViewById(R.id.x);
         btnRequest = rootView.findViewById(R.id.request);
         btnGrades = rootView.findViewById(R.id.grades);
+        btnGuide = rootView.findViewById(R.id.study_guide);
     }
 
     private void ConstructLayout(){
@@ -191,6 +193,13 @@ public class TabHome extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), RequestAdd.class));
+            }
+        });
+
+        btnGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), StudyGuide.class));
             }
         });
 

@@ -28,9 +28,11 @@ import java.util.Date;
 
 public class PomodoroActivity extends AppCompatActivity {
 
-    public static boolean timeRunning = false, quarterHourPress = false, halfHourPress = false, breakTime = false;
-    public static boolean fourtimes = false;
-    public static int cntRound = 1;
+    public boolean quarterHourPress = false, halfHourPress = false, breakTime = false;
+
+    public boolean timeRunning = false;
+    public boolean fourtimes = false;
+    public int cntRound = 1;
     RelativeLayout relativeLayout;
     TextView titlePomodoro, roundCount;
     TextView textRoundCount;
@@ -357,8 +359,18 @@ public class PomodoroActivity extends AppCompatActivity {
 
     }
 
+    private void updateCountDownText() {
+        int minutes = (int) (TimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (TimeLeftInMillis / 1000) % 60;
+
+        //String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        //mTextViewCountDown.setText(timeLeftFormatted);
+    }
+
     @Override
     protected void onStop() {
+        super.onStop();
 
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -369,15 +381,18 @@ public class PomodoroActivity extends AppCompatActivity {
 
         if (pomodoroTimer != null) pomodoroTimer.cancel();
 
-        super.onStop();
+
     }
 
     @Override
     protected void onStart() {
-
+        super.onStart();
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-        TimeLeftInMillis = preferences.getLong("millisleft", 10000);
-        timeRunning = preferences.getBoolean("timeRunning", timeRunning);
+        TimeLeftInMillis = preferences.getLong("millisleft", 600000);
+        timeRunning = preferences.getBoolean("timeRunning", false);
+
+        updateCountDownText();
+
         if (timeRunning) {
 
             Endtime = preferences.getLong("endTime", 0);
@@ -385,11 +400,10 @@ public class PomodoroActivity extends AppCompatActivity {
             if (TimeLeftInMillis < 0) {
                 TimeLeftInMillis = 0;
                 timeRunning = false;
-                long minutes = TimeLeftInMillis / 1000 / 60;
-                long seconds = TimeLeftInMillis / 1000 % 60;
+                updateCountDownText();
+
             } else startTimer();
         }
 
-        super.onStart();
     }
 }
