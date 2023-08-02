@@ -111,7 +111,6 @@ public class Calendar extends AppCompatActivity {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         String student_id_child = "22026521";
-        //reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
         dayList = new ArrayList<String>();

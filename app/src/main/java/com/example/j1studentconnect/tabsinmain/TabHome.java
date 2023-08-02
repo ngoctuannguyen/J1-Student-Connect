@@ -6,14 +6,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.j1studentconnect.guide.StudyGuide;
 import com.example.j1studentconnect.timetable.Calendar;
@@ -21,14 +25,24 @@ import com.example.j1studentconnect.studyresults.Grades;
 import com.example.j1studentconnect.pomodoro.PomodoroActivity;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.request.RequestAdd;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sahana.horizontalcalendar.HorizontalCalendar;
 import com.sahana.horizontalcalendar.OnDateSelectListener;
 import com.sahana.horizontalcalendar.model.DateModel;
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 //import com.harrywhewell.scrolldatepicker.DayScrollDatePicker;
 //import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
 
@@ -45,7 +59,10 @@ public class TabHome extends Fragment {
 
     String SelectedDate;
 
-    private RecyclerView calendarRecyclerView;
+
+    private ListView lessonInDayListView;
+
+    private FirebaseFirestore firebaseFirestore;
 
     DatabaseReference reference;
     private static final String ARG_PARAM1 = "param1";
@@ -87,15 +104,6 @@ public class TabHome extends Fragment {
         ConstructLayout();
         ConstructButton();
 
-//        initWidgets();
-      //SetCalendar();
-//        setWeekView();
-        ClickButton();
-        return rootView;
-    }
-
-    private void SetCalendar() {
-
         HorizontalCalendar mHorizontalCalendar;
         mHorizontalCalendar = rootView.findViewById(R.id.horizontalCalendar);
         //dayScrollDatePicker.setStartDate(29, 7, 2023);
@@ -103,9 +111,69 @@ public class TabHome extends Fragment {
             @Override
             public void onSelect(DateModel dateModel) {
                 //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
-
+                SelectedDate = dateModel.dayOfWeek;
+                if (SelectedDate == "Mon")
+                    SelectedDate = "Monday";
+                else if (SelectedDate == "Tue")
+                    SelectedDate = "Tuesday";
+                else if (SelectedDate == "Wed")
+                    SelectedDate = "Wednesday";
+                else if (SelectedDate == "Thu")
+                    SelectedDate = "Thursday";
+                else if (SelectedDate == "Fri")
+                    SelectedDate = "Friday";
+                else if (SelectedDate == "Sat")
+                    SelectedDate = "Saturday";
+                setLessonInDay(SelectedDate);
+                //Toast.makeText(getActivity(), "FFF", 1);
             }
         });
+
+//        initWidgets();
+//        setWeekView();
+        ClickButton();
+        return rootView;
+    }
+
+
+    private void setLessonInDay(String Date) {
+        lessonInDayListView = rootView.findViewById(R.id.listViewHome);
+        ArrayList<TimeTableInMain> arrayList = new ArrayList<>();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+        collectionReference.document(Date).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        arrayList.add(new TimeTableInMain(subject1.get(1) + '-' + subject1.get(2),
+                                                                          subject1.get(0) + "",
+                                                                        subject1.get(5) + "",
+                                                                        subject1.get(3) + ""));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), R.layout.todo_cell_in_home, arrayList);
+
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
 
     }
 
