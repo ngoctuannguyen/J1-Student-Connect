@@ -1,5 +1,7 @@
 package com.example.j1studentconnect.tabsinmain;
 
+import static android.view.View.GONE;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -68,6 +70,8 @@ public class TabHome extends Fragment {
 
     List<TimeTableInMain> arrayListMon, arrayListTue, arrayListWed, arrayListThu, arrayListFri, arrayListSat;
 
+    private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
+
     DatabaseReference reference;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -128,24 +132,40 @@ public class TabHome extends Fragment {
         arrayListThu = new ArrayList<>();
         arrayListFri = new ArrayList<>();
         arrayListSat = new ArrayList<>();
-
         mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
             @Override
             public void onSelect(DateModel dateModel) {
                 //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
                 SelectedDate = dateModel.dayOfWeek;
-                if (SelectedDate.equals("Mon"))
+                if (SelectedDate.equals("Mon")) {
+                    //setLessonInSun();
                     setLessonInMon();
-                else if (SelectedDate.equals("Tue"))
+
+                }
+                else if (SelectedDate.equals("Tue")) {
                     setLessonInTue();
-                else if (SelectedDate.equals("Wed"))
+                    //setLessonInTue();
+                }
+                else if (SelectedDate.equals("Wed")) {
                     setLessonInWed();
-                else if (SelectedDate.equals("Thu"))
+                    //setLessonInWed();
+                }
+                else if (SelectedDate.equals("Thu")){
                     setLessonInThu();
-                else if (SelectedDate.equals("Fri"))
+                    //setLessonInThu();
+                }
+                else if (SelectedDate.equals("Fri")) {
                     setLessonInFri();
-                else if (SelectedDate.equals("Sat"))
+                    //setLessonInFri();
+                }
+                else if (SelectedDate.equals("Sat")) {
+                    //setLessonInSun();
                     setLessonInSat();
+                    //setLessonInSat();
+                    ///setinSat = true;
+                }
+                else if (SelectedDate.equals("Sun"))
+                    setLessonInSun();
                 //arrayList = new ArrayList<>();
                 //setLessonInDay(SelectedDate);
                 Log.d("fff", SelectedDate);
@@ -162,9 +182,20 @@ public class TabHome extends Fragment {
         ClickButton(view);
     }
 
+    private void setLessonInSun() {
+        arrayListSat.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
+    }
+
     private void setLessonInSat() {
         //arrayListSat = new ArrayList<>();
         arrayListSat.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
+
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
+        tbInHomeAdapter.notifyDataSetChanged();
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
         collectionReference.document("Saturday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -182,7 +213,7 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                         String nameOfLesson = (String) subject1.get(0);
                                         String IdOfLesson = (String) subject1.get(5);
                                         String placeForLesson = (String) subject1.get(3);
@@ -190,9 +221,13 @@ public class TabHome extends Fragment {
                                                 nameOfLesson,
                                                 IdOfLesson,
                                                 placeForLesson));
-                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(),arrayListSat);
-                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
-                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //if (setinSat == false) {
+                                            TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
+
+                                            lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                            tbInHomeAdapter.notifyDataSetChanged();
+                                        //}
+
                                         //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
 
                                         //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
@@ -209,10 +244,15 @@ public class TabHome extends Fragment {
         // }
     }
 
+
+
     private void setLessonInFri() {
 
         //arrayListFri = new ArrayList<>();
         arrayListFri.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListFri);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
@@ -231,7 +271,7 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                         String nameOfLesson = (String) subject1.get(0);
                                         String IdOfLesson = (String) subject1.get(5);
                                         String placeForLesson = (String) subject1.get(3);
@@ -261,6 +301,9 @@ public class TabHome extends Fragment {
     private void setLessonInThu() {
         //arrayListThu = new ArrayList<>();
         arrayListThu.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListThu);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
@@ -279,7 +322,7 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                         String nameOfLesson = (String) subject1.get(0);
                                         String IdOfLesson = (String) subject1.get(5);
                                         String placeForLesson = (String) subject1.get(3);
@@ -310,6 +353,9 @@ public class TabHome extends Fragment {
 
         //arrayListWed = new ArrayList<>();
         arrayListWed.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListWed);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
@@ -328,7 +374,7 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                         String nameOfLesson = (String) subject1.get(0);
                                         String IdOfLesson = (String) subject1.get(5);
                                         String placeForLesson = (String) subject1.get(3);
@@ -359,6 +405,9 @@ public class TabHome extends Fragment {
     private void setLessonInTue() {
         //arrayListTue = new ArrayList<>();
         arrayListTue.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListTue);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
         collectionReference.document("Tuesday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -376,7 +425,7 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                         String nameOfLesson = (String) subject1.get(0);
                                         String IdOfLesson = (String) subject1.get(5);
                                         String placeForLesson = (String) subject1.get(3);
@@ -411,6 +460,9 @@ public class TabHome extends Fragment {
 
             //arrayListMon = new ArrayList<>();
             arrayListMon.clear();
+            TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
+            tbInHomeAdapter.notifyDataSetChanged();
+            lessonInDayListView.setAdapter(tbInHomeAdapter);
             collectionReference.document("Monday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -426,7 +478,7 @@ public class TabHome extends Fragment {
                                     if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                         List<String> subject1 = (List<String>) document.get(field);
                                         if (subject1 != null) {
-                                                String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                                String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
                                                 String nameOfLesson = (String) subject1.get(0);
                                                 String IdOfLesson = (String) subject1.get(5);
                                                 String placeForLesson = (String) subject1.get(3);
@@ -435,14 +487,16 @@ public class TabHome extends Fragment {
                                                         IdOfLesson,
                                                         placeForLesson));
                                                 TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
+                                                tbInHomeAdapter.notifyDataSetChanged();
                                                 lessonInDayListView.setAdapter(tbInHomeAdapter);
 
-                                                tbInHomeAdapter.notifyDataSetChanged();
                                                 //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
 
                                                 //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
                                         }
+                                        //else lessonInDayListView.setAdapter(null);
                                     }
+
                                 }
                             }
                         }
@@ -451,24 +505,6 @@ public class TabHome extends Fragment {
                     }
                 }
             });
-        //}
-
-
-
-        //if (Date == "Tue") {
-
-
-        //if (Date == "Wed")
-
-
-        //if (Date == "Thu") {
-
-
-
-        //if (Date == "Fri") {
-
-
-        //if (Date == "Sat") {
 
 
     }
@@ -531,7 +567,7 @@ public class TabHome extends Fragment {
             RenderToday();
         }
         else {
-            ConvenientCard.setVisibility(View.GONE);
+            ConvenientCard.setVisibility(GONE);
             btnRecover.setVisibility(View.VISIBLE);
         }
 
@@ -589,7 +625,7 @@ public class TabHome extends Fragment {
 
                 if (recover == false){
                     recover = true;
-                    ConvenientCard.setVisibility(View.GONE);
+                    ConvenientCard.setVisibility(GONE);
                     btnRecover.setVisibility(View.VISIBLE);
                 }
             }
@@ -599,7 +635,7 @@ public class TabHome extends Fragment {
             @Override
             public void onClick(View view) {
                 ConvenientCard.setVisibility(View.VISIBLE);
-                btnRecover.setVisibility(View.GONE);
+                btnRecover.setVisibility(GONE);
                 recover = false;
             }
         });
