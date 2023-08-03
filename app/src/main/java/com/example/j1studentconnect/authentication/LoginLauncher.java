@@ -27,6 +27,7 @@ public class LoginLauncher extends AppCompatActivity {
         if(currentUser != null) {
             Intent intent = new Intent(LoginLauncher.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             finish();
         }
     }
@@ -50,10 +51,12 @@ public class LoginLauncher extends AppCompatActivity {
                         if (menuItem.getItemId() == R.id.opt_vnu) {
                             Intent intent = new Intent(getApplicationContext(), Login.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
                             finish();
                             return true;
                         } else if (menuItem.getItemId() == R.id.opt_other) {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ngoctuannguyen/J1-Student-Connect")));
+                            overridePendingTransition(R.anim.anim_activity_slide_up, R.anim.anim_acitivity_slide_down);
                             return true;
                         } else {
                             return false;

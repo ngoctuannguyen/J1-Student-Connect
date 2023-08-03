@@ -1,6 +1,7 @@
 package com.example.j1studentconnect.guide;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +11,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -88,6 +91,10 @@ public class StudyGuide extends AppCompatActivity {
                 break;
         }
 
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.anim_pomodoro_in);
+        View dialogLayout = guide_dialog.findViewById(R.id.layout_dialog_guide);
+        dialogLayout.startAnimation(slideUp);
+
         link1 = guide_dialog.findViewById(R.id.link1_guide);
         link2 = guide_dialog.findViewById(R.id.link2_guide);
         link3 = guide_dialog.findViewById(R.id.link3_guide);
@@ -126,6 +133,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.youtube.com/@EurekaUni/playlists";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("DVN Toán cao cấp");
@@ -135,6 +143,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.youtube.com/@dvntoancaocap3151/playlists";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -151,6 +160,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.freecodecamp.org/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_left_to_right_in);
                     }
                 });
                 link2.setText("Code Learn");
@@ -160,6 +170,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://codelearn.io/learning/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("W3Schools");
@@ -167,6 +178,7 @@ public class StudyGuide extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.w3schools.com/")));
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -183,6 +195,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.freecodecamp.org/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("UET OASIS");
@@ -192,6 +205,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://oasis.uet.vnu.edu.vn/#/login";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Code Learn");
@@ -201,6 +215,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://codelearn.io/learning/object-oriented-programming-in-java";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -216,6 +231,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://codeforces.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("VNOI Wiki");
@@ -225,6 +241,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://vnoi.info/wiki/Home";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Hackerank");
@@ -234,6 +251,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.hackerrank.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link4.setText("Leetcode");
@@ -243,6 +261,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://leetcode.com/problems";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -259,6 +278,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.hackerrank.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("DB-Engines");
@@ -268,6 +288,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://db-engines.com/en/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Database Jonal");
@@ -277,6 +298,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.databasejournal.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -293,6 +315,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://developer.android.com/docs";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("Flutter");
@@ -302,6 +325,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://flutter.dev/learn";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Viblo.asia");
@@ -311,6 +335,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://viblo.asia/followings";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -327,6 +352,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.freecodecamp.org/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("W3Schools");
@@ -336,6 +362,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.w3schools.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Viblo.asia");
@@ -345,6 +372,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://viblo.asia/followings";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -361,6 +389,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://ctf.viblo.asia/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("CTFtime");
@@ -370,6 +399,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://ctftime.org/event/list/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Hacker101 CTF");
@@ -379,6 +409,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://ctf.hacker101.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -394,6 +425,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.kaggle.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("Marchine Learning");
@@ -403,6 +435,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://machinelearningcoban.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Khanh's blog");
@@ -412,6 +445,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://phamdinhkhanh.github.io/home";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link4.setText("Papers With Code");
@@ -421,6 +455,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://paperswithcode.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -437,6 +472,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.topcv.vn/mau-cv";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("resume.io");
@@ -446,6 +482,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://resume.io/resume-templates";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("CakeResume");
@@ -455,6 +492,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.cakeresume.com/?fbclid=IwAR0wUJn5cBcMzlY-l-t3706oDzQxD-8UBcmiga61Kefj8BfROSVH1pgaoKM";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -471,6 +509,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://stackoverflow.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("Medium");
@@ -480,6 +519,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://medium.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Viblo.asia");
@@ -489,6 +529,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://viblo.asia/followings";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -504,6 +545,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://topdev.vn/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("ITviec");
@@ -513,6 +555,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://itviec.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Group Tuyển dụng IT");
@@ -522,6 +565,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.facebook.com/groups/174764463261090";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link4.setText("Timviec365");
@@ -531,6 +575,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://timviec365.vn/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }
@@ -546,6 +591,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://ieltsonlinetests.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link2.setText("TOEIC - IIG");
@@ -555,6 +601,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://toeic.iigvietnam.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link3.setText("Vnpjclub");
@@ -564,6 +611,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://www.vnjpclub.com/";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
                 link4.setText("Mazii");
@@ -573,6 +621,7 @@ public class StudyGuide extends AppCompatActivity {
                         String webLink = "https://mazii.net/vi-VN/search";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webLink));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
                     }
                 });
             }

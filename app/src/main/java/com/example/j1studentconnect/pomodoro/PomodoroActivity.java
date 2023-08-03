@@ -74,7 +74,11 @@ public class PomodoroActivity extends AppCompatActivity {
         backFromPomodoro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(PomodoroActivity.this, MainActivity.class));
+                // Thiết lập animation khi mở Activity mới
+                overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
+
             }
         });
 
@@ -95,9 +99,6 @@ public class PomodoroActivity extends AppCompatActivity {
                 if (!timeRunning) {
                     timeRunning = true;
                     startTimer();
-                    fadeOutDuration = 10 * 1000;
-                    fadeOut.setDuration(fadeOutDuration);
-                    textView.startAnimation(fadeOut);
                     startButton.setText("Dừng và làm lại cuộc đời");
 
                 } else {
@@ -134,8 +135,13 @@ public class PomodoroActivity extends AppCompatActivity {
     }
 
     public void startTimer() {
+        TextView textView = findViewById(R.id.timer_text_view);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         long timerLength = 10 * 1000;
         Endtime = System.currentTimeMillis() + timerLength;
+        fadeOutDuration = timerLength;
+        fadeOut.setDuration(fadeOutDuration);
+        textView.startAnimation(fadeOut);
 
 
         //linearLayout.setBackgroundColor(Color.RED);

@@ -220,7 +220,10 @@ public class TabProfile extends Fragment {
                 intent.putExtra("email", user_email);
                 startActivity(intent);
 
+
             }
+
+
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
