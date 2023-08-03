@@ -382,6 +382,7 @@ public class Calendar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Calendar.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
             }
         });
 
@@ -389,6 +390,7 @@ public class Calendar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Calendar.this, Search.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in,R.anim.anim_activity_left_to_right_out);
             }
         });
 

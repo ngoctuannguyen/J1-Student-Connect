@@ -79,6 +79,7 @@
                         android:fontFamily="@font/arsenalregular"
                         android:text="1. Đại số, giải tích, xác suất thống kê"
                         android:textSize="12sp"
+                        android:textColor="@drawable/text_color_press"
                         android:textStyle="bold" />
 
                     <TextView
@@ -88,6 +89,7 @@
                         android:fontFamily="@font/arsenalregular"
                         android:text="2. Nhập môn lập trình"
                         android:textSize="12sp"
+                        android:textColor="@drawable/text_color_press"
                         android:textStyle="bold" />
 
                     <TextView
@@ -96,6 +98,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="3. Lập trình hướng đối tượng"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -105,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="4. Cấu trúc dữ liệu và giải thuật"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -113,6 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
+                        android:textColor="@drawable/text_color_press"
                         android:text="5. Cơ sở dữ liệu"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -135,6 +140,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="1. Mẫu CV tham khảo"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -143,6 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
+                        android:textColor="@drawable/text_color_press"
                         android:text="2. Trau dồi kinh nghiệm"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -153,6 +160,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="3. Doanh nghiệp tuyển dụng"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -161,6 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
+                        android:textColor="@drawable/text_color_press"
                         android:text="4. Chứng chỉ ngoại ngữ"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -269,6 +278,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="1. Phái Android/iOS"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -278,6 +288,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="2. Phái Web Dev"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -287,6 +298,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="3. Phái Cyber Security"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -296,6 +308,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:text="4. Phái AI &amp; Data"
+                        android:textColor="@drawable/text_color_press"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 

@@ -1,0 +1,13 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hiệu ứng rõ dần -->
+    <alpha
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:duration="300" />
+
+    <!-- Hiệu ứng di chuyển từ dưới lên trên -->
+    <translate
+        android:fromYDelta="100%p"
+        android:toYDelta="0"
+        android:duration="500" />
+</set>

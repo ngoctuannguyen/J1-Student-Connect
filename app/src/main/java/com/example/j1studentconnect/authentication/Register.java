@@ -73,6 +73,7 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.anim_activity_left_to_right_in_return, R.anim.anim_activity_left_to_right_out_return);
                         } else {
                             Toast.makeText(Register.this, "Đăng ký thất bại" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -85,6 +86,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in_return, R.anim.anim_activity_left_to_right_out_return);
             }
         });
     }

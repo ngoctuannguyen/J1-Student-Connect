@@ -21,6 +21,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TextRecognitionActivity.this, ScannerActivity.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_out,R.anim.anim_activity_left_to_right_in);
             }
         });
     }

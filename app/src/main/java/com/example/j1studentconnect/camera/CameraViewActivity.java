@@ -39,6 +39,7 @@ public class CameraViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 101);
+                overridePendingTransition(R.anim.anim_activity_slide_up_return, R.anim.anim_activity_slide_down_return);
             }
         });
     }
