@@ -36,6 +36,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(NotificationActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
             }
         });
 
@@ -43,6 +44,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(NotificationActivity.this, Search.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_out, R.anim.anim_activity_left_to_right_in);
             }
         });
 

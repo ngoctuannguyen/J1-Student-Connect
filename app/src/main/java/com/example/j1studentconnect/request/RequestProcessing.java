@@ -110,12 +110,14 @@ public class RequestProcessing extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestProcessing.this, RequestAdd.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in_return, R.anim.anim_activity_left_to_right_out_return);
             }
         });
         btnRPHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestProcessing.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
             }
         });
 
@@ -123,6 +125,7 @@ public class RequestProcessing extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestProcessing.this, Search.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
 

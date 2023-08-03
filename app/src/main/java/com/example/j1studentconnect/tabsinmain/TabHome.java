@@ -267,26 +267,32 @@ public class TabHome extends Fragment {
 //            public void onClick(View view) {
 //                startActivity(new Intent(getActivity(), Profile.class));
 //            }
+//
 //        });
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), Calendar.class));
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(getActivity(), RequestAdd.class));
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
 
         btnGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(getActivity(), StudyGuide.class));
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
 
@@ -294,6 +300,9 @@ public class TabHome extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), PomodoroActivity.class));
+                // Thiết lập animation khi mở Activity mới
+                getActivity().overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
+
             }
         });
 
@@ -321,7 +330,9 @@ public class TabHome extends Fragment {
         btnGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(getActivity(), Grades.class));
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
 

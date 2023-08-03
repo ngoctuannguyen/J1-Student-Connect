@@ -18,6 +18,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -143,12 +145,14 @@ public class RequestAdd extends AppCompatActivity {
                 Uri uri = Uri.fromParts("package", getPackageName(), null);
                 intent.setData(uri);
                 startActivityForResult(intent, MANAGE_EXTERNAL_STORAGE_REQUEST_CODE);
+                overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
             } catch (Exception e) {
                 // Open the application's settings to grant the permission manually
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 Uri uri = Uri.fromParts("package", getPackageName(), null);
                 intent.setData(uri);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
             }
         }
     }
@@ -240,6 +244,7 @@ public class RequestAdd extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_request);
+        dialog.setContentView(R.layout.dialog_request);
 
         Window window = dialog.getWindow();
         if (window == null) return;
@@ -292,6 +297,10 @@ public class RequestAdd extends AppCompatActivity {
         TextView textState = dialog.findViewById(R.id.text_stateOfReason);
         stateOfReason.setVisibility(View.GONE);
 
+        // Sử dụng AnimationUtils để áp dụng animation vào Dialog
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.anim_pomodoro_in);
+        dialog.findViewById(R.id.layout_dialog_request).startAnimation(slideUp);
+
 
 //
         file_archive.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +330,7 @@ public class RequestAdd extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                            overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -343,6 +353,8 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestAdd.this, RequestProcessing.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
+
             }
         });
 
@@ -350,6 +362,7 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestAdd.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
             }
         });
 
@@ -357,6 +370,7 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestAdd.this, Search.class));
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
 

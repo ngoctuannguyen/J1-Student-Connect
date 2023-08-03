@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
         if(currentUser != null){
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             finish();
         }
     }
@@ -85,6 +86,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
 
@@ -93,6 +95,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, ForgotPassword.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
     }
@@ -137,6 +140,7 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(Login.this, MainActivity.class);
                                         intent.putExtra("student_id", id_from_DB);
                                         startActivity(intent);
+                                        overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
                                         finish();
                                     }
                                 })

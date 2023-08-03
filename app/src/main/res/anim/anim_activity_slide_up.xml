@@ -1,0 +1,14 @@
+<!-- anim_activity_slide_up.xml -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hiệu ứng mờ dần -->
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:duration="500" />
+
+    <!-- Hiệu ứng di chuyển từ dưới lên trên -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="-100%p"
+        android:duration="500" />
+</set>
