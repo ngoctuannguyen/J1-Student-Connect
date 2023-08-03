@@ -3,6 +3,7 @@ package com.example.j1studentconnect.tabsinmain;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -33,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sahana.horizontalcalendar.HorizontalCalendar;
@@ -56,13 +58,15 @@ public class TabHome extends Fragment {
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
 
-    String SelectedDate;
+    public boolean onCreateArrrayList = false;
 
-    ArrayList<TimeTableInMain> arrayList;
+    String SelectedDate;
 
     private RecyclerView lessonInDayListView;
 
     private FirebaseFirestore firebaseFirestore;
+
+    List<TimeTableInMain> arrayListMon, arrayListTue, arrayListWed, arrayListThu, arrayListFri, arrayListSat;
 
     DatabaseReference reference;
     private static final String ARG_PARAM1 = "param1";
@@ -118,26 +122,34 @@ public class TabHome extends Fragment {
 
         HorizontalCalendar mHorizontalCalendar;
         mHorizontalCalendar = view.findViewById(R.id.horizontalCalendar);
-        //dayScrollDatePicker.setStartDate(29, 7, 2023);
+        arrayListMon = new ArrayList<>();
+        arrayListTue = new ArrayList<>();
+        arrayListWed = new ArrayList<>();
+        arrayListThu = new ArrayList<>();
+        arrayListFri = new ArrayList<>();
+        arrayListSat = new ArrayList<>();
+
         mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
             @Override
             public void onSelect(DateModel dateModel) {
                 //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
                 SelectedDate = dateModel.dayOfWeek;
-                if (SelectedDate == "Mon")
-                    SelectedDate = "Monday";
-                else if (SelectedDate == "Tue")
-                    SelectedDate = "Tuesday";
-                else if (SelectedDate == "Wed")
-                    SelectedDate = "Wednesday";
-                else if (SelectedDate == "Thu")
-                    SelectedDate = "Thursday";
-                else if (SelectedDate == "Fri")
-                    SelectedDate = "Friday";
-                else if (SelectedDate == "Sat")
-                    SelectedDate = "Saturday";
-                setLessonInDay(SelectedDate);
-                //Toast.makeText(getContext(), dateModel.dayOfWeek, Toast.LENGTH_SHORT).show();
+                if (SelectedDate.equals("Mon"))
+                    setLessonInMon();
+                else if (SelectedDate.equals("Tue"))
+                    setLessonInTue();
+                else if (SelectedDate.equals("Wed"))
+                    setLessonInWed();
+                else if (SelectedDate.equals("Thu"))
+                    setLessonInThu();
+                else if (SelectedDate.equals("Fri"))
+                    setLessonInFri();
+                else if (SelectedDate.equals("Sat"))
+                    setLessonInSat();
+                //arrayList = new ArrayList<>();
+                //setLessonInDay(SelectedDate);
+                Log.d("fff", SelectedDate);
+                //Toast.makeText(getContext(), SelectedDate, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -150,15 +162,15 @@ public class TabHome extends Fragment {
         ClickButton(view);
     }
 
-    private void setLessonInDay(String Date) {
-
-        arrayList = new ArrayList<>();
+    private void setLessonInSat() {
+        //arrayListSat = new ArrayList<>();
+        arrayListSat.clear();
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
-        collectionReference.document("Friday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        collectionReference.document("Saturday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> data = document.getData();
@@ -170,29 +182,294 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-//                                        arrayList.add(new TimeTableInMain(subject1.get(1) + '-' + subject1.get(2),
-//                                                                          subject1.get(0) + "",
-//                                                                        subject1.get(5) + "",
-//                                                                        subject1.get(3) + ""));
-                                        //Toast.makeText(getContext(), subject1.get(0), Toast.LENGTH_SHORT).show();
+                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String nameOfLesson = (String) subject1.get(0);
+                                        String IdOfLesson = (String) subject1.get(5);
+                                        String placeForLesson = (String) subject1.get(3);
+                                        arrayListSat.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(),arrayListSat);
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     Log.w("Error getting document.", task.getException());
                 }
             }
         });
+        // }
+    }
 
-        arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+    private void setLessonInFri() {
 
-        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(arrayList);
+        //arrayListFri = new ArrayList<>();
+        arrayListFri.clear();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
-        lessonInDayListView.setAdapter(tbInHomeAdapter);
-        //tbInHomeAdapter.notifyDataSetChanged();
+        collectionReference.document("Friday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String nameOfLesson = (String) subject1.get(0);
+                                        String IdOfLesson = (String) subject1.get(5);
+                                        String placeForLesson = (String) subject1.get(3);
+                                        arrayListFri.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListFri);
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+        //}
+    }
+
+    private void setLessonInThu() {
+        //arrayListThu = new ArrayList<>();
+        arrayListThu.clear();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+
+        collectionReference.document("Thursday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String nameOfLesson = (String) subject1.get(0);
+                                        String IdOfLesson = (String) subject1.get(5);
+                                        String placeForLesson = (String) subject1.get(3);
+                                        arrayListThu.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListThu);
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+        //}
+    }
+
+    private void setLessonInWed() {
+
+        //arrayListWed = new ArrayList<>();
+        arrayListWed.clear();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+
+        collectionReference.document("Wednesday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String nameOfLesson = (String) subject1.get(0);
+                                        String IdOfLesson = (String) subject1.get(5);
+                                        String placeForLesson = (String) subject1.get(3);
+                                        arrayListWed.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListWed);
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+        //}
+
+    }
+
+    private void setLessonInTue() {
+        //arrayListTue = new ArrayList<>();
+        arrayListTue.clear();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+        collectionReference.document("Tuesday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
+
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                        String nameOfLesson = (String) subject1.get(0);
+                                        String IdOfLesson = (String) subject1.get(5);
+                                        String placeForLesson = (String) subject1.get(3);
+                                        arrayListTue.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListTue);
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Log.w("Error getting document.", task.getException());
+                }
+            }
+        });
+        //}
+
+    }
+
+    private void setLessonInMon() {
+        //String timeLesson, nameOfLesson, IdOfLesson, placeForLesson;
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+
+            //arrayListMon = new ArrayList<>();
+            arrayListMon.clear();
+            collectionReference.document("Monday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Map<String, Object> data = document.getData();
+                            if (data != null) {
+                                for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                    String field = entry.getKey();
+                                    Object value = entry.getValue();
+
+                                    if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                        List<String> subject1 = (List<String>) document.get(field);
+                                        if (subject1 != null) {
+                                                String timeLesson = (String) subject1.get(1) + subject1.get(2);
+                                                String nameOfLesson = (String) subject1.get(0);
+                                                String IdOfLesson = (String) subject1.get(5);
+                                                String placeForLesson = (String) subject1.get(3);
+                                                arrayListMon.add(new TimeTableInMain(timeLesson,
+                                                        nameOfLesson,
+                                                        IdOfLesson,
+                                                        placeForLesson));
+                                                TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
+                                                lessonInDayListView.setAdapter(tbInHomeAdapter);
+
+                                                tbInHomeAdapter.notifyDataSetChanged();
+                                                //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
+
+                                                //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Log.w("Error getting document.", task.getException());
+                    }
+                }
+            });
+        //}
+
+
+
+        //if (Date == "Tue") {
+
+
+        //if (Date == "Wed")
+
+
+        //if (Date == "Thu") {
+
+
+
+        //if (Date == "Fri") {
+
+
+        //if (Date == "Sat") {
+
 
     }
 

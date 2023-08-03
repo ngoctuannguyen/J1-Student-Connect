@@ -4,10 +4,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TimeTableInMain {
 
-    String lessonTime;
-    String name_of_subject;
-    String id_of_subject;
-    String classroom;
+    public String lessonTime;
+    public String name_of_subject;
+    public String id_of_subject;
+    public String classroom;
 
     public TimeTableInMain(String lessonTime, String name_of_subject, String id_of_subject, String classroom) {
         this.lessonTime = lessonTime;
