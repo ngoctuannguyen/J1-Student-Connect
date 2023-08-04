@@ -6,12 +6,17 @@
     android:gravity="center">
 
     <TextView
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cấp bảng điểm"
         android:id="@+id/txtTypeOfRequestProcessing"
-        android:textSize="30sp"
-        android:layout_marginLeft="30dp"/>
+        android:textSize="20sp"
+        android:fontFamily="@font/merriweathersanswght"
+        android:paddingLeft="30dp"/>
 
 
 </LinearLayout>

@@ -68,7 +68,7 @@ public class RequestProcessing extends AppCompatActivity {
         RequestTypeList.add("Cấp lại thẻ sinh viên");
         RequestTypeList.add("Đề nghị làm vé xe bus");
         RequestTypeList.add("Xin thôi học");
-        RequestTypeList.add("Cấp chứng chỉ tốt nghiệp tạm thời");
+        RequestTypeList.add("Cấp chứng chỉ TN tạm thời");
 
         List<String> subjectMon = new ArrayList<>();
         String date = "Ngày tạo : " + today.get(java.util.Calendar.DATE) + " / " + (today.get(java.util.Calendar.MONTH) + 1) + " / " + today.get(java.util.Calendar.YEAR) + "\n";
