@@ -108,6 +108,38 @@
                 android:gravity="top"
                 android:text="null"
                 android:textColor="@color/grey" />
+                <TextView
+                    android:id="@+id/name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/karmab"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/student_id_in_main1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/name1"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/grey" />
+          
+                <ImageButton
+                    android:id="@+id/calendarHotKey"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@null"
+                    android:contentDescription="Lịch"
+                    android:src="@drawable/hotkey_selector" />
 
 
         </RelativeLayout>
@@ -182,13 +214,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        app:numOfDays="200"
+                        app:numOfDays="90"
                         app:setBgColor="@drawable/fullfillcircle"
                         app:setMonthTextSize="18sp"
                         app:setSelectedBgColor="@drawable/blue_fullfillcircle"
                         app:setSelectedTextColor="@color/white"
                         app:setTextColor="@color/grey"
                         app:setWeekTextSize="12sp" />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"

@@ -73,6 +73,14 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         TextView txtTypeOfRequestProcessing = view.findViewById(R.id.txtTypeOfRequestProcessing);
         txtTypeOfRequestProcessing.setText(typeOfRequest);
 
+        if(i==0) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub_fir);
+        if(i==1) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub_sec);
+        if(i==2) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub3);
+        if(i==3) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub4);
+        if(i==4) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub5);
+        if(i==5) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub6);
+        if(i==6) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub7);
+
         return view;
     }
 

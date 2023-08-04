@@ -2,7 +2,13 @@ package com.example.j1studentconnect.tabsinmain;
 
 import static android.view.View.GONE;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimatedStateListDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -13,8 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -59,6 +67,7 @@ public class TabHome extends Fragment {
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
     public boolean onCreateArrrayList = false;
+    AnimatorSet scaleUp, scaleDown;
     String SelectedDate;
     private RecyclerView lessonInDayListView;
     private FirebaseFirestore firebaseFirestore;
@@ -66,6 +75,38 @@ public class TabHome extends Fragment {
     private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
     DatabaseReference reference;
     String student_id_child;
+    Animator pressedButton;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public TabHome() {
+        // Required empty public constructor
+    }
+
+    // TODO: Rename and change types and number of parameters
+    public static TabHome newInstance(String param1, String param2) {
+        TabHome fragment = new TabHome();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        scaleDown = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_down);
+        scaleUp = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_up);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,10 +135,10 @@ public class TabHome extends Fragment {
         arrayListThu = new ArrayList<>();
         arrayListFri = new ArrayList<>();
         arrayListSat = new ArrayList<>();
+
         mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
             @Override
             public void onSelect(DateModel dateModel) {
-                //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
                 SelectedDate = dateModel.dayOfWeek;
                 if (SelectedDate.equals("Mon")) {
                     //setLessonInSun();
@@ -128,8 +169,6 @@ public class TabHome extends Fragment {
                 }
                 else if (SelectedDate.equals("Sun"))
                     setLessonInSun();
-                //arrayList = new ArrayList<>();
-                //setLessonInDay(SelectedDate);
                 Log.d("fff", SelectedDate);
                 //Toast.makeText(getContext(), SelectedDate, Toast.LENGTH_SHORT).show();
             }
@@ -184,10 +223,10 @@ public class TabHome extends Fragment {
                                                 IdOfLesson,
                                                 placeForLesson));
                                         //if (setinSat == false) {
-                                            TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
-
-                                            lessonInDayListView.setAdapter(tbInHomeAdapter);
-                                            tbInHomeAdapter.notifyDataSetChanged();
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
+                                        //arrayListSat.clear();
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
                                         //}
 
                                         //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
@@ -203,7 +242,7 @@ public class TabHome extends Fragment {
                 }
             }
         });
-        // }
+
     }
 
     private void setLessonInFri() {
@@ -520,16 +559,42 @@ public class TabHome extends Fragment {
                 Intent intent = new Intent(getActivity(), Calendar.class);
                 intent.putExtra("student_id", student_id_child);
                 startActivity(intent);
+                btnCalendar.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnCalendar);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnCalendar.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnCalendar);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
+                startActivity(new Intent(getActivity(), Calendar.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) 
                 Intent intent = new Intent(getActivity(), RequestAdd.class);
                 intent.putExtra("student_id", student_id_child);
                 startActivity(intent);
+                btnRequest.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnRequest);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnRequest.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnRequest);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
+                startActivity(new Intent(getActivity(), RequestAdd.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
@@ -550,6 +615,19 @@ public class TabHome extends Fragment {
                 Intent intent = new Intent(getActivity(), Grades.class);
                 intent.putExtra("student_id", student_id_child);
                 startActivity(intent);
+                btnGuide.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnGuide);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGuide.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnGuide);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
+                startActivity(new Intent(getActivity(), StudyGuide.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
@@ -584,5 +662,27 @@ public class TabHome extends Fragment {
                 recover = false;
             }
         });
+
+
+        btnGrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnGrades.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnGrades);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGrades.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnGrades);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
+                startActivity(new Intent(getActivity(), Grades.class));
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
+            }
+        });
+
     }
 }

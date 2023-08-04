@@ -17,7 +17,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/thay_trinh"
             android:id="@+id/origin"
             android:adjustViewBounds="true"/>
         
@@ -28,14 +27,22 @@
             android:text="Detect"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="NTN"
+            android:id="@+id/NTN"/>
+
         <ImageView
             android:id="@+id/croppedImageIv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
 
-
-
     </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
 
 </ScrollView>
