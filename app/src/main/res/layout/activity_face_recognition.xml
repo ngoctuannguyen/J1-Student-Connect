@@ -17,7 +17,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/thay_trinh"
             android:id="@+id/origin"
             android:adjustViewBounds="true"/>
         
