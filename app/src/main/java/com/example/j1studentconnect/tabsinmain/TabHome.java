@@ -441,12 +441,7 @@ public class TabHome extends Fragment {
                                                 TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
                                                 tbInHomeAdapter.notifyDataSetChanged();
                                                 lessonInDayListView.setAdapter(tbInHomeAdapter);
-
-                                                //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
-
-                                                //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
                                         }
-                                        //else lessonInDayListView.setAdapter(null);
                                     }
 
                                 }
@@ -522,7 +517,9 @@ public class TabHome extends Fragment {
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Calendar.class));
+                Intent intent = new Intent(getActivity(), Calendar.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
@@ -541,6 +538,16 @@ public class TabHome extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), StudyGuide.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
+            }
+        });
+
+        btnGrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Grades.class);
                 intent.putExtra("student_id", student_id_child);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
@@ -575,16 +582,6 @@ public class TabHome extends Fragment {
                 ConvenientCard.setVisibility(View.VISIBLE);
                 btnRecover.setVisibility(GONE);
                 recover = false;
-            }
-        });
-
-        btnGrades.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Grades.class);
-                intent.putExtra("student_id", student_id_child);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
     }
