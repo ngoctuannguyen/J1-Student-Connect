@@ -8,25 +8,28 @@
     android:orientation="vertical"
     tools:context=".tabsinmain.TabProfile">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
+        android:id="@+id/search_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-        app:navigationIcon="@drawable/baseline_arrow_back_ios_24">
+        android:background="@drawable/gradient_bg_blue"
+        android:padding="15sp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/pastel_grey"
-            android:text="@string/edit_profile_full"
-            style="@style/CustomActionBar"/>
-
-    </androidx.appcompat.widget.Toolbar>
+            android:text="@string/profile"
+            android:layout_marginLeft="10sp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

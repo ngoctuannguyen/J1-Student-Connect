@@ -52,66 +52,28 @@ import java.util.Map;
 
 public class TabHome extends Fragment {
     View rootView;
-    private ImageButton btnCalendar, btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades, btnGuide;
+    private ImageButton btnCalendar, btnCalendarHotkey, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
-    //private LinearLayout
     private CardView ConvenientCard;
     private TextView txtToday;
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
-
     public boolean onCreateArrrayList = false;
-
     String SelectedDate;
-
     private RecyclerView lessonInDayListView;
-
     private FirebaseFirestore firebaseFirestore;
-
     List<TimeTableInMain> arrayListMon, arrayListTue, arrayListWed, arrayListThu, arrayListFri, arrayListSat;
-
     private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
-
     DatabaseReference reference;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TabHome() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static TabHome newInstance(String param1, String param2) {
-        TabHome fragment = new TabHome();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    String student_id_child;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
-
-
+        Intent intentBefore = getActivity().getIntent();
+        student_id_child = intentBefore.getStringExtra("student_id").toString();
         //onViewCreated();
-
         return rootView;
     }
 
@@ -244,11 +206,7 @@ public class TabHome extends Fragment {
         // }
     }
 
-
-
     private void setLessonInFri() {
-
-        //arrayListFri = new ArrayList<>();
         arrayListFri.clear();
         TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListFri);
         tbInHomeAdapter.notifyDataSetChanged();
@@ -271,10 +229,10 @@ public class TabHome extends Fragment {
                                 if (value instanceof ArrayList<?> || value instanceof List<?>) {
                                     List<String> subject1 = (List<String>) document.get(field);
                                     if (subject1 != null) {
-                                        String timeLesson = (String) subject1.get(1) + " - " + subject1.get(2);
-                                        String nameOfLesson = (String) subject1.get(0);
-                                        String IdOfLesson = (String) subject1.get(5);
-                                        String placeForLesson = (String) subject1.get(3);
+                                        String timeLesson = subject1.get(1) + " - " + subject1.get(2);
+                                        String nameOfLesson = subject1.get(0);
+                                        String IdOfLesson = subject1.get(5);
+                                        String placeForLesson = subject1.get(3);
                                         arrayListFri.add(new TimeTableInMain(timeLesson,
                                                 nameOfLesson,
                                                 IdOfLesson,
@@ -282,9 +240,6 @@ public class TabHome extends Fragment {
                                         TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListFri);
                                         lessonInDayListView.setAdapter(tbInHomeAdapter);
                                         tbInHomeAdapter.notifyDataSetChanged();
-                                        //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
-
-                                        //Toast.makeText(getContext(), timeLesson + nameOfLesson + IdOfLesson + placeForLesson, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -295,11 +250,9 @@ public class TabHome extends Fragment {
                 }
             }
         });
-        //}
     }
 
     private void setLessonInThu() {
-        //arrayListThu = new ArrayList<>();
         arrayListThu.clear();
         TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListThu);
         tbInHomeAdapter.notifyDataSetChanged();
@@ -399,7 +352,6 @@ public class TabHome extends Fragment {
             }
         });
         //}
-
     }
 
     private void setLessonInTue() {
@@ -514,16 +466,13 @@ public class TabHome extends Fragment {
         TextView student_id = view.findViewById(R.id.student_id_in_main1);
         TextView class_id = view.findViewById(R.id.class_id1);
 
-        //Intent intentBefore = getActivity().getIntent();
-        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "22026521";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()){
                     Name.setText(snapshot.child("name").getValue().toString());
-                    student_id.setText(" | "+ snapshot.child("student_id").getValue().toString());
+                    student_id.setText(snapshot.child("student_id").getValue().toString());
                     class_id.setText(snapshot.child("student_class").getValue().toString());
                 }
             }
@@ -535,10 +484,7 @@ public class TabHome extends Fragment {
     }
 
     private void ConstructTextView(View view){
-
-        //txtRecover = (TextView) findViewById(R.id.recover);
         txtToday = view.findViewById(R.id.today);
-
     }
 
     private void RenderToday(){
@@ -550,7 +496,6 @@ public class TabHome extends Fragment {
     private void ConstructButton(View view){
         btnCalendar = view.findViewById(R.id.TimeTable);
         btnCalendarHotkey =  view.findViewById(R.id.calendarHotKey);
-        btnAvatar = view.findViewById(R.id.dogAvt);
         btnX = view.findViewById(R.id.x);
         btnRequest = view.findViewById(R.id.request);
         btnGrades = view.findViewById(R.id.grades);
@@ -574,15 +519,6 @@ public class TabHome extends Fragment {
     }
 
     private void ClickButton(View view){
-
-//        btnAvatar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), Profile.class));
-//            }
-//
-//        });
-
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -594,8 +530,9 @@ public class TabHome extends Fragment {
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(getActivity(), RequestAdd.class));
+                Intent intent = new Intent(getActivity(), RequestAdd.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
@@ -603,8 +540,9 @@ public class TabHome extends Fragment {
         btnGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(getActivity(), StudyGuide.class));
+                Intent intent = new Intent(getActivity(), StudyGuide.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
@@ -612,8 +550,9 @@ public class TabHome extends Fragment {
         btnCalendarHotkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PomodoroActivity.class));
-                // Thiết lập animation khi mở Activity mới
+                Intent intent = new Intent(getActivity(), PomodoroActivity.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
 
             }
@@ -622,7 +561,6 @@ public class TabHome extends Fragment {
         btnX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (recover == false){
                     recover = true;
                     ConvenientCard.setVisibility(GONE);
@@ -643,11 +581,11 @@ public class TabHome extends Fragment {
         btnGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(getActivity(), Grades.class));
+                Intent intent = new Intent(getActivity(), Grades.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
         });
-
     }
 }
