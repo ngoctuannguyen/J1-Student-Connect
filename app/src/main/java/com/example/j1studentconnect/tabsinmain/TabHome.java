@@ -2,7 +2,13 @@ package com.example.j1studentconnect.tabsinmain;
 
 import static android.view.View.GONE;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimatedStateListDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -13,8 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -63,7 +71,7 @@ public class TabHome extends Fragment {
     public boolean onCreateArrrayList = false;
 
     String SelectedDate;
-
+    AnimatorSet scaleUp, scaleDown;
     private RecyclerView lessonInDayListView;
 
     private FirebaseFirestore firebaseFirestore;
@@ -73,6 +81,7 @@ public class TabHome extends Fragment {
     private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
 
     DatabaseReference reference;
+    Animator pressedButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -97,6 +106,8 @@ public class TabHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scaleDown = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_down);
+        scaleUp = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_up);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -582,6 +593,18 @@ public class TabHome extends Fragment {
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnCalendar.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnCalendar);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnCalendar.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnCalendar);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
                 startActivity(new Intent(getActivity(), Calendar.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
@@ -590,7 +613,18 @@ public class TabHome extends Fragment {
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                btnRequest.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnRequest);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnRequest.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnRequest);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
                 startActivity(new Intent(getActivity(), RequestAdd.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
@@ -599,7 +633,18 @@ public class TabHome extends Fragment {
         btnGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                btnGuide.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnGuide);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGuide.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnGuide);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
                 startActivity(new Intent(getActivity(), StudyGuide.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }
@@ -639,7 +684,18 @@ public class TabHome extends Fragment {
         btnGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                btnGrades.setBackgroundResource(R.drawable.clicked_bg_button);
+                scaleDown.setTarget(btnGrades);
+                scaleDown.start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGrades.setBackgroundResource(R.drawable.bg_button);
+                    }
+                }, 250);
+                scaleUp.setTarget(btnGrades);
+                scaleUp.setStartDelay(200);
+                scaleUp.start();
                 startActivity(new Intent(getActivity(), Grades.class));
                 getActivity().overridePendingTransition(R.anim.anim_acitivity_slide_down, R.anim.anim_activity_slide_up);
             }

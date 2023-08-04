@@ -1,10 +1,14 @@
 package com.example.j1studentconnect.timetable;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
@@ -33,6 +37,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +48,7 @@ public class Calendar extends AppCompatActivity {
 
     private ImageButton btnTBHome, btnTBSearch, btnTBProfile;
     private Spinner SpinnerSemester;
+    TextView dayText;
     TimeTableAdapter TimeTable;
     ExpandableListView expandableListView;
     List<String> dayList;
@@ -80,6 +86,30 @@ public class Calendar extends AppCompatActivity {
 
     private void ConstructSpinner() {
 
+        String[] options = {"2022-2023"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+//        Spinner spinner = findViewById(R.id.spinner_semester);
+//        spinner.setAdapter(adapter);
+//
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+//                // Xử lý khi người dùng chọn một tùy chọn trong Spinner
+//                String selectedOption = (String) adapterView.getItemAtPosition(position);
+//
+//                // Thực hiện các hành động tùy theo tùy chọn đã chọn
+//                switch (selectedOption) {
+//                    case "2022-2023":
+//                        // Xử lý khi chọn Option 1
+//                        expandableListView.removeAllViews(); // Xóa bảng hiện tại (nếu có)
+//                        showList();
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {}
+//        });
 //        String[] options = {"2022-2023"};
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
 //        //Spinner spinner = findViewById(R.id.spinner_semester);
@@ -160,6 +190,7 @@ public class Calendar extends AppCompatActivity {
                             if (!check)
                                 subjectMon.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
                         }
+
                     }
                 }
                 else {
@@ -203,7 +234,6 @@ public class Calendar extends AppCompatActivity {
                             if (!check)
                                 subjectTue.add("    Được nghỉ rồi nhé, nhớ ở nhà tự học đấy    ");
                         }
-
                     }
                 }
                 else {

@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Tạo yêu cầu"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/merriweathersanswght"
                     android:textStyle="bold"/>
 
@@ -72,7 +72,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="Trạng thái xử lý yêu cầu"
                     android:gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/merriweathersanswght"
                     android:textStyle="bold"/>
 
@@ -97,7 +97,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
@@ -115,7 +115,8 @@
                 <ExpandableListView
                     android:id="@+id/StateRequestList1"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="600dp"
                     android:layout_marginBottom="100dp"
                    />
 
@@ -157,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/grey_home" />
+                    android:src="@drawable/home_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -183,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/search_icon" />
+                    android:src="@drawable/search_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/profile_icon" />
+                    android:src="@drawable/profile_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"
