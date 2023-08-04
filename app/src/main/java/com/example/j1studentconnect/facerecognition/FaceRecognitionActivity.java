@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.j1studentconnect.HistogramComputing;
 import com.example.j1studentconnect.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -145,6 +147,36 @@ public class FaceRecognitionActivity extends AppCompatActivity {
 
         //set the cropped bitmap to imageview
         croppedImageIv.setImageBitmap(croppedBitmap);
+        HistogramComputing histogramComputing = new HistogramComputing();
+        int[] histogram1 = histogramComputing.HistogramComputing(croppedBitmap);
+        int[] histogram2 = histogramComputing.HistogramComputing(bitmap);
+        int totalObservations = 0;
+        for (int i = 0; i < histogram1.length; i++){
+            totalObservations += histogram1[i];
+            totalObservations += histogram2[i];
+        }
+        Toast.makeText(this, "" + totalObservations, Toast.LENGTH_SHORT).show();
+        double[] expectedFrequencies1 = new double[histogram1.length];
+        double[] expectedFrequencies2 = new double[histogram2.length];
+
+        for (int i = 0; i < histogram1.length; i++) {
+            expectedFrequencies1[i] = (double) totalObservations * histogram1[i] / (double) totalObservations;
+            expectedFrequencies2[i] = (double) totalObservations * histogram2[i] / (double) totalObservations;
+        }
+
+        double chiSquare = 0.0;
+
+        for (int i = 0; i < histogram1.length; i++) {
+            double diff1 = histogram1[i] - expectedFrequencies1[i];
+            double diff2 = histogram2[i] - expectedFrequencies2[i];
+
+            chiSquare += (diff1 * diff1) / expectedFrequencies1[i];
+            chiSquare += (diff2 * diff2) / expectedFrequencies2[i];
+        }
+
+        TextView NTN = findViewById(R.id.NTN);
+        //NTN.setText(String.format("%.2f", chiSquare));
+        ///Toast.makeText(this, "" + chiSquare, Toast.LENGTH_SHORT).show();
 
     }
 }

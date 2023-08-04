@@ -132,10 +132,10 @@ public class TabHome extends Fragment {
         arrayListThu = new ArrayList<>();
         arrayListFri = new ArrayList<>();
         arrayListSat = new ArrayList<>();
+
         mHorizontalCalendar.setOnDateSelectListener(new OnDateSelectListener() {
             @Override
             public void onSelect(DateModel dateModel) {
-                //mDateTextView.setText(dateModel != null ? dateModel.day + " " + dateModel.dayOfWeek + " " + dateModel.month + "," + dateModel.year : "");
                 SelectedDate = dateModel.dayOfWeek;
                 if (SelectedDate.equals("Mon")) {
                     //setLessonInSun();
@@ -166,8 +166,6 @@ public class TabHome extends Fragment {
                 }
                 else if (SelectedDate.equals("Sun"))
                     setLessonInSun();
-                //arrayList = new ArrayList<>();
-                //setLessonInDay(SelectedDate);
                 Log.d("fff", SelectedDate);
                 //Toast.makeText(getContext(), SelectedDate, Toast.LENGTH_SHORT).show();
             }
@@ -222,10 +220,10 @@ public class TabHome extends Fragment {
                                                 IdOfLesson,
                                                 placeForLesson));
                                         //if (setinSat == false) {
-                                            TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
-
-                                            lessonInDayListView.setAdapter(tbInHomeAdapter);
-                                            tbInHomeAdapter.notifyDataSetChanged();
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListSat);
+                                        //arrayListSat.clear();
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
+                                        tbInHomeAdapter.notifyDataSetChanged();
                                         //}
 
                                         //arrayList.add(new TimeTableInMain("7:00 - 11:00", "Phát triên ứng dụng di động", "INT3120 50", "101-G2"));
@@ -241,10 +239,8 @@ public class TabHome extends Fragment {
                 }
             }
         });
-        // }
+
     }
-
-
 
     private void setLessonInFri() {
 
