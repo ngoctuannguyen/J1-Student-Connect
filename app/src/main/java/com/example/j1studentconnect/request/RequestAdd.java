@@ -1,6 +1,7 @@
 package com.example.j1studentconnect.request;
 
 import android.Manifest;
+import java.util.Calendar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +49,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,17 +65,19 @@ public class RequestAdd extends AppCompatActivity {
     private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 101;
     private static final int MANAGE_EXTERNAL_STORAGE_REQUEST_CODE = 102;
     private static final int PICKFILE_REQUEST_CODE = 1;
-    DatabaseReference reference;
+    DatabaseReference reference, reference1;
     FirebaseStorage storage;
     Uri tempFile;
     public static String strRequest = "";
     EditText edtReason;
     Button file_archive;
     Button submitDialog;
+    String fileId, fileName;
     ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
             if (result != null) {
+                String fileId = generateFileId();
                 tempFile = result;
             }
         }
@@ -85,6 +90,11 @@ public class RequestAdd extends AppCompatActivity {
     private String path;
     private TextView InfoAddRequest;
     private LinearLayout btnRequestProcessing;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+    private String generateFileId() {
+        return String.valueOf(System.currentTimeMillis());
+    }
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree, cardSocialAssistance;
 
     @Override
@@ -94,6 +104,7 @@ public class RequestAdd extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         storage = FirebaseStorage.getInstance();
+        reference1 = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0");
 
         bottomNavigationView = findViewById(R.id.tab_menu);
         Intent intentBefore = getIntent();
@@ -135,6 +146,9 @@ public class RequestAdd extends AppCompatActivity {
         //addListenerOnButton();
         addClickOnCardRequest();
         CreateAndShowInfoStudent();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -311,8 +325,11 @@ public class RequestAdd extends AppCompatActivity {
         file_archive = dialog.findViewById(R.id.file_archive);
         submitDialog = dialog.findViewById(R.id.submit_dialog);
         RelativeLayout stateOfReason = dialog.findViewById(R.id.stateOfReason);
+        RelativeLayout stateOfFile = dialog.findViewById(R.id.stateOfFile);
         TextView textState = dialog.findViewById(R.id.text_stateOfReason);
+        TextView fileName = dialog.findViewById(R.id.fileName);
         stateOfReason.setVisibility(View.GONE);
+        stateOfFile.setVisibility(View.GONE);
 
         // Sử dụng AnimationUtils để áp dụng animation vào Dialog
         Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.anim_pomodoro_in);
@@ -322,29 +339,54 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getFile.launch("*/*");
-
             }
         });
 
         submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tempFile == null) {
-
-                    textState.setText("Bạn chưa chọn tệp từ thiết bị");
-                    stateOfReason.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(edtReason.getText().toString())) {
+                if (TextUtils.isEmpty(edtReason.getText().toString())) {
                     textState.setText("Bạn chưa điền đủ lý do");
                     stateOfReason.setVisibility(View.VISIBLE);
+                } else if (tempFile == null) {
+                    textState.setText("Bạn chưa chọn tệp từ thiết bị");
+                    stateOfReason.setVisibility(View.VISIBLE);
                 } else {
+                    stateOfFile.setVisibility(View.GONE);
                     stateOfReason.setVisibility(View.GONE);
-                    StorageReference referencee = storage.getReference().child("files/" + edtReason.getText().toString());
+                    String uid = currentUser.getUid();
+                    Calendar calendar = Calendar.getInstance();
+
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                    int minute = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+
+                    String currentTime = hour + ":" + minute + ":" + second;
+
+                    String currentDate = day + "-" + (month + 1) + "-" + year + "     " + currentTime;
+                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(currentUser.getDisplayName().toString(), "Đang chờ", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("DatabaseError", "Failed to submit request");
+                            Toast.makeText(RequestAdd.this, "Submit failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    StorageReference referencee = storage.getReference().child("archive_files/" + uid + "/" + txtTitleOfDialog.getText().toString() + "/" + currentDate + "/" + edtReason.getText().toString());
                     referencee.putFile(tempFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RequestAdd.this, RequestAdd.class));
-                            overridePendingTransition(R.anim.anim_pomodoro_in, R.anim.anim_pomodoro_out);
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {

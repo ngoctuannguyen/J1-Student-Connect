@@ -29,9 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grades extends AppCompatActivity {
 
     private TextView gradesStuInf;
+    Integer user_id;
     DatabaseReference reference;
     private BottomNavigationView bottomNavigationView;
 
@@ -98,62 +102,66 @@ public class Grades extends AppCompatActivity {
                         reference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        // Xóa hết các hàng dữ liệu cũ trước khi hiển thị dữ liệu mới
-                                        tableLayout.removeAllViews();
+                                // Xóa hết các hàng dữ liệu cũ trước khi hiển thị dữ liệu mới
+                                tableLayout.removeAllViews();
 
-                                        int stt = 1;
+                                int stt = 1;
+                                List<TableRow> rowsToShow = new ArrayList<>();
 
-                                        // Duyệt qua các dữ liệu trong dataSnapshot
-                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                            // Lấy giá trị từ mỗi dữ liệu trong Firebase
-                                            String name = snapshot.child("class_id").getValue(String.class);
-                                            String score = snapshot.child("class_id2").getValue(String.class);
+                                // Duyệt qua các dữ liệu trong dataSnapshot
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    // Lấy giá trị từ mỗi dữ liệu trong Firebase
+                                    Integer student_id = snapshot.child("student_id").getValue(Integer.class);
+                                    String name = snapshot.child("class_id").getValue(String.class);
+                                    String score = snapshot.child("class_id2").getValue(String.class);
+                                    if (student_id != null && student_id.equals(user_id)) {
+                                        // Tạo một TableRow mới
+                                        TableRow row = new TableRow(getApplicationContext());
 
-                                            // Tạo một TableRow mới
-                                            TableRow row = new TableRow(getApplicationContext());
+                                        // Tạo các TextView chứa dữ liệu và thêm vào TableRow
+                                        TextView textViewColumn1 = new TextView(getApplicationContext());
+                                        textViewColumn1.setText(String.valueOf(stt));
+                                        textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.1f));
+                                        textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        row.addView(textViewColumn1);
 
-                                            // Tạo các TextView chứa dữ liệu và thêm vào TableRow
-                                            TextView textViewColumn1 = new TextView(getApplicationContext());
-                                            textViewColumn1.setText(String.valueOf(stt));
-                                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.1f));
-                                            textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            row.addView(textViewColumn1);
+                                        TextView textViewColumn2 = new TextView(getApplicationContext());
+                                        textViewColumn2.setText(name);
+                                        textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.35f));
+                                        textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        row.addView(textViewColumn2);
 
-                                            TextView textViewColumn2 = new TextView(getApplicationContext());
-                                            textViewColumn2.setText(name);
-                                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.35f));
-                                            textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            row.addView(textViewColumn2);
+                                        TextView textViewColumn3 = new TextView(getApplicationContext());
+                                        textViewColumn3.setText("3");
+                                        textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                                        textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        row.addView(textViewColumn3);
 
-                                            TextView textViewColumn3 = new TextView(getApplicationContext());
-                                            textViewColumn3.setText("3");
-                                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
-                                            textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            row.addView(textViewColumn3);
+                                        TextView textViewColumn4 = new TextView(getApplicationContext());
+                                        textViewColumn4.setText(score);
+                                        textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                                        textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        row.addView(textViewColumn4);
 
-                                            TextView textViewColumn4 = new TextView(getApplicationContext());
-                                            textViewColumn4.setText(score);
-                                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
-                                            textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            row.addView(textViewColumn4);
+                                        TextView textViewColumn5 = new TextView(getApplicationContext());
+                                        textViewColumn5.setText("aaa");
+                                        textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
+                                        textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        row.addView(textViewColumn5);
 
-                                            TextView textViewColumn5 = new TextView(getApplicationContext());
-                                            textViewColumn5.setText("aaa");
-                                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
-                                            textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            row.addView(textViewColumn5);
-
-                                            // Thêm TableRow vào TableLayout
-                                            tableLayout.addView(row);
-
-                                            stt++;
-                                        }
+                                        rowsToShow.add(row);
+                                        stt++;
                                     }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                        // Xử lý khi có lỗi xảy ra
-                                    }
-                                });
+                                }
+                                for (TableRow row : rowsToShow) {
+                                    tableLayout.addView(row);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Xử lý khi có lỗi xảy ra
+                            }
+                        });
 
                         // Tạo các hàng và cột cho bảng tương ứng với Option 1
                         break;
@@ -217,7 +225,8 @@ public class Grades extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()){
-                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
+                    user_id = snapshot.child("student_id").getValue(Integer.class);
+                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + user_id.toString();
                     gradesStuInf.setText(strshow);
                 }
             }

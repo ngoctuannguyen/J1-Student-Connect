@@ -75,8 +75,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@color/white"
                     app:cardCornerRadius="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Học kỳ I 2023 - 2024"
+                        android:fontFamily="@font/k2d_bold"
+                        android:textColor="@color/red"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        />
 
 <!--                    <Spinner-->
 <!--                        android:layout_width="match_parent"-->
@@ -91,7 +100,7 @@
                 android:layout_marginTop="20dp"
                 android:id="@+id/InfoinTB"
                 android:fontFamily="@font/karmamedium"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
                 android:textSize="16dp"
                 android:textStyle="bold" />

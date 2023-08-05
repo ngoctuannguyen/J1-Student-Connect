@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.j1studentconnect.R;
@@ -71,14 +72,33 @@ public class TimeTableAdapter extends BaseExpandableListAdapter {
         }
 
         TextView daytxt = view.findViewById(R.id.daytxt);
+        ImageView imgView = view.findViewById(R.id.imgViewinCalendar);
         daytxt.setText(dayTitle);
         String dayView = dayList.get(i);
-        if (dayView.equals("Monday"))  daytxt.setBackgroundResource(R.drawable.bg_day_list_sec);
-        if (dayView.equals("Tuesday"))  daytxt.setBackgroundResource(R.drawable.bg_day_list_fir);
-        if (dayView.equals("Wednesday"))  daytxt.setBackgroundResource(R.drawable.bg_day_list_thir);
-        if (dayView.equals("Thursday"))  daytxt.setBackgroundResource(R.drawable.bg_day_list_for);
-        if (dayView.equals("Friday"))  daytxt.setBackgroundResource(R.drawable.bg_list_day_fif);
-        if (dayView.equals("Saturday"))  daytxt.setBackgroundResource(R.drawable.bg_list_day_six);
+        if (dayView.equals("Monday")) {
+            daytxt.setBackgroundResource(R.drawable.bg_day_list_sec);
+            imgView.setImageResource(R.drawable.moon_icon);
+        }
+        if (dayView.equals("Tuesday"))  {
+            daytxt.setBackgroundResource(R.drawable.bg_day_list_fir);
+            imgView.setImageResource(R.drawable.ares_icon);
+        }
+        if (dayView.equals("Wednesday"))  {
+            daytxt.setBackgroundResource(R.drawable.bg_day_list_thir);
+            imgView.setImageResource(R.drawable.hermes_icon);
+        }
+        if (dayView.equals("Thursday"))  {
+            daytxt.setBackgroundResource(R.drawable.bg_day_list_for);
+            imgView.setImageResource(R.drawable.zeus_icon);
+        }
+        if (dayView.equals("Friday"))  {
+            daytxt.setBackgroundResource(R.drawable.bg_list_day_fif);
+            imgView.setImageResource(R.drawable.aphrodite_icon);
+        }
+        if (dayView.equals("Saturday"))  {
+            daytxt.setBackgroundResource(R.drawable.bg_list_day_six);
+            imgView.setImageResource(R.drawable.cronus_icon);
+        }
 
         return view;
     }

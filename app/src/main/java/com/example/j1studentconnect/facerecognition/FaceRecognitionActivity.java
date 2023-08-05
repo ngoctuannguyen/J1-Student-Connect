@@ -39,9 +39,9 @@ public class FaceRecognitionActivity extends AppCompatActivity {
     private FaceDetector detector;
 
     private static boolean img1 = true;
-    //Bitmap cropBitmap2 = null, cropBitmap1 = null;
+    Bitmap cropBitmap2 = null, cropBitmap1 = null;
 
-    double chiSquare = 0.0;
+    //double chiSquare = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,8 @@ public class FaceRecognitionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //from drawable
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh);
-                Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh_2);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh_4);
+                Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh_3);
                 //bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh_2);
 
                 //Bitmap from Uri, in case to detect face from mage picked from gallery
@@ -82,17 +82,10 @@ public class FaceRecognitionActivity extends AppCompatActivity {
 //                BitmapDrawable bitmapDrawable = (BitmapDrawable) originalImageIv.getDrawable();
 //                Bitmap bitmap1 = bitmapDrawable.getBitmap();
 
-                //Bitmap cropBitmap1 = null, cropBitmap2 = null;
-
                 analyzePhoto(bitmap);
                 //img1 = false;
                 analyzePhoto(bitmap1);
-                //img1 = true;
 
-                Bitmap cropbitmap1, cropbitmap2;
-                cropbitmap1 = ((BitmapDrawable)originalImageIv.getDrawable()).getBitmap();
-                cropbitmap2 = ((BitmapDrawable)croppedImageIv.getDrawable()).getBitmap();
-                HistogramCalculate(cropbitmap1, cropbitmap2);
             }
 
 
@@ -166,105 +159,32 @@ public class FaceRecognitionActivity extends AppCompatActivity {
         );
 
         //set the cropped bitmap to imageview
-        //Bitmap cropBitmap1, cropBitmap2;
+        //Bitmap cropBitmap1 = croppedBitmap, cropBitmap2 = croppedBitmap;
         if (img1) {
-            //cropBitmap1 = croppedBitmap;
+            cropBitmap1 = croppedBitmap;
             croppedImageIv.setImageBitmap(croppedBitmap);
             img1 = false;
             //return croppedBitmap;
         } else {
-            //cropBitmap2 = croppedBitmap;
+            cropBitmap2 = croppedBitmap;
             originalImageIv.setImageBitmap(croppedBitmap);
             img1 = true;
+            HistogramCalculate(cropBitmap1, cropBitmap2);
         }
-
-//            int[] histogram2 = histogramComputing.HistogramComputing(cropBitmap2);
-//            int totalObservations1 = 0, totalObservations2 = 0;
-//            for (int i = 0; i < histogram1.length; i++) {
-//                totalObservations1 += histogram1[i];
-//                totalObservations2 += histogram2[i];
-//            }
-//            Toast.makeText(this, "" + totalObservations2, Toast.LENGTH_SHORT).show();
-//            double[] expectedFrequencies1 = new double[histogram1.length];
-//            double[] expectedFrequencies2 = new double[histogram2.length];
-//
-//            for (int i = 0; i < histogram1.length; i++) {
-//                expectedFrequencies1[i] = (double) totalObservations1 * (histogram1[i] + histogram2[i]) / (double) (totalObservations1 + totalObservations2);
-//                expectedFrequencies2[i] = (double) totalObservations2 * (histogram2[i] + histogram1[i]) / (double) (totalObservations1 + totalObservations2);
-//            }
-//
-//            double chiSquare = 0.0;
-//            //Log.d("fffF", String.valueOf(chiSquare));
-//
-//            for (int i = 0; i < histogram1.length; i++) {
-//                double diff1 = histogram1[i] - expectedFrequencies1[i];
-//                double diff2 = histogram2[i] - expectedFrequencies2[i];
-//
-//                if (expectedFrequencies1[i] > 0)
-//                    chiSquare += (diff1 * diff1) / expectedFrequencies1[i];
-//                if (expectedFrequencies2[i] > 0)
-//                    chiSquare += (diff2 * diff2) / expectedFrequencies2[i];
-//            }
-//
-//            TextView NTN = findViewById(R.id.NTN);
-//
-//            NTN.setText(String.format("%.2f", chiSquare));
-//            img1 = true;
-//            ///Toast.makeText(this, "" + chiSquare, Toast.LENGTH_SHORT).show();
-//            img1 = true;
-        //Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.thay_trinh_2);
-//        if (!img1) {
-//            HistogramComputing histogramComputing = new HistogramComputing();
-//            int[] histogram1 = histogramComputing.HistogramComputing(cropBitmap1);
-//            int[] histogram2 = histogramComputing.HistogramComputing(cropBitmap2);
-//            int totalObservations1 = 0, totalObservations2 = 0;
-//            for (int i = 0; i < histogram1.length; i++) {
-//                totalObservations1 += histogram1[i];
-//                totalObservations2 += histogram2[i];
-//            }
-//            Toast.makeText(this, "" + totalObservations2, Toast.LENGTH_SHORT).show();
-//            double[] expectedFrequencies1 = new double[histogram1.length];
-//            double[] expectedFrequencies2 = new double[histogram2.length];
-//
-//            for (int i = 0; i < histogram1.length; i++) {
-//                expectedFrequencies1[i] = (double) totalObservations1 * (histogram1[i] + histogram2[i]) / (double) (totalObservations1 + totalObservations2);
-//                expectedFrequencies2[i] = (double) totalObservations2 * (histogram2[i] + histogram1[i]) / (double) (totalObservations1 + totalObservations2);
-//            }
-//
-//            double chiSquare = 0.0;
-//            //Log.d("fffF", String.valueOf(chiSquare));
-//
-//            for (int i = 0; i < histogram1.length; i++) {
-//                double diff1 = histogram1[i] - expectedFrequencies1[i];
-//                double diff2 = histogram2[i] - expectedFrequencies2[i];
-//
-//                if (expectedFrequencies1[i] > 0)
-//                    chiSquare += (diff1 * diff1) / expectedFrequencies1[i];
-//                if (expectedFrequencies2[i] > 0)
-//                    chiSquare += (diff2 * diff2) / expectedFrequencies2[i];
-//            }
-//
-//            TextView NTN = findViewById(R.id.NTN);
-//
-//            NTN.setText(String.format("%.2f", chiSquare));
-//            img1 = true;
-//            ///Toast.makeText(this, "" + chiSquare, Toast.LENGTH_SHORT).show();
-
-//        }
 
     }
 
-    private void HistogramCalculate(Bitmap cropBitmap1, Bitmap cropBitmap2) {
+    private void HistogramCalculate(Bitmap bm1, Bitmap bm2) {
 
         HistogramComputing histogramComputing = new HistogramComputing();
-        int[] histogram1 = histogramComputing.HistogramComputing(cropBitmap1);
-        int[] histogram2 = histogramComputing.HistogramComputing(cropBitmap2);
+        int[] histogram1 = histogramComputing.HistogramComputing(bm1);
+        int[] histogram2 = histogramComputing.HistogramComputing(bm2);
         int totalObservations1 = 0, totalObservations2 = 0;
         for (int i = 0; i < histogram1.length; i++) {
             totalObservations1 += histogram1[i];
             totalObservations2 += histogram2[i];
         }
-        Toast.makeText(this, "" + totalObservations2, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + totalObservations2, Toast.LENGTH_SHORT).show();
         double[] expectedFrequencies1 = new double[histogram1.length];
         double[] expectedFrequencies2 = new double[histogram2.length];
 
@@ -273,6 +193,8 @@ public class FaceRecognitionActivity extends AppCompatActivity {
             expectedFrequencies2[i] = (double) totalObservations2 * (histogram2[i] + histogram1[i]) / (double) (totalObservations1 + totalObservations2);
         }
         //Log.d("fffF", String.valueOf(chiSquare));
+
+        double chiSquare = 0.0;
 
         for (int i = 0; i < histogram1.length; i++) {
             double diff1 = histogram1[i] - expectedFrequencies1[i];
