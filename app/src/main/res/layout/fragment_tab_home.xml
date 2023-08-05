@@ -199,13 +199,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        app:numOfDays="200"
+                        app:numOfDays="90"
                         app:setBgColor="@drawable/fullfillcircle"
                         app:setMonthTextSize="18sp"
                         app:setSelectedBgColor="@drawable/blue_fullfillcircle"
                         app:setSelectedTextColor="@color/white"
                         app:setTextColor="@color/grey"
                         app:setWeekTextSize="12sp" />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"

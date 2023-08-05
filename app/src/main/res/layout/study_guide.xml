@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/arsenalregular"
                         android:textColor="@drawable/text_color_press"
-                        android:text="4. Chứng chỉ ngoại ngữ"
+                        android:text="4. Chứng chỉ \nngoại ngữ"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
