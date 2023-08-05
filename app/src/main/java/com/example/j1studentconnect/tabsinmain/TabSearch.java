@@ -181,13 +181,13 @@ public class TabSearch extends Fragment {
         List<StudentForSearch> filterList = new ArrayList<>();
 
         for (StudentForSearch item : std_search){
-            if (item.getStudentInfoSearch().toLowerCase().contains(text.toLowerCase()) && index == "info")
+            if (item.getStudentInfoSearch().toLowerCase().contains(text.toLowerCase()) && index.equals("info"))
                 filterList.add(item);
 
-            if (item.getClassIdSearch().toLowerCase().contains(text.toLowerCase())  && index == "classid")
+            if (item.getClassIdSearch().toLowerCase().contains(text.toLowerCase())  && index.equals("classid"))
                 filterList.add(item);
 
-            if (item.getClassNameSearch().toLowerCase().contains(text.toLowerCase()) && index == "classname")
+            if (item.getClassNameSearch().toLowerCase().contains(text.toLowerCase()) && index.equals("classname"))
                 filterList.add(item);
 
 
