@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.example.j1studentconnect.tabsinmain.TabProfile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,7 @@ public class Grades extends AppCompatActivity {
 
     private ImageButton btnGradesHome, btnGradesSearch, btnGradesProfile;
     private TextView gradesStuInf;
-    Integer user_id;
+    String student_id_child;
     DatabaseReference reference;
 
     @Override
@@ -41,9 +42,12 @@ public class Grades extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grades_search);
 
+        Intent intent = getIntent();
+        student_id_child = intent.getStringExtra("student_id").toString();
+
         ConstructGradesSpinner();
         ConstructGradesButton();
-        ClickGradesButton();
+//        ClickGradesButton();
         CreateAndShowInfoStudent();
     }
 
@@ -79,10 +83,10 @@ public class Grades extends AppCompatActivity {
                                 // Duyệt qua các dữ liệu trong dataSnapshot
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     // Lấy giá trị từ mỗi dữ liệu trong Firebase
-                                    Integer student_id = snapshot.child("student_id").getValue(Integer.class);
+                                    String student_id = snapshot.child("student_id").getValue(Integer.class).toString();
                                     String name = snapshot.child("class_id").getValue(String.class);
                                     String score = snapshot.child("class_id2").getValue(String.class);
-                                    if (student_id != null && student_id.equals(user_id)) {
+                                    if (student_id != null && student_id.equals(student_id_child)) {
                                         // Tạo một TableRow mới
                                         TableRow row = new TableRow(getApplicationContext());
 
@@ -186,16 +190,12 @@ public class Grades extends AppCompatActivity {
 
     private void CreateAndShowInfoStudent() {
         gradesStuInf = findViewById(R.id.gradesStuInf);
-        //Intent intent = getIntent();
-        //String student_id_child = intent.getStringExtra("student_id").toString();
-        String student_id_child = "21020074";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()){
-                    user_id = snapshot.child("student_id").getValue(Integer.class);
-                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + user_id.toString();
+                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + student_id_child;
                     gradesStuInf.setText(strshow);
                 }
             }
@@ -214,18 +214,18 @@ public class Grades extends AppCompatActivity {
 
     private void ClickGradesButton() {
 
-//        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Grades.this, Profile.class));
-//            }
-//        });
+        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Grades.this, TabProfile.class));
+            }
+        });
 
         btnGradesHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Grades.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
+                //overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
             }
         });
 
@@ -233,7 +233,7 @@ public class Grades extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Grades.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
+                //overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
 

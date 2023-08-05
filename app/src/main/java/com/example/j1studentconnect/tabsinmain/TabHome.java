@@ -60,6 +60,7 @@ import java.util.Map;
 
 public class TabHome extends Fragment {
     View rootView;
+    String student_id_child;
     private ImageButton btnCalendar, btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
     //private LinearLayout
@@ -120,7 +121,8 @@ public class TabHome extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
 
-
+        Intent intent = getActivity().getIntent();
+        student_id_child = intent.getStringExtra("student_id").toString();
         //onViewCreated();
 
         return rootView;
@@ -523,7 +525,7 @@ public class TabHome extends Fragment {
 
         //Intent intentBefore = getActivity().getIntent();
         //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "22026521";
+        //String student_id_child = "22026521";
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -684,6 +686,9 @@ public class TabHome extends Fragment {
         btnGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Grades.class);
+                intent.putExtra("student_id", student_id_child);
+                startActivity(intent);
                 btnGrades.setBackgroundResource(R.drawable.clicked_bg_button);
                 scaleDown.setTarget(btnGrades);
                 scaleDown.start();
