@@ -5,12 +5,15 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.j1studentconnect.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,11 +22,16 @@ public class TimeTableAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> dayList;
     private HashMap<String, List<String>> subjectList;
+    private List<Boolean> itemVisibilityList = new ArrayList<>();
+
 
     public TimeTableAdapter(Context context, List<String> dayList, HashMap<String, List<String>> subjectList) {
         this.context = context;
         this.dayList = dayList;
         this.subjectList = subjectList;
+        for (int i = 0; i < dayList.size(); i++) {
+            itemVisibilityList.add(false);
+        }
     }
 
     @Override
@@ -143,7 +151,13 @@ public class TimeTableAdapter extends BaseExpandableListAdapter {
             if (i1 == 2) subjectTxt.setBackgroundResource(R.drawable.bg_sub18);
         }
 
-
+        // Kiểm tra xem item đã hiển thị hay chưa
+        if (!itemVisibilityList.get(i)) {
+            // Áp dụng hiệu ứng fade-in vào view
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_pomodoro_in);
+            view.startAnimation(fadeInAnimation);
+            itemVisibilityList.set(i, true); // Đánh dấu item đã hiển thị
+        }
 
         return view;
     }

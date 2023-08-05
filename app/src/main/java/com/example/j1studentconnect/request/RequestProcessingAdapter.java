@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,11 +25,15 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> RequestTypeList;
     private HashMap<String, List<String>> StateRequestList;
+    private List<Boolean> itemVisibilityList = new ArrayList<>();
 
     public RequestProcessingAdapter(Context context, List<String> requestTypeList, HashMap<String, List<String>> stateRequestList) {
         this.context = context;
         this.RequestTypeList = requestTypeList;
         this.StateRequestList = stateRequestList;
+        for (int i = 0; i < requestTypeList.size(); i++) {
+            itemVisibilityList.add(false);
+        }
     }
 
     @Override
@@ -109,7 +116,13 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         if (request_cell_processing.contains("Đang chờ")) dateCreate.setBackgroundResource(R.drawable.bg_waiting_request_cell);
         else if (request_cell_processing.contains("Đã duyệt")) dateCreate.setBackgroundResource(R.drawable.bg_checked_request_cell);
         else dateCreate.setBackgroundResource(R.drawable.bg_request_cell);
-
+        // Kiểm tra xem item đã hiển thị hay chưa
+        if (!itemVisibilityList.get(i)) {
+            // Áp dụng hiệu ứng fade-in vào view
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_pomodoro_in);
+            view.startAnimation(fadeInAnimation);
+            itemVisibilityList.set(i, true); // Đánh dấu item đã hiển thị
+        }
         return view;
     }
 
