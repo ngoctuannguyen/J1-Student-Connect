@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,20 +30,25 @@ import java.util.List;
 
 public class RequestProcessing extends AppCompatActivity {
 
-    private ImageButton btnRPHome, btnRPSearch, btnRPProfile;
-    private LinearLayout btnRequestAdd;
-
-    private java.util.Calendar today = java.util.Calendar.getInstance();
-
+    String txt = "\n";
     RequestProcessingAdapter requestProcessingAdapter;
     ExpandableListView expandableListView1;
     List<String> RequestTypeList;
     HashMap<String, List<String>> StateRequestList;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+    DatabaseReference requestRef = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("requests").child(currentUser.getUid());
+    private ImageButton btnRPHome, btnRPSearch, btnRPProfile;
+    private LinearLayout btnRequestAdd;
+    private java.util.Calendar today = java.util.Calendar.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.process_request);
+
+        FirebaseApp.initializeApp(this);
+        RequestTypeList = new ArrayList<>();
 
         btnRPHome = findViewById(R.id.RequestProcessHome);
         btnRPSearch = findViewById(R.id.RequestProcessSearch);
@@ -49,18 +57,18 @@ public class RequestProcessing extends AppCompatActivity {
         CreateAndShowInfoStudent();
         ClickButtonInRequestProcessing();
         expandableListView1 = findViewById(R.id.StateRequestList1);
-
         showList();
 
         requestProcessingAdapter = new RequestProcessingAdapter(this, RequestTypeList, StateRequestList);
         expandableListView1.setAdapter(requestProcessingAdapter);
 
-
     }
+
 
     private void showList() {
         RequestTypeList = new ArrayList<String>();
         StateRequestList = new HashMap<String, List<String>>();
+        List<String> subjectMon = new ArrayList<>();
 
         RequestTypeList.add("Cấp bảng điểm");
         RequestTypeList.add("Đề nghị hoãn thi");
@@ -68,31 +76,167 @@ public class RequestProcessing extends AppCompatActivity {
         RequestTypeList.add("Cấp lại thẻ sinh viên");
         RequestTypeList.add("Đề nghị làm vé xe bus");
         RequestTypeList.add("Xin thôi học");
-        RequestTypeList.add("Cấp chứng chỉ TN tạm thời");
+        RequestTypeList.add("Cấp CN tốt nghiệp tạm thời");
+        RequestTypeList.add("Đề nghị hưởng trợ cấp xã hội");
 
-        List<String> subjectMon = new ArrayList<>();
-        String date = "Ngày tạo : " + today.get(java.util.Calendar.DATE) + " / " + (today.get(java.util.Calendar.MONTH) + 1) + " / " + today.get(java.util.Calendar.YEAR) + "\n";
-        String file = "Tệp đính kèm: \n";
-        String reason = "Lý do: " + RequestAdd.strRequest;
-        subjectMon.add(date + file + reason);
+
+        DatabaseReference capBangDiemRef = requestRef.child("Cấp bảng điểm");
+        capBangDiemRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectMon.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectTue = new ArrayList<>();
-        subjectTue.add("DSA");
+        DatabaseReference hoanThiRef = requestRef.child("Đề nghị hoãn thi");
+        hoanThiRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectTue.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectWed = new ArrayList<>();
-        subjectWed.add("DSA");
+        DatabaseReference xemLaiBaiRef = requestRef.child("Xem lại bài thi");
+        xemLaiBaiRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectWed.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectThu = new ArrayList<>();
-        subjectThu.add("DSA");
+        DatabaseReference capTSVRef = requestRef.child("Cấp lại thẻ sinh viên");
+        capTSVRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectThu.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectFri = new ArrayList<>();
-        subjectFri.add("DSA");
+        DatabaseReference lamVeBusRef = requestRef.child("Đề nghị làm vé xe bus");
+        lamVeBusRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectFri.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectSat = new ArrayList<>();
-        subjectSat.add("DSA");
+        DatabaseReference xinThoiHocRef = requestRef.child("Xin thôi học");
+        xinThoiHocRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectSat.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         List<String> subjectSun = new ArrayList<>();
-        subjectSun.add("DSA");
+        DatabaseReference chungChiTNRef = requestRef.child("Cấp CN tốt nghiệp tạm thời");
+        chungChiTNRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectSun.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        List<String> subjectSpe = new ArrayList<>();
+        DatabaseReference troCapXHRef = requestRef.child("Đề nghị hưởng trợ cấp xã hội");
+        troCapXHRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
+                    String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
+                    String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
+                    subjectSpe.add(date + reason + state);
+                    requestProcessingAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         StateRequestList.put(RequestTypeList.get(0), subjectMon);
@@ -102,6 +246,7 @@ public class RequestProcessing extends AppCompatActivity {
         StateRequestList.put(RequestTypeList.get(4), subjectFri);
         StateRequestList.put(RequestTypeList.get(5), subjectSat);
         StateRequestList.put(RequestTypeList.get(6), subjectSun);
+        StateRequestList.put(RequestTypeList.get(7), subjectSpe);
     }
 
     private void ClickButtonInRequestProcessing() {
@@ -117,7 +262,7 @@ public class RequestProcessing extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RequestProcessing.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
+                overridePendingTransition(R.anim.anim_activity_slide_up_return, R.anim.anim_activity_slide_down_return);
             }
         });
 
@@ -146,7 +291,7 @@ public class RequestProcessing extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()){
+                if (snapshot.hasChildren()) {
                     String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
                     InfoProcessingRequest.setText(strshow);
                 }

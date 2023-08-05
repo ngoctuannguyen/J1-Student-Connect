@@ -9,12 +9,16 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.example.j1studentconnect.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class RequestProcessingAdapter extends BaseExpandableListAdapter {
-
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    Query query = databaseReference.child("requests").orderByChild("uid").equalTo("RrJhoNgYjKZynWWTmtBFnGMRTJj1");
     private Context context;
     private List<String> RequestTypeList;
     private HashMap<String, List<String>> StateRequestList;
@@ -80,6 +84,7 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         if(i==4) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub5);
         if(i==5) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub6);
         if(i==6) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub7);
+        if(i==7) txtTypeOfRequestProcessing.setBackgroundResource(R.drawable.bg_sub8);
 
         return view;
     }
@@ -101,6 +106,9 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         dateCreate.setText(request_cell_processing);
         //requestFile.setText(request_cell_processing);
         //reasonForRequest.setText(request_cell_processing);
+        if (request_cell_processing.contains("Đang chờ")) dateCreate.setBackgroundResource(R.drawable.bg_waiting_request_cell);
+        else if (request_cell_processing.contains("Đã duyệt")) dateCreate.setBackgroundResource(R.drawable.bg_checked_request_cell);
+        else dateCreate.setBackgroundResource(R.drawable.bg_request_cell);
 
         return view;
     }
