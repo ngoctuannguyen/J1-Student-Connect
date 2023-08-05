@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.guide.StudyGuide;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,30 +49,56 @@ import java.util.Objects;
 
 public class Calendar extends AppCompatActivity {
 
-    private ImageButton btnTBHome, btnTBSearch, btnTBProfile;
     private Spinner SpinnerSemester;
     TextView dayText;
     TimeTableAdapter TimeTable;
     ExpandableListView expandableListView;
     List<String> dayList;
     HashMap<String, List<String>> subjectList;
-
     DatabaseReference reference;
-
     FirebaseFirestore firebaseFirestore;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_set);
 
-        btnTBHome = (ImageButton) findViewById(R.id.TimeTableHome);
-        btnTBSearch = (ImageButton) findViewById(R.id.TimeTableSearch);
-        btnTBProfile = (ImageButton) findViewById(R.id.TimeTableProfile);
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(Calendar.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(Calendar.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(Calendar.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         //Choose semester
 //        SpinnerSemester = (Spinner) findViewById(R.id.spinner_semester);
         // ExpandableListView
-
         expandableListView = findViewById(R.id.TimeTableList);
         //ConstructSpinner();
         showList();
@@ -78,10 +107,6 @@ public class Calendar extends AppCompatActivity {
         expandableListView.setAdapter(TimeTable);
 
         CreateAndShowInfoStudent();
-
-
-        ClickButtonInCalen();
-
     }
 
     private void ConstructSpinner() {
@@ -142,7 +167,10 @@ public class Calendar extends AppCompatActivity {
     private void showList() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        String student_id_child = "22026521";
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+       // CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
+        //String student_id_child = "22026521";
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document(student_id_child).collection("semesterI");
 
         dayList = new ArrayList<String>();
@@ -430,37 +458,10 @@ public class Calendar extends AppCompatActivity {
         subjectList.put(dayList.get(5), subjectSat);
     }
 
-    private void ClickButtonInCalen(){
-
-        btnTBHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Calendar.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnTBSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Calendar.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in,R.anim.anim_activity_left_to_right_out);
-            }
-        });
-
-//        btnTBProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Calendar.this, Profile.class));
-//            }
-//        });
-    }
-
     private void CreateAndShowInfoStudent() {
         TextView InfoTBStudent = findViewById(R.id.InfoinTB);
-        //Intent intentBefore = getActivity().getIntent();
-        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "22026521";
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
         DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -476,6 +477,4 @@ public class Calendar extends AppCompatActivity {
             }
         });
     }
-
-
 }
