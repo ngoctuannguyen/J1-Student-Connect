@@ -7,15 +7,22 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.tabsinmain.TabMenuAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    private ViewPager viewPager;
+    public ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
+<<<<<<< HEAD
+=======
+    private TextView state;
+>>>>>>> 667ae5c0c3d5c9166794bfd4caf58d5686385811
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,39 @@ public class MainActivity extends AppCompatActivity {
 
         TabMenuAdapter tabMenuAdapter = new TabMenuAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(tabMenuAdapter);
+
+        Intent intentBefore = getIntent();
+        String signal = intentBefore.getStringExtra("signal").toString();
+
+        state = findViewById(R.id.state_i);
+        state.setText("5");
+        state.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (signal.equals("0")) {
+                    bottomNavigationView.getMenu().findItem(R.id.tab_home).setChecked(true);
+                    viewPager.setCurrentItem(0);
+                } else if (signal.equals("1")) {
+                    bottomNavigationView.getMenu().findItem(R.id.tab_search).setChecked(true);
+                    viewPager.setCurrentItem(1);
+                } else if (signal.equals("2")) {
+                    bottomNavigationView.getMenu().findItem(R.id.tab_profile).setChecked(true);
+                    viewPager.setCurrentItem(2);
+                }
+            }
+        });
+
+        state.setText(signal);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -61,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -139,6 +139,7 @@ public class Login extends AppCompatActivity {
                                         String id_from_DB = snapshot.child("student_id").getValue().toString();
                                         Intent intent = new Intent(Login.this, MainActivity.class);
                                         intent.putExtra("student_id", id_from_DB);
+                                        intent.putExtra("signal", "0");
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
                                         finish();
