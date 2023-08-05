@@ -3,10 +3,12 @@ package com.example.j1studentconnect.authentication;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +21,8 @@ public class LoginLauncher extends AppCompatActivity {
 
     Button popup_menu;
     FirebaseAuth auth;
+
+    TextView appName;
 
     @Override
     public void onStart() {
@@ -39,6 +43,106 @@ public class LoginLauncher extends AppCompatActivity {
 
         popup_menu = findViewById(R.id.btn_choose);
         auth = FirebaseAuth.getInstance();
+
+        appName = findViewById(R.id.app_name);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.setText("J");
+            }
+        }, 300);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("1");
+            }
+        }, 350);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append(" S");
+            }
+        }, 400);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("t");
+            }
+        }, 450);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("u");
+            }
+        }, 500);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("d");
+            }
+        }, 550);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("e");
+            }
+        }, 600);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 650);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("t");
+            }
+        }, 700);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append(" C");
+            }
+        }, 750);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("o");
+            }
+        }, 800);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 850);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 900);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("e");
+            }
+        }, 950);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("c");
+            }
+        }, 1000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("t");
+            }
+        }, 1800);
 
         popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override
