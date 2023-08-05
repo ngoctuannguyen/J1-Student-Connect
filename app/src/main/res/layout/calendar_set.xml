@@ -8,14 +8,12 @@
     android:orientation="vertical"
     android:background="@color/bg_grey">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/calendar_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/gradient_bg_blue"
-        android:orientation="vertical">
+        android:background="@drawable/gradient_bg_blue">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,10 +21,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_margin="15dp">
 
             <ImageView
                 android:id="@+id/calendar_headericon"
@@ -48,15 +43,13 @@
 
 
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="690dp"
         android:orientation="vertical"
         android:layout_below="@+id/calendar_toolbar">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,102 +128,15 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/tab_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/white"
-        app:cardCornerRadius="40dp">
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_navigation"
+        app:itemIconTint="@color/color_tab_menu"
+        app:itemTextColor="@color/color_tab_menu"
+        app:menu="@menu/tab_menu" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/TimeTableHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:src="@drawable/grey_home" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/arialnb"
-                    android:text="Trang chủ"
-                    android:textColor="@color/grey"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/TimeTableSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:src="@drawable/search_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/arialnb"
-                    android:text="Tra cứu"
-                    android:textColor="@color/grey"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/TimeTableProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:src="@drawable/profile_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/arialnb"
-                    android:text="Hồ sơ"
-                    android:textColor="@color/grey"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 </RelativeLayout>

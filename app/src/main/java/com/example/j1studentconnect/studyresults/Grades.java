@@ -3,6 +3,7 @@ package com.example.j1studentconnect.studyresults;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.request.RequestAdd;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,19 +34,48 @@ import java.util.List;
 
 public class Grades extends AppCompatActivity {
 
-    private ImageButton btnGradesHome, btnGradesSearch, btnGradesProfile;
     private TextView gradesStuInf;
     Integer user_id;
     DatabaseReference reference;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grades_search);
 
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
         ConstructGradesSpinner();
-        ConstructGradesButton();
-        ClickGradesButton();
         CreateAndShowInfoStudent();
     }
 
@@ -186,9 +218,8 @@ public class Grades extends AppCompatActivity {
 
     private void CreateAndShowInfoStudent() {
         gradesStuInf = findViewById(R.id.gradesStuInf);
-        //Intent intent = getIntent();
-        //String student_id_child = intent.getStringExtra("student_id").toString();
-        String student_id_child = "21020074";
+        Intent intent = getIntent();
+        String student_id_child = intent.getStringExtra("student_id").toString();
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -204,38 +235,5 @@ public class Grades extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
-    private void ConstructGradesButton() {
-        btnGradesHome = (ImageButton) findViewById(R.id.GradesHome);
-        btnGradesSearch = (ImageButton) findViewById(R.id.GradesSearch);
-        btnGradesProfile = (ImageButton) findViewById(R.id.GradesProfile);
-
-    }
-
-    private void ClickGradesButton() {
-
-//        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Grades.this, Profile.class));
-//            }
-//        });
-
-        btnGradesHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Grades.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnGradesSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Grades.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            }
-        });
-
     }
 }
