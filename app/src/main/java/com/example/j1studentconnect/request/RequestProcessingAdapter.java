@@ -106,6 +106,9 @@ public class RequestProcessingAdapter extends BaseExpandableListAdapter {
         dateCreate.setText(request_cell_processing);
         //requestFile.setText(request_cell_processing);
         //reasonForRequest.setText(request_cell_processing);
+        if (request_cell_processing.contains("Đang chờ")) dateCreate.setBackgroundResource(R.drawable.bg_waiting_request_cell);
+        else if (request_cell_processing.contains("Đã duyệt")) dateCreate.setBackgroundResource(R.drawable.bg_checked_request_cell);
+        else dateCreate.setBackgroundResource(R.drawable.bg_request_cell);
 
         return view;
     }
