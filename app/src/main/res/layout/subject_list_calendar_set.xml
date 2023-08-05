@@ -13,6 +13,9 @@
         android:text="Mobile"
         android:fontFamily="@font/k2d_med"
         android:id="@+id/subjecttxt"
-        android:background="@drawable/edit_text_background"/>
+        android:background="@drawable/edit_text_background">
+
+
+    </TextView>
 
 </LinearLayout>
