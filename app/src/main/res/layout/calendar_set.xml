@@ -82,6 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="Học kỳ I 2023 - 2024"
                         android:fontFamily="@font/k2d_bold"
+                        android:id="@+id/semesterchoose"
                         android:textColor="@color/red"
                         android:gravity="center"
                         android:paddingLeft="10dp"

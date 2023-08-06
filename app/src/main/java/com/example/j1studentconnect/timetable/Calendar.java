@@ -40,6 +40,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ObjectInputStream;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +59,8 @@ public class Calendar extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseFirestore firebaseFirestore;
     private BottomNavigationView bottomNavigationView;
-
+    TextView semesterchoose;
+    private java.util.Calendar today = java.util.Calendar.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +98,17 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
+        semesterchoose = findViewById(R.id.semesterchoose);
+        String semester = "Học kỳ";
+        if (today.get(java.util.Calendar.MONTH) > 8)
+            semester += " I " + today.get(java.util.Calendar.YEAR) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR) + 1);
+        else semester += " II " + String.valueOf(today.get(java.util.Calendar.YEAR) - 1) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR));
+
+        if (today.get(java.util.Calendar.MONTH) > 6 && today.get(java.util.Calendar.MONTH) < 9)
+            semester = "Học kỳ hè " + String.valueOf(today.get(java.util.Calendar.YEAR) - 1) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR));
+
+        semesterchoose.setText(semester);
+
         expandableListView = findViewById(R.id.TimeTableList);
         showList();
 
@@ -109,53 +122,6 @@ public class Calendar extends AppCompatActivity {
 
         String[] options = {"2022-2023"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
-//        Spinner spinner = findViewById(R.id.spinner_semester);
-//        spinner.setAdapter(adapter);
-//
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                // Xử lý khi người dùng chọn một tùy chọn trong Spinner
-//                String selectedOption = (String) adapterView.getItemAtPosition(position);
-//
-//                // Thực hiện các hành động tùy theo tùy chọn đã chọn
-//                switch (selectedOption) {
-//                    case "2022-2023":
-//                        // Xử lý khi chọn Option 1
-//                        expandableListView.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-//                        showList();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {}
-//        });
-//        String[] options = {"2022-2023"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
-//        //Spinner spinner = findViewById(R.id.spinner_semester);
-//        //spinner.setAdapter(adapter);
-//
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                // Xử lý khi người dùng chọn một tùy chọn trong Spinner
-//                String selectedOption = (String) adapterView.getItemAtPosition(position);
-//
-//                // Thực hiện các hành động tùy theo tùy chọn đã chọn
-//                switch (selectedOption) {
-//                    case "2022-2023":
-//                        // Xử lý khi chọn Option 1
-//                        expandableListView.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-//                        showList();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {}
-//        });
-
         showList();
 
     }
@@ -165,8 +131,6 @@ public class Calendar extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         Intent intentBefore = getIntent();
         String student_id_child = intentBefore.getStringExtra("student_id").toString();
-       // CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
-        //String student_id_child = "22026521";
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document(student_id_child).collection("semesterI");
 
         dayList = new ArrayList<String>();

@@ -1,8 +1,12 @@
 package com.example.j1studentconnect.request;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -64,7 +68,6 @@ public class RequestProcessing extends AppCompatActivity {
 
     }
 
-
     private void showList() {
         RequestTypeList = new ArrayList<String>();
         StateRequestList = new HashMap<String, List<String>>();
@@ -82,8 +85,10 @@ public class RequestProcessing extends AppCompatActivity {
 
         DatabaseReference capBangDiemRef = requestRef.child("Cấp bảng điểm");
         capBangDiemRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
@@ -97,6 +102,7 @@ public class RequestProcessing extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
 
         List<String> subjectTue = new ArrayList<>();
