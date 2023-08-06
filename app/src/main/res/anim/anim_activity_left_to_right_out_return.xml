@@ -1,0 +1,13 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hiệu ứng mờ dần -->
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:duration="500" />
+
+    <!-- Hiệu ứng di chuyển từ trái qua phải -->
+    <translate
+        android:fromXDelta="0"
+        android:toXDelta="100%p"
+        android:duration="500" />
+</set>

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">J1 Student Connect</string>
+    <string name="app_name_short">J1SC</string>
 
 
-    <!-- Login and Register strings-->
+    <!-- Login and Register strings -->
 
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
@@ -13,7 +14,12 @@
     <string name="login_redirect">Đã có tài khoản ? Đăng nhập ngay</string>
     <string name="register_redirect">Chưa có tài khoản ? Đăng ký ngay</string>
 
-    <!-- Profile strings-->
+    <!-- Login and Register strings -->
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="forgot_tutor">Chúng tôi sẽ gửi thông tin về thủ tục lấy lại mật khẩu tới email đã liên kết với tài khoản của bạn</string>
+    <string name="send_email">Gửi email</string>
+
+    <!-- Profile strings -->
     <string name="student_name">Tên hiển thị</string>
     <string name="birthday">Ngày sinh</string>
     <string name="gender">Giới tính</string>
@@ -24,6 +30,28 @@
     <string name="edit_profile_full">Chỉnh sửa hồ sơ</string>
     <string name="logout">Đăng xuất</string>
 
+    <!-- Search strings -->
+    <string name="search_page">Tra cứu thông tin</string>
+    <string name="lookup">Tìm kiếm</string>
+    <string name="total_tc">Tổng tín chỉ: [N/A]</string>
+
+
+    <!-- Bottom Navigation Bar strings -->
+    <string name="homepage">Trang chủ</string>
+    <string name="search">Tra cứu</string>
+    <string name="profile">Hồ sơ</string>
+
+    <!-- Request Add strings -->
+    <string name="item1">CẤP BẢNG ĐIỂM</string>
+    <string name="item2">ĐỀ NGHỊ HOÃN THI</string>
+    <string name="item3">XEM LẠI BÀI THI</string>
+    <string name="item4">CẤP LẠI THẺ SV</string>
+    <string name="item5">LÀM VÉ BUS</string>
+    <string name="item6">XIN THÔI HỌC</string>
+    <string name="item7">CẤP CHỨNG CHỈ TN TẠM THỜI</string>
+    <string name="item8">ĐỀ NGHỊ HƯỞNG TRỢ CẤP XH</string>
+
+    <!-- Others -->
     <string name="save">Lưu</string>
     <string name="blank">Trống</string>
     <string name="notify">Menu item title</string>
@@ -47,5 +75,22 @@
         <item>Xin thôi học</item>
         <item>Xin cấp CN tốt nghiệp tạm thời</item>
     </string-array>
+
+    <string-array name="Semester">
+        <item>Học kì I</item>
+        <item>Học kì II</item>
+        <item>Học kì hè</item>
+    </string-array>
+
+    <string name="student_info_string">Thông tin\n sinh viên</string>
+    <string name="student_class_name">Tên môn học</string>
+    <string name="student_class_id">Mã \nlớp học</string>
+    <string name="portal_number">Số \ntín chỉ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment"></string>
+
+    <!--    Pomodoro-->
+    <string name="channel_name">pomodoro_channel</string>
+    <string name="channel_desc">FFFFF</string>
 
 </resources>

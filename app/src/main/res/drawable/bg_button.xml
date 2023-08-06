@@ -1,0 +1,21 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Button shadow -->
+    <item>
+        <shape>
+            <solid android:color="#40000000" /> <!-- Màu bóng của button -->
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <!-- Button content -->
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="8dp"> <!-- Dịch nội dung xuống dưới 8dp để tạo hiệu ứng bóng -->
+        <shape>
+            <solid android:color="#FFFFFF" /> <!-- Màu nền của button -->
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+</layer-list>

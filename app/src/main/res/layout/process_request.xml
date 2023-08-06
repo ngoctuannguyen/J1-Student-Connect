@@ -12,7 +12,7 @@
         android:id="@+id/request_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:background="@color/bg_blue">
+        android:background="@drawable/gradient_bg_blue">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Tạo yêu cầu"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/merriweathersanswght"
                     android:textStyle="bold"/>
 
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_alignParentBottom="true"
-                android:paddingLeft="20dp"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:orientation="horizontal"
                 android:layout_toRightOf="@+id/add_request_bar"
@@ -63,15 +63,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp"
+                    android:layout_margin="0dp"
                     android:src="@drawable/handling"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Xử lý yêu cầu"
-                    android:textSize="20sp"
+                    android:text="Trạng thái xử lý yêu cầu"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:fontFamily="@font/merriweathersanswght"
                     android:textStyle="bold"/>
 
@@ -85,7 +86,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="15dp"
         android:layout_below="@+id/request_toolbar">
 
         <LinearLayout
@@ -96,116 +97,30 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
+                android:id="@+id/InfoProcessingRequest"
                 android:text="Họ tên SV: Mikasa Ackerman\nMSSV: 21020337"
                 android:fontFamily="@font/karmamedium"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <ExpandableListView
+                    android:id="@+id/StateRequestList1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TableLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@color/white"
-                        android:divider="@color/grey"
-                        android:showDividers="middle">
+                    android:layout_marginTop="20dp"
+                    android:layout_height="2000dp"
+                    android:layout_marginBottom="100dp"
+                   />
 
-                        <TableRow
-                            android:background="@color/tb_grey"
-                            android:divider="@color/grey"
-                            android:showDividers="middle">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Column 1"
-                                android:padding="5dp"
-                                android:layout_gravity="center_horizontal"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Column 2"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Column 3"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                        </TableRow>
-
-                        <TableRow
-                            android:divider="@color/grey"
-                            android:showDividers="middle">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Row 1, Column 1"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Row 1, Column 2"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Row 1, Column 3"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                        </TableRow>
-
-                        <TableRow
-                            android:divider="@color/grey"
-                            android:showDividers="middle">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
-                                android:padding="5dp"
-                                android:text="Row 2, Column 1" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Row 2, Column 2"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Row 2, Column 3"
-                                android:padding="5dp"
-                                android:gravity="center_horizontal"/>
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
@@ -243,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/grey_home" />
+                    android:src="@drawable/home_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -269,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/search_icon" />
+                    android:src="@drawable/search_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -295,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@null"
-                    android:src="@drawable/profile_icon" />
+                    android:src="@drawable/profile_color_press" />
 
                 <TextView
                     android:layout_width="wrap_content"

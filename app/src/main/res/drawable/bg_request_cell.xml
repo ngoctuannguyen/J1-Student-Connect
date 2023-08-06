@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners android:radius="0dp" />
+            <solid android:color="#40000000" /> <!-- Màu bóng của dialog -->
+        </shape>
+    </item>
+
+    <item
+        android:left="8dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="0dp"> <!-- Dịch nội dung xuống dưới 8dp để tạo hiệu ứng bóng -->
+        <shape>
+            <corners android:radius="0dp" />
+            <solid android:color="#FFFFFFFF" /> <!-- Màu nền của dialog -->
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_dialog_guide"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:layout_gravity="center"
+    android:background="@drawable/callout"
+    android:orientation="vertical"
+    android:paddingTop="70dp"
+    android:paddingBottom="70dp"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
+
+    <TextView
+        android:id="@+id/dialog_guide_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="Lập trình hướng đối tượng"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/link1_guide"
+        android:padding="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link tham khảo 1"
+        android:background="@drawable/bg_dialog"/>
+    <TextView
+        android:id="@+id/link2_guide"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link tham khảo 2"
+        android:background="@drawable/bg_dialog"/>
+    <TextView
+        android:id="@+id/link3_guide"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link tham khảo 3"
+        android:background="@drawable/bg_dialog"/>
+    <TextView
+        android:id="@+id/link4_guide"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link tham khảo 4"
+        android:background="@drawable/bg_dialog"/>
+
+</LinearLayout>

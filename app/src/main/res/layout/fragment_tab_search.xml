@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_grey"
+    tools:context=".tabsinmain.TabSearch" >
+
+    <LinearLayout
+        android:id="@+id/search_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bg_blue"
+        android:padding="15sp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/search_headericon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_headericon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_page"
+            android:layout_marginLeft="10sp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lookup"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/viewToSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập tên môn học"
+                    android:layout_marginTop="5sp"
+                    android:maxLines="1"
+                    android:padding="10sp"
+                    android:textColor="@color/grey"
+                    android:background="@drawable/edit_text_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/student_name_search_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Nhập thông tin sinh viên"
+                        android:maxLines="1"
+                        android:layout_marginRight="5sp"
+                        android:padding="10sp"
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/student_id_search_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Nhập mã sinh viên"
+                        android:maxLines="1"
+                        android:layout_marginHorizontal="5sp"
+                        android:padding="10sp"
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/class_id_search_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Nhập mã lớp học"
+                        android:maxLines="1"
+                        android:layout_marginLeft="5sp"
+                        android:padding="10sp"
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tableSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:divider="@color/grey"
+                android:stretchColumns="1,2,3"
+                android:layout_margin="10sp"
+                android:showDividers="middle">
+
+                <TableRow
+                    android:background="@color/tb_grey"
+                    android:divider="@color/grey"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:id="@+id/student_info_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="5sp"
+                        android:text="@string/student_info_string"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/class_id_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="5sp"
+                        android:text="@string/student_class_id"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/class_name_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:padding="5sp"
+                        android:text="@string/student_class_name"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5sp"
+                        android:textSize="10sp"
+                        android:id="@+id/portal_number_search"
+                        android:gravity="center_horizontal"
+                        android:text="@string/portal_number"/>
+
+                </TableRow>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerViewSearch"/>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="@string/total_tc"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

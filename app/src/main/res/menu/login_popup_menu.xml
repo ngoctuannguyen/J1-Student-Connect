@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/opt_vnu"
-        android:title="VNU Student" />
+        android:title="UET Student" />
     <item android:id="@+id/opt_other"
-        android:title="Other Student" />
+        android:title="Other Student Of VNU" />
 </menu>
