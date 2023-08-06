@@ -24,9 +24,6 @@ import io.grpc.internal.SharedResourceHolder;
 
 public class TBInHomeAdapter extends RecyclerView.Adapter<TBInHomeAdapter.MyViewHolder> {
 
-
-
-
     Context mcontext;
     List<TimeTableInMain> dataList;
     public TBInHomeAdapter(Context mcontext, List<TimeTableInMain> dataList) {

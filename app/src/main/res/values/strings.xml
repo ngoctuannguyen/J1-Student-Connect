@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">J1 Student Connect</string>
+    <string name="app_name_short">J1SC</string>
 
 
     <!-- Login and Register strings -->
@@ -29,6 +30,28 @@
     <string name="edit_profile_full">Chỉnh sửa hồ sơ</string>
     <string name="logout">Đăng xuất</string>
 
+    <!-- Search strings -->
+    <string name="search_page">Tra cứu thông tin</string>
+    <string name="lookup">Tìm kiếm</string>
+    <string name="total_tc">Tổng tín chỉ: [N/A]</string>
+
+
+    <!-- Bottom Navigation Bar strings -->
+    <string name="homepage">Trang chủ</string>
+    <string name="search">Tra cứu</string>
+    <string name="profile">Hồ sơ</string>
+
+    <!-- Request Add strings -->
+    <string name="item1">CẤP BẢNG ĐIỂM</string>
+    <string name="item2">ĐỀ NGHỊ HOÃN THI</string>
+    <string name="item3">XEM LẠI BÀI THI</string>
+    <string name="item4">CẤP LẠI THẺ SV</string>
+    <string name="item5">LÀM VÉ BUS</string>
+    <string name="item6">XIN THÔI HỌC</string>
+    <string name="item7">CẤP CHỨNG CHỈ TN TẠM THỜI</string>
+    <string name="item8">ĐỀ NGHỊ HƯỞNG TRỢ CẤP XH</string>
+
+    <!-- Others -->
     <string name="save">Lưu</string>
     <string name="blank">Trống</string>
     <string name="notify">Menu item title</string>

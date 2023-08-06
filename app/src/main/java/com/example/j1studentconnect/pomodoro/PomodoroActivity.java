@@ -384,42 +384,42 @@ public class PomodoroActivity extends AppCompatActivity {
         //mTextViewCountDown.setText(timeLeftFormatted);
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putLong("millisleft", TimeLeftInMillis);
-//        editor.putBoolean("timeRunning", timeRunning);
-//        editor.putLong("endTime", Endtime);
-//        editor.apply();
-//
-//        if (pomodoroTimer != null) pomodoroTimer.cancel();
-//
-//
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-//        TimeLeftInMillis = preferences.getLong("millisleft", 600000);
-//        timeRunning = preferences.getBoolean("timeRunning", false);
-//
-//        updateCountDownText();
-//
-//        if (timeRunning) {
-//
-//            Endtime = preferences.getLong("endTime", 0);
-//            TimeLeftInMillis = Endtime - System.currentTimeMillis();
-//            if (TimeLeftInMillis < 0) {
-//                TimeLeftInMillis = 0;
-//                timeRunning = false;
-//                updateCountDownText();
-//
-//            } else startTimer();
-//        }
-//
-//    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong("millisleft", TimeLeftInMillis);
+        editor.putBoolean("timeRunning", timeRunning);
+        editor.putLong("endTime", Endtime);
+        editor.apply();
+
+        if (pomodoroTimer != null) pomodoroTimer.cancel();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        TimeLeftInMillis = preferences.getLong("millisleft", 600000);
+        timeRunning = preferences.getBoolean("timeRunning", false);
+
+        updateCountDownText();
+
+        if (timeRunning) {
+
+            Endtime = preferences.getLong("endTime", 0);
+            TimeLeftInMillis = Endtime - System.currentTimeMillis();
+            if (TimeLeftInMillis < 0) {
+                TimeLeftInMillis = 0;
+                timeRunning = false;
+                updateCountDownText();
+
+            } else startTimer();
+        }
+
+    }
 }
