@@ -76,6 +76,7 @@
                         android:id="@+id/maths_subject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
                         android:fontFamily="@font/arsenalregular"
                         android:text="1. Đại số, giải tích, xác suất thống kê"
                         android:textSize="12sp"
@@ -89,6 +90,7 @@
                         android:fontFamily="@font/arsenalregular"
                         android:text="2. Nhập môn lập trình"
                         android:textSize="12sp"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@drawable/text_color_press"
                         android:textStyle="bold" />
 

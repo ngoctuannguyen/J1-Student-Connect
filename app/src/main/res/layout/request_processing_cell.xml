@@ -11,6 +11,7 @@
         android:id="@+id/cell_request_date"
         android:paddingLeft="30dp"
         android:layout_marginBottom="5dp"
+        android:fontFamily="@font/merriweathersanswght"
         android:text="Ngày tạo: 23/7/2023 22:38:00"/>
     <!--    <TextView-->
     <!--        android:layout_width="match_parent"-->
