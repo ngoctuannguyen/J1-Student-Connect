@@ -3,6 +3,7 @@ package com.example.j1studentconnect.request;
 public class RequestData {
     private String userName;
     private String state;
+    private String reply;
     private String currentDate;
     private String edtReason;
 
@@ -10,9 +11,10 @@ public class RequestData {
         // Default constructor required for Firebase
     }
 
-    public RequestData(String userName, String state, String currentDate, String edtReason) {
+    public RequestData(String userName, String state, String reply, String currentDate, String edtReason) {
         this.userName = userName;
         this.state = state;
+        this.reply = reply;
         this.currentDate = currentDate;
         this.edtReason = edtReason;
     }
@@ -49,5 +51,12 @@ public class RequestData {
         this.edtReason = edtReason;
     }
 
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
 // Getter and setter methods for each field
 }

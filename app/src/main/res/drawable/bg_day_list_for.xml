@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke
-        android:width="2dp"
-        android:color="@color/black" /> <!-- Đổi thành màu đỏ -->
-    <solid android:color="#807092BE" /> <!-- Đặt màu nền trong suốt -->
-    <corners android:radius="10dp" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <stroke
+                android:width="2dp"
+                android:color="@color/black" /> <!-- Thay đổi màu đỏ -->
+            <solid android:color="@android:color/transparent" /> <!-- Sử dụng màu trong suốt -->
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#807092BE"
+                android:endColor="#80FFFFFF"
+                android:type="linear"
+                android:angle="90"/>
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

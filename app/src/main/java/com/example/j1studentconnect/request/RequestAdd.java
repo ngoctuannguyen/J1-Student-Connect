@@ -353,7 +353,7 @@ public class RequestAdd extends AppCompatActivity {
                     String currentTime = hour + ":" + minute + ":" + second;
 
                     String currentDate = day + "-" + (month + 1) + "-" + year + "     " + currentTime;
-                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(currentUser.getDisplayName().toString(), "Đang chờ", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(currentUser.getDisplayName().toString(), "Đang chờ", "", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();

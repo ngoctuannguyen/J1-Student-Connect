@@ -1,8 +1,11 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape>
-            <corners android:radius="0dp" />
-            <solid android:color="#80061C98" /> <!-- Màu bóng của dialog -->
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <gradient
+                android:startColor="#80061C98"
+                android:endColor="#80FFFFFF"
+                android:type="linear"
+                android:angle="45"/>
         </shape>
     </item>
 

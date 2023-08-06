@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tra cứu thông tin"
                 android:textSize="25sp"
-                android:fontFamily="@font/merriweathersanswght"
+                android:fontFamily="@font/arsenalregular"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/search_headericon"
                 android:layout_marginLeft="10sp"
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/merriweathersanswght"
+                    android:fontFamily="@font/arsenalregular"
                     android:text="Tìm kiếm"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -164,45 +164,57 @@
                 android:showDividers="middle">
 
                 <TableRow
-                    android:background="@color/tb_grey"
+                    android:background="@drawable/bg_dialog"
                     android:divider="@color/grey"
                     android:showDividers="middle">
 
                     <TextView
                         android:id="@+id/student_info_search"
-                        android:layout_width="117dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
                         android:padding="5sp"
                         android:text="@string/student_info_string"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/cell_head1"
+                        android:fontFamily="@font/arsenalbold"/>
 
                     <TextView
                         android:id="@+id/class_id_search"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
                         android:padding="5sp"
                         android:text="@string/student_class_id"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/cell_head1"
+                        android:fontFamily="@font/arsenalbold"/>
 
                     <TextView
                         android:id="@+id/class_name_search"
-                        android:layout_width="152dp"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
+                        android:gravity="center"
                         android:padding="5sp"
                         android:text="@string/student_class_name"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/cell_head1"
+                        android:fontFamily="@font/arsenalbold"/>
 
                     <TextView
                         android:layout_width="30dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:padding="5sp"
                         android:textSize="10sp"
                         android:id="@+id/portal_number_search"
-                        android:gravity="center_horizontal"
-                        android:text="@string/portal_number"/>
+                        android:gravity="center"
+                        android:text="@string/portal_number"
+                        android:textStyle="bold"
+                        android:background="@drawable/cell_head1"
+                        android:fontFamily="@font/arsenalbold"/>
 
                 </TableRow>
 

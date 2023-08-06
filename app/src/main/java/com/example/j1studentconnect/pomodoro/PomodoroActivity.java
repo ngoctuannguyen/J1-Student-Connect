@@ -255,7 +255,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
         //linearLayout.setBackgroundColor(Color.GREEN);
         titlePomodoro.setText("Nghỉ ngơi chút nhé !");
-        relativeLayout.setBackgroundResource(R.color.bg_blue);
+        relativeLayout.setBackgroundResource(R.drawable.bg_blue);
         hiTuzki.setVisibility(View.GONE);
         fightingTuzki.setVisibility(View.GONE);
         relaxTuzki.setVisibility(View.VISIBLE);

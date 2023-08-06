@@ -34,7 +34,6 @@ import java.util.List;
 
 public class RequestProcessing extends AppCompatActivity {
 
-    String txt = "\n";
     RequestProcessingAdapter requestProcessingAdapter;
     ExpandableListView expandableListView1;
     List<String> RequestTypeList;
@@ -93,7 +92,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectMon.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectMon.add(date + reason + state);
+                    else subjectMon.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -114,7 +116,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectTue.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectTue.add(date + reason + state);
+                    else subjectTue.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -134,7 +139,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectWed.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectWed.add(date + reason + state);
+                    else subjectWed.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -154,7 +162,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectThu.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectThu.add(date + reason + state);
+                    else subjectThu.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -174,7 +185,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectFri.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectFri.add(date + reason + state);
+                    else subjectFri.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -194,7 +208,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectSat.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectSat.add(date + reason + state);
+                    else subjectSat.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -214,7 +231,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectSun.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectSun.add(date + reason + state);
+                    else subjectSun.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }
@@ -233,7 +253,10 @@ public class RequestProcessing extends AppCompatActivity {
                     String date = "Ngày tạo: " + dataSnapshot.child("currentDate").getValue(String.class);
                     String reason = "\nLý do: " + dataSnapshot.child("edtReason").getValue(String.class);
                     String state = "\nTrạng thái: " + dataSnapshot.child("state").getValue(String.class);
-                    subjectSpe.add(date + reason + state);
+                    String reply = "\nLời nhắn từ QTV: " + dataSnapshot.child("reply").getValue(String.class);
+                    String tmp = dataSnapshot.child("reply").getValue(String.class);
+                    if(tmp=="") subjectSpe.add(date + reason + state);
+                    else subjectSpe.add(date + reason + state + reply);
                     requestProcessingAdapter.notifyDataSetChanged();
                 }
             }

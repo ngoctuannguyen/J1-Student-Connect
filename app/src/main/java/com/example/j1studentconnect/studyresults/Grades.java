@@ -86,36 +86,41 @@ public class Grades extends AppCompatActivity {
                                         // Tạo một TableRow mới
                                         TableRow row = new TableRow(getApplicationContext());
 
-                                        // Tạo các TextView chứa dữ liệu và thêm vào TableRow
-                                        TextView textViewColumn1 = new TextView(getApplicationContext());
-                                        textViewColumn1.setText(String.valueOf(stt));
-                                        textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.1f));
-                                        textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
-                                        row.addView(textViewColumn1);
+                                            // Tạo các TextView chứa dữ liệu và thêm vào TableRow
+                                            TextView textViewColumn1 = new TextView(getApplicationContext());
+                                            textViewColumn1.setText(String.valueOf(stt));
+                                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
+                                            textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            textViewColumn1.setBackgroundResource(R.drawable.cell1);
+                                            row.addView(textViewColumn1);
 
-                                        TextView textViewColumn2 = new TextView(getApplicationContext());
-                                        textViewColumn2.setText(name);
-                                        textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.35f));
-                                        textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
-                                        row.addView(textViewColumn2);
+                                            TextView textViewColumn2 = new TextView(getApplicationContext());
+                                            textViewColumn2.setText(name);
+                                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
+                                            textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            textViewColumn2.setBackgroundResource(R.drawable.cell2);
+                                            row.addView(textViewColumn2);
 
-                                        TextView textViewColumn3 = new TextView(getApplicationContext());
-                                        textViewColumn3.setText("3");
-                                        textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
-                                        textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
-                                        row.addView(textViewColumn3);
+                                            TextView textViewColumn3 = new TextView(getApplicationContext());
+                                            textViewColumn3.setText("3");
+                                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                            textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            textViewColumn3.setBackgroundResource(R.drawable.cell3);
+                                            row.addView(textViewColumn3);
 
-                                        TextView textViewColumn4 = new TextView(getApplicationContext());
-                                        textViewColumn4.setText(score);
-                                        textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
-                                        textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
-                                        row.addView(textViewColumn4);
+                                            TextView textViewColumn4 = new TextView(getApplicationContext());
+                                            textViewColumn4.setText(score);
+                                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                            textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            textViewColumn4.setBackgroundResource(R.drawable.cell4);
+                                            row.addView(textViewColumn4);
 
-                                        TextView textViewColumn5 = new TextView(getApplicationContext());
-                                        textViewColumn5.setText("aaa");
-                                        textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
-                                        textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
-                                        row.addView(textViewColumn5);
+                                            TextView textViewColumn5 = new TextView(getApplicationContext());
+                                            textViewColumn5.setText("aaa");
+                                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
+                                            textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            textViewColumn5.setBackgroundResource(R.drawable.cell5);
+                                            row.addView(textViewColumn5);
 
                                         rowsToShow.add(row);
                                         stt++;
@@ -143,32 +148,37 @@ public class Grades extends AppCompatActivity {
                             // Thêm các TextView vào TableRow để hiển thị dữ liệu trong các cột
                             TextView textViewColumn1 = new TextView(getApplicationContext());
                             textViewColumn1.setText("1");
-                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.1f));
+                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
                             textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                            textViewColumn1.setBackgroundResource(R.drawable.cell1);
                             row.addView(textViewColumn1);
 
                             TextView textViewColumn2 = new TextView(getApplicationContext());
                             textViewColumn2.setText("Phát triển ứng dụng di động");
-                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.35f));
+                            textViewColumn2.setBackgroundResource(R.drawable.cell2);
+                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
                             textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
                             row.addView(textViewColumn2);
 
                             TextView textViewColumn3 = new TextView(getApplicationContext());
                             textViewColumn3.setText("zzz");
-                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
                             textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                            textViewColumn3.setBackgroundResource(R.drawable.cell3);
                             row.addView(textViewColumn3);
 
                             TextView textViewColumn4 = new TextView(getApplicationContext());
                             textViewColumn4.setText("aaa");
-                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.2f));
+                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
                             textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                            textViewColumn4.setBackgroundResource(R.drawable.cell4);
                             row.addView(textViewColumn4);
 
                             TextView textViewColumn5 = new TextView(getApplicationContext());
                             textViewColumn5.setText("aaa");
-                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f));
+                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
                             textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                            textViewColumn5.setBackgroundResource(R.drawable.cell5);
                             row.addView(textViewColumn5);
 
                             // Thêm TableRow vào TableLayout
