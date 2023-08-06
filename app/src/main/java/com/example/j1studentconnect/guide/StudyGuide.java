@@ -32,7 +32,6 @@ import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.example.j1studentconnect.tabsinmain.TabProfile;
 
 public class StudyGuide extends AppCompatActivity {
-    private ImageButton btnGuideHome, btnGuideSearch, btnGuideProfile;
     TextView link1, link2, link3, link4;
     TextView maths_sub, it_beginning, oop_sub, dsa_sub, db_sub, cv_temp, gain_exp, recruitment, lang_cer, mobile, web_dev, cyber_sec, ai_data;
 
@@ -75,38 +74,6 @@ public class StudyGuide extends AppCompatActivity {
         });
         ConstructButton();
         addClickOnMathSub();
-        ConstructGuideButton();
-        ClickGuideButton();
-    }
-
-    private void ClickGuideButton() {
-        btnGuideHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnGuideSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            }
-        });
-        btnGuideProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, TabProfile.class));
-            }
-        });
-    }
-
-    private void ConstructGuideButton() {
-        btnGuideHome = (ImageButton) findViewById(R.id.GuideHome);
-        btnGuideSearch = (ImageButton) findViewById(R.id.GuideSearch);
-        btnGuideProfile = (ImageButton) findViewById(R.id.GuideProfile);
     }
 
     private void openRequest(int gravity, int type) {

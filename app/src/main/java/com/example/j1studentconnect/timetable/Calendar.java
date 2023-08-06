@@ -96,11 +96,7 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        //Choose semester
-//        SpinnerSemester = (Spinner) findViewById(R.id.spinner_semester);
-        // ExpandableListView
         expandableListView = findViewById(R.id.TimeTableList);
-        //ConstructSpinner();
         showList();
 
         TimeTable = new TimeTableAdapter(this, dayList, subjectList);
