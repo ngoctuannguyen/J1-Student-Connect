@@ -54,9 +54,6 @@ import com.sahana.horizontalcalendar.model.DateModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-//import com.harrywhewell.scrolldatepicker.DayScrollDatePicker;
-//import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
-
 
 public class TabHome extends Fragment {
     View rootView;

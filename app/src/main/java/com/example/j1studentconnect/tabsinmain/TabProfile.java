@@ -114,6 +114,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.j1studentconnect.profiletab.EditProfile;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.authentication.Login;
@@ -130,7 +131,7 @@ public class TabProfile extends Fragment {
 
     TextView name, email, student_id, password, gender, birthday, student_class, phone, title_name;
 
-    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child, profile_imageURL;
+    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
     CircleImageView profile_image;
 
     Button logout, edit_profile;
@@ -204,10 +205,6 @@ public class TabProfile extends Fragment {
                     user_class = snapshot.child("student_class").getValue().toString();
                     user_birthday = snapshot.child("birthday").getValue().toString();
                     user_phone = snapshot.child("phone").getValue().toString();
-                    if (snapshot.hasChild("imageURL")) {
-                        profile_imageURL = snapshot.child("imageURL").getValue().toString();
-                        // Picasso.get().load(profile_imageURL).into(profile_image);
-                    }
                     title_name.setText(user_name);
                     name.setText(user_name);
                     email.setText(user_email);
