@@ -22,43 +22,45 @@
         android:theme="@style/Base.Theme.J1StudentConnect"
         tools:targetApi="31">
         <activity
+            android:name=".splashscreen.SplashScreen"
+            android:exported="false" />
+        <activity
             android:name=".textrecognition.ScannerActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".textrecognition.TextRecognitionActivity"
             android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
         </activity>
         <activity
             android:name=".camera.CameraViewActivity"
             android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
         </activity>
         <activity
             android:name=".facerecognition.FaceRecognitionActivity"
             android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity> <!-- LoginLauncher -->
         <activity
             android:name=".authentication.LoginLauncher"
@@ -132,7 +134,7 @@
         <!-- Request -->
         <activity android:name=".request.RequestAdd" />
         <activity android:name=".request.RequestProcessing" />
-        <activity android:name=".guide.StudyGuide"/>
+        <activity android:name=".guide.StudyGuide" />
         <activity
             android:name=".pomodoro.PomodoroActivity"
             android:exported="true" />

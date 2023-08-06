@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -216,19 +218,22 @@ public class PomodoroActivity extends AppCompatActivity {
     }
 
     private void showNotification() {
+        // Tạo đối tượng âm thanh từ tệp trong thư mục res/raw (trong đây tên là notification_sound)
+        // Tạo đối tượng âm thanh từ tệp trong thư mục res/raw (trong đây tên là notification_sound)
+        //Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification_sound);
 
         Intent intent = new Intent(this, PomodoroActivity.class);
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO")
-                                                                        .setContentTitle("VNU Pomodoro Timer")
-                                                                        .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
-                                                                        .setSmallIcon(R.drawable.icon_learning_pomodoro)
-                                                                        .setPriority(NotificationCompat.PRIORITY_HIGH);
-                                                                        //.setSound();
+                .setContentTitle("VNU Pomodoro Timer")
+                .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
+                .setSmallIcon(R.drawable.icon_learning_pomodoro)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+               // .setSound(soundUri);
 
         if (breakTime == false)
             notification.setContentText("Nghỉ thế là đủ rồi, tiếp tục tập trung thôi !!!");
 
-        //  .setAutoCancel(true);
+        //.setAutoCancel(true);
         //.setSound(Uri.parse("https://firebasestorage.googleapis.com/v0/b/mynotes-8b6d5.appspot.com/o/mixkit-scanning-sci-fi-alarm-905.wav?alt=media&token=5bebfd2b-3bc3-45a4-8a2d-acb2f3f0e182"));
 
         // Display the notification

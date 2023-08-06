@@ -37,6 +37,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ObjectInputStream;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,9 +56,11 @@ public class Calendar extends AppCompatActivity {
     HashMap<String, List<String>> subjectList;
 
     DatabaseReference reference;
+    
+    TextView semesterchoose;
 
     FirebaseFirestore firebaseFirestore;
-
+    private java.util.Calendar today = java.util.Calendar.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +70,17 @@ public class Calendar extends AppCompatActivity {
         btnTBSearch = (ImageButton) findViewById(R.id.TimeTableSearch);
         btnTBProfile = (ImageButton) findViewById(R.id.TimeTableProfile);
         //Choose semester
-//        SpinnerSemester = (Spinner) findViewById(R.id.spinner_semester);
-        // ExpandableListView
+
+        semesterchoose = findViewById(R.id.semesterchoose);
+        String semester = "Học kỳ";
+        if (today.get(java.util.Calendar.MONTH) > 8)
+            semester += " I " + today.get(java.util.Calendar.YEAR) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR) + 1);
+        else semester += " II " + String.valueOf(today.get(java.util.Calendar.YEAR) - 1) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR));
+
+        if (today.get(java.util.Calendar.MONTH) > 6 && today.get(java.util.Calendar.MONTH) < 9)
+            semester = "Học kỳ hè " + String.valueOf(today.get(java.util.Calendar.YEAR) - 1) + " - " + String.valueOf(today.get(java.util.Calendar.YEAR));
+
+        semesterchoose.setText(semester);
 
         expandableListView = findViewById(R.id.TimeTableList);
         //ConstructSpinner();
