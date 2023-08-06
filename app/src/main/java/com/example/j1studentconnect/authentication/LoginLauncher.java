@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -22,7 +26,11 @@ public class LoginLauncher extends AppCompatActivity {
     Button popup_menu;
     FirebaseAuth auth;
 
-    TextView appName;
+    TextView appName, quotes;
+
+    ImageView logoUET, imageInLoginLauncher;
+
+    Button btnchoose;
 
     @Override
     public void onStart() {
@@ -43,56 +51,40 @@ public class LoginLauncher extends AppCompatActivity {
 
         popup_menu = findViewById(R.id.btn_choose);
         auth = FirebaseAuth.getInstance();
-
+        logoUET = findViewById(R.id.logo_uet);
+        TextView login = findViewById(R.id.login);
+        quotes = findViewById(R.id.quotes);
+        btnchoose = findViewById(R.id.btn_choose);
         appName = findViewById(R.id.app_name);
+        imageInLoginLauncher = findViewById(R.id.image_in_login_launcher);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeIn.setDuration(3000);
+        logoUET.startAnimation(fadeIn);
+        login.startAnimation(fadeIn);
+        btnchoose.startAnimation(fadeIn);
+        quotes.startAnimation(fadeIn);
+        imageInLoginLauncher.startAnimation(fadeIn);
+
+        //str = "Trên bước đường thành công không có dấu chân của kẻ lười biếng";
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.setText("J");
             }
-        }, 300);
+        }, 400);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("1");
             }
-        }, 350);
+        }, 500);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append(" S");
             }
-        }, 400);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("t");
-            }
-        }, 450);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("u");
-            }
-        }, 500);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("d");
-            }
-        }, 550);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("e");
-            }
         }, 600);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("n");
-            }
-        }, 650);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -102,25 +94,13 @@ public class LoginLauncher extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append(" C");
-            }
-        }, 750);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("o");
+                appName.append("u");
             }
         }, 800);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append("n");
-            }
-        }, 850);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("n");
+                appName.append("d");
             }
         }, 900);
         new Handler().postDelayed(new Runnable() {
@@ -128,21 +108,64 @@ public class LoginLauncher extends AppCompatActivity {
             public void run() {
                 appName.append("e");
             }
-        }, 950);
+        }, 1000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 1100);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("t");
+            }
+        }, 1200);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append(" C");
+            }
+        }, 1300);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("o");
+            }
+        }, 1400);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 1500);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+            }
+        }, 1600);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("e");
+            }
+        }, 1700);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("c");
             }
-        }, 1000);
+        }, 1800);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("t");
             }
-        }, 1800);
+        }, 1900);
+
 
         popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override
