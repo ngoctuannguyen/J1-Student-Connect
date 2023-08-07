@@ -73,6 +73,9 @@ public class RequestAdd extends AppCompatActivity {
     Button file_archive;
     Button submitDialog;
     String fileId, fileName;
+
+    ImageButton provideresultImg;
+
     ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
@@ -96,6 +99,8 @@ public class RequestAdd extends AppCompatActivity {
         return String.valueOf(System.currentTimeMillis());
     }
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree, cardSocialAssistance;
+
+    //RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,11 +201,15 @@ public class RequestAdd extends AppCompatActivity {
         cardResults = findViewById(R.id.card_study_results);
         cardPostpone = findViewById(R.id.card_postpone);
         cardReview = findViewById(R.id.card_review);
+        //relativeLayout = findViewById(R.id.provideresultLayout);
         cardStudentRequest = findViewById(R.id.card_student_card);
         cardBusRequest = findViewById(R.id.card_bus_request);
         cardStopLearning = findViewById(R.id.card_stop_learning);
         cardDegree = findViewById(R.id.card_degree_request);
         cardSocialAssistance = findViewById(R.id.social_assistance);
+
+        provideresultImg = findViewById(R.id.provideresultImg);
+
     }
 
     private void addClickOnCardRequest() {
@@ -270,6 +279,13 @@ public class RequestAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openRequest(Gravity.CENTER, 8);
+            }
+        });
+
+        provideresultImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRequest(Gravity.CENTER, 1);
             }
         });
 
