@@ -32,8 +32,6 @@ public class LoginLauncher extends AppCompatActivity {
     Button btnchoose;
     int i, time = 400;
 
-    int i, time = 400;
-
     @Override
     public void onStart() {
         super.onStart();

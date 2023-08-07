@@ -69,8 +69,6 @@ public class TabHome extends Fragment {
     String student_id_childd, homeAvtURL;
     String SelectedDate;
     AnimatorSet scaleUp, scaleDown;
-    String student_id_childd, homeAvtURL;
-    String SelectedDate;
     private RecyclerView lessonInDayListView;
     private FirebaseFirestore firebaseFirestore;
     List<TimeTableInMain> arrayListMon, arrayListTue, arrayListWed, arrayListThu, arrayListFri, arrayListSat;
