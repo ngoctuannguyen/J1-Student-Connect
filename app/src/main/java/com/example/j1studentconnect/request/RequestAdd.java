@@ -74,7 +74,8 @@ public class RequestAdd extends AppCompatActivity {
     Button file_archive;
     Button submitDialog;
     String fileId, fileName;
-    private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+    private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;
+    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
             if (result != null) {
