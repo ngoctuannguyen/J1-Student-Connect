@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,12 +39,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.authentication.Login;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,11 +64,7 @@ import com.google.firebase.storage.UploadTask;
 public class RequestAdd extends AppCompatActivity {
     private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 101;
     private static final int MANAGE_EXTERNAL_STORAGE_REQUEST_CODE = 102;
-
-
     private static final int PICKFILE_REQUEST_CODE = 1;
-
-
     DatabaseReference reference, reference1;
     FirebaseStorage storage;
     Uri tempFile;
@@ -73,9 +73,7 @@ public class RequestAdd extends AppCompatActivity {
     Button file_archive;
     Button submitDialog;
     String fileId, fileName;
-
-    private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;
-    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+    private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;    ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
             if (result != null) {
@@ -84,6 +82,7 @@ public class RequestAdd extends AppCompatActivity {
             }
         }
     });
+    private BottomNavigationView bottomNavigationView;
     private Spinner spinner1;
     private Context context;
     private Button attachButton;
@@ -91,35 +90,55 @@ public class RequestAdd extends AppCompatActivity {
     private String path;
     private TextView InfoAddRequest;
     private LinearLayout btnRequestProcessing;
-    private ImageButton btnRHome, btnRSearch, btnRProfile;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
-    //    private EditText edtReason;
-//    private Button file_archive, submitDialog;
     private String generateFileId() {
         return String.valueOf(System.currentTimeMillis());
     }
     private CardView cardResults, cardPostpone, cardReview, cardStudentRequest, cardBusRequest, cardStopLearning, cardDegree, cardSocialAssistance;
 
-    //RelativeLayout relativeLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_request);
-        ///attachButton = findViewById(R.id.attach_button);
-
-        btnRHome = findViewById(R.id.RequestHome);
-        btnRSearch = findViewById(R.id.RequestSearch);
-        btnRProfile = findViewById(R.id.RequestProfile);
-
 
         FirebaseApp.initializeApp(this);
         storage = FirebaseStorage.getInstance();
         reference1 = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0");
 
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(RequestAdd.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(RequestAdd.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(RequestAdd.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         ConstructButton();
-        ClickButtonInRequest();
         ConstructCardButton();
         //initifinal();
         //addListenerOnButton();
@@ -140,8 +159,6 @@ public class RequestAdd extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PICKFILE_REQUEST_CODE);
             }
         }
-
-
     }
 
     @Override
@@ -184,7 +201,6 @@ public class RequestAdd extends AppCompatActivity {
         cardStopLearning = findViewById(R.id.card_stop_learning);
         cardDegree = findViewById(R.id.card_degree_request);
         cardSocialAssistance = findViewById(R.id.social_assistance);
-
         cardResultsImg = findViewById(R.id.provideresultImg);
         cardPostponeImg = findViewById(R.id.postponerequestImg);
         cardReviewImg = findViewById(R.id.reviewrequestImg);
@@ -192,9 +208,7 @@ public class RequestAdd extends AppCompatActivity {
         cardBusRequestImg = findViewById(R.id.busrequestImg);
         cardStopLearningImg = findViewById(R.id.stoplearningImg);
         cardDegreeImg = findViewById(R.id.qualificationImg);
-        cardSocialAssistanceImg = findViewById(R.id.text_social_assistanceImg);
-
-    }
+        cardSocialAssistanceImg = findViewById(R.id.text_social_assistanceImg);    }
 
     private void addClickOnCardRequest() {
         cardResults.setOnClickListener(new View.OnClickListener() {
@@ -266,8 +280,6 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
-        //Img
-
         cardResultsImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -335,7 +347,6 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void openRequest(int gravity, int type) {
@@ -354,13 +365,9 @@ public class RequestAdd extends AppCompatActivity {
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
-//        if (Gravity.BOTTOM == gravity)
-//            dialog.setCancelable(true);
-//        else dialog.setCancelable(false);
 
         TextView txtTitleOfDialog = dialog.findViewById(R.id.dialog_title);
         switch (type) {
-
             case 1:
                 txtTitleOfDialog.setText("Cấp bảng điểm");
                 break;
@@ -402,15 +409,12 @@ public class RequestAdd extends AppCompatActivity {
         Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.anim_pomodoro_in);
         dialog.findViewById(R.id.layout_dialog_request).startAnimation(slideUp);
 
-
-//
         file_archive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFile.launch("*/*");
             }
         });
-
 
         submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -469,38 +473,7 @@ public class RequestAdd extends AppCompatActivity {
                 }
             }
         });
-
-
         dialog.show();
-    }
-
-    private void ClickButtonInRequest() {
-        btnRequestProcessing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestAdd.this, RequestProcessing.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-
-            }
-        });
-
-        btnRHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestAdd.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnRSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestAdd.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            }
-        });
-
-
     }
 
     private void ConstructButton() {
@@ -510,7 +483,6 @@ public class RequestAdd extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (requestCode == MANAGE_EXTERNAL_STORAGE_REQUEST_CODE) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -536,7 +508,6 @@ public class RequestAdd extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             }
-            // Call the method to open the dialog and pass the 'path' to it
             openRequest(Gravity.CENTER, 1);
         } else {
             path = null;
@@ -545,9 +516,8 @@ public class RequestAdd extends AppCompatActivity {
 
     private void CreateAndShowInfoStudent() {
         InfoAddRequest = findViewById(R.id.InfoAddRequest);
-        //Intent intentBefore = getActivity().getIntent();
-        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "22026521";
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

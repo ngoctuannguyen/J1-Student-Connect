@@ -56,6 +56,8 @@ dependencies {
     //implementation 'com.github.afreakyelf:AndroidHorizontalCalendar:<latest_version>'
     //implementation 'com.github.JoelKanyi:HorizontalCalendarView:1.0.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.picasso:picasso:2.71828' 
+    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
 }
+

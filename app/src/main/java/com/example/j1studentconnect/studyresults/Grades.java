@@ -3,6 +3,7 @@ package com.example.j1studentconnect.studyresults;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.j1studentconnect.R;
+import com.example.j1studentconnect.request.RequestAdd;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,29 +29,72 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Grades extends AppCompatActivity {
 
-    private ImageButton btnGradesHome, btnGradesSearch, btnGradesProfile;
-    private TextView gradesStuInf;
+    private TextView gradesStuInf, gradeSemester, gradeGeneral;
     Integer user_id;
+    String check_option, HKoption1, HKoption2;
     DatabaseReference reference;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grades_search);
 
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(Grades.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
         ConstructGradesSpinner();
-        ConstructGradesButton();
-        ClickGradesButton();
         CreateAndShowInfoStudent();
     }
 
     private void ConstructGradesSpinner() {
-        String[] options = {"2021-2022", "2022-2023"};
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonth().getValue();
+        int currentYear = currentDate.getYear();
+        if(currentMonth>=5 && currentMonth<=12) {
+            HKoption1 = "Học kì I " + String.valueOf(currentYear-1) + " - " + String.valueOf(currentYear);
+            HKoption2 = "Học kì II " + String.valueOf(currentYear-1) + " - " + String.valueOf(currentYear);
+        } else {
+            HKoption1 = "Học kì II " + String.valueOf(currentYear-2) + " - " + String.valueOf(currentYear-1);
+            HKoption2 = "Học kì I " + String.valueOf(currentYear-1) + " - " + String.valueOf(currentYear);
+        }
+
+        String[] options = {HKoption1, HKoption2, "Toàn khóa"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
         Spinner spinner = findViewById(R.id.selectGrades);
         TableLayout tableLayout = findViewById(R.id.gradesTable);
@@ -57,135 +103,192 @@ public class Grades extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                // Xử lý khi người dùng chọn một tùy chọn trong Spinner
                 String selectedOption = (String) adapterView.getItemAtPosition(position);
+                if (selectedOption.equals(HKoption1)) {
+                    check_option = HKoption1;
+                    ShowGrades();
+                } else if (selectedOption.equals(HKoption2)) {
+                    check_option = HKoption2;
+                    ShowGrades();
+                } else if (selectedOption.equals("Toàn khóa")) {
+                    check_option = "Toàn khóa";
+                    ShowGrades();
+                }
+            }
 
-                // Thực hiện các hành động tùy theo tùy chọn đã chọn
-                switch (selectedOption) {
-                    case "2021-2022":
-                        // Xử lý khi chọn Option 1
+            private void ShowGrades() {
+                tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
+                reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("results");
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-                        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("results");
-                        // Đọc dữ liệu từ Firebase
-                        reference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // Xóa hết các hàng dữ liệu cũ trước khi hiển thị dữ liệu mới
-                                tableLayout.removeAllViews();
 
-                                int stt = 1;
-                                List<TableRow> rowsToShow = new ArrayList<>();
+                        int stt = 1;
+                        Integer portal_semester = 0;
+                        Double gpa_semester = 0.00;
+                        Integer portal_total = 0;
+                        Double gpa_total = 0.00;
+                        List<TableRow> rowsToShow = new ArrayList<>();
 
-                                // Duyệt qua các dữ liệu trong dataSnapshot
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    // Lấy giá trị từ mỗi dữ liệu trong Firebase
-                                    Integer student_id = snapshot.child("student_id").getValue(Integer.class);
-                                    String name = snapshot.child("class_id").getValue(String.class);
-                                    String score = snapshot.child("class_id2").getValue(String.class);
-                                    if (student_id != null && student_id.equals(user_id)) {
-                                        // Tạo một TableRow mới
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Integer student_id = snapshot.child("student_id").getValue(Integer.class);
+                            String name = snapshot.child("class_id").getValue(String.class);
+                            Integer portal = snapshot.child("portal_number").getValue(Integer.class);
+                            String score = snapshot.child("class_id2").getValue(String.class);
+                            Double gpa = snapshot.child("GPA").getValue(Double.class);
+                            //String semester = snapshot.child("semester_id").getValue(String.class);
+                            if (check_option == HKoption1 || check_option == HKoption2) {
+                                if (student_id != null && student_id.equals(user_id)) {
+                                    if (0 == 0 /* && check_option==semester */) {
                                         TableRow row = new TableRow(getApplicationContext());
 
-                                            // Tạo các TextView chứa dữ liệu và thêm vào TableRow
-                                            TextView textViewColumn1 = new TextView(getApplicationContext());
-                                            textViewColumn1.setText(String.valueOf(stt));
-                                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
-                                            textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            textViewColumn1.setBackgroundResource(R.drawable.cell1);
-                                            row.addView(textViewColumn1);
+                                        // Tạo các TextView chứa dữ liệu và thêm vào TableRow
+                                        TextView textViewColumn1 = new TextView(getApplicationContext());
+                                        textViewColumn1.setText(String.valueOf(stt));
+                                        textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
+                                        textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        textViewColumn1.setBackgroundResource(R.drawable.cell1);
+                                        row.addView(textViewColumn1);
 
-                                            TextView textViewColumn2 = new TextView(getApplicationContext());
-                                            textViewColumn2.setText(name);
-                                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
-                                            textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            textViewColumn2.setBackgroundResource(R.drawable.cell2);
-                                            row.addView(textViewColumn2);
+                                        TextView textViewColumn2 = new TextView(getApplicationContext());
+                                        textViewColumn2.setText(name);
+                                        textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
+                                        textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        textViewColumn2.setBackgroundResource(R.drawable.cell2);
+                                        row.addView(textViewColumn2);
 
-                                            TextView textViewColumn3 = new TextView(getApplicationContext());
-                                            textViewColumn3.setText("3");
-                                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
-                                            textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            textViewColumn3.setBackgroundResource(R.drawable.cell3);
-                                            row.addView(textViewColumn3);
+                                        TextView textViewColumn3 = new TextView(getApplicationContext());
+                                        textViewColumn3.setText(String.valueOf(portal));
+                                        textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                        textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        textViewColumn3.setBackgroundResource(R.drawable.cell3);
+                                        row.addView(textViewColumn3);
 
-                                            TextView textViewColumn4 = new TextView(getApplicationContext());
-                                            textViewColumn4.setText(score);
-                                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
-                                            textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            textViewColumn4.setBackgroundResource(R.drawable.cell4);
-                                            row.addView(textViewColumn4);
+                                        TextView textViewColumn4 = new TextView(getApplicationContext());
+                                        textViewColumn4.setText(score);
+                                        textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                        textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        textViewColumn4.setBackgroundResource(R.drawable.cell4);
+                                        row.addView(textViewColumn4);
 
-                                            TextView textViewColumn5 = new TextView(getApplicationContext());
-                                            textViewColumn5.setText("aaa");
-                                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
-                                            textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
-                                            textViewColumn5.setBackgroundResource(R.drawable.cell5);
-                                            row.addView(textViewColumn5);
+                                        TextView textViewColumn5 = new TextView(getApplicationContext());
+                                        textViewColumn5.setText(String.valueOf(gpa));
+                                        textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
+                                        textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        textViewColumn5.setBackgroundResource(R.drawable.cell5);
+                                        row.addView(textViewColumn5);
 
                                         rowsToShow.add(row);
                                         stt++;
+                                        portal_semester += portal;
+                                        gpa_semester += gpa * portal;
+
+                                        portal_total += portal;
+                                        gpa_total += gpa * portal;
+                                    } else {
+                                        portal_total += portal;
+                                        gpa_total += gpa * portal;
                                     }
                                 }
-                                for (TableRow row : rowsToShow) {
-                                    tableLayout.addView(row);
+                            } else if (check_option == "Toàn khóa") {
+                                if (student_id != null && student_id.equals(user_id)) {
+                                    TableRow row = new TableRow(getApplicationContext());
+
+                                    // Tạo các TextView chứa dữ liệu và thêm vào TableRow
+                                    TextView textViewColumn1 = new TextView(getApplicationContext());
+                                    textViewColumn1.setText(String.valueOf(stt));
+                                    textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
+                                    textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    textViewColumn1.setBackgroundResource(R.drawable.cell1);
+                                    row.addView(textViewColumn1);
+
+                                    TextView textViewColumn2 = new TextView(getApplicationContext());
+                                    textViewColumn2.setText(name);
+                                    textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
+                                    textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    textViewColumn2.setBackgroundResource(R.drawable.cell2);
+                                    row.addView(textViewColumn2);
+
+                                    TextView textViewColumn3 = new TextView(getApplicationContext());
+                                    textViewColumn3.setText(String.valueOf(portal));
+                                    textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                    textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    textViewColumn3.setBackgroundResource(R.drawable.cell3);
+                                    row.addView(textViewColumn3);
+
+                                    TextView textViewColumn4 = new TextView(getApplicationContext());
+                                    textViewColumn4.setText(score);
+                                    textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
+                                    textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    textViewColumn4.setBackgroundResource(R.drawable.cell4);
+                                    row.addView(textViewColumn4);
+
+                                    TextView textViewColumn5 = new TextView(getApplicationContext());
+                                    textViewColumn5.setText(String.valueOf(gpa));
+                                    textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
+                                    textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    textViewColumn5.setBackgroundResource(R.drawable.cell5);
+                                    row.addView(textViewColumn5);
+
+                                    rowsToShow.add(row);
+                                    stt++;
+                                    portal_total += portal;
+                                    gpa_total += gpa * portal;
                                 }
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Xử lý khi có lỗi xảy ra
+                        }
+
+                        if (portal_semester != 0) {
+                            gpa_semester /= portal_semester;
+                            gpa_semester = (double) (Math.round(gpa_semester*100)/100);
+                        } else {
+                            gpa_semester = 0.00;
+                        }
+
+                        if (portal_total != 0) {
+                            gpa_total /= portal_total;
+                            gpa_total = (double) (Math.round(gpa_total*100)/100);
+                        } else {
+                            gpa_total = 0.00;
+                        }
+
+                        if (check_option==HKoption1 || check_option==HKoption2) {
+                            gradeSemester = findViewById(R.id.grade_semester);
+                            gradeSemester.setText("Tổng tín chỉ: " + String.valueOf(portal_semester) + "\nĐiểm trung bình hệ 4: " + String.format("%.2f", gpa_semester));
+
+                            gradeGeneral = findViewById(R.id.grade_general);
+                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.valueOf(portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
+                        } else if (check_option=="Toàn khóa") {
+                            gradeSemester = findViewById(R.id.grade_general);
+                            String str = "Xếp loại học lực\n";
+                            if (gpa_total>=3.6 && gpa_total<=4.0) {
+                                str += "Xuất sắc";
+                            } else if (gpa_total>=3.2 && gpa_total<=3.6) {
+                                str += "Giỏi";
+                            } else if (gpa_total>=2.5 && gpa_total<=3.2) {
+                                str += "Khá";
+                            } else if (gpa_total>=2.0 && gpa_total<=2.5) {
+                                str += "Trung bình";
+                            } else if (gpa_total>=1.0 && gpa_total<=2.0) {
+                                str += "Yếu";
+                            } else if (gpa_total>=0.0 && gpa_total<=1.0) {
+                                str += "Kém";
                             }
-                        });
+                            gradeSemester.setText(str);
 
-                        // Tạo các hàng và cột cho bảng tương ứng với Option 1
-                        break;
-                    case "2022-2023":
-                        // Xử lý khi chọn Option 2
-                        tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-                        // Tạo các hàng và cột cho bảng tương ứng với Option 2
-                        for (int i = 0; i < 10; i++) {
-                            TableRow row = new TableRow(getApplicationContext());
+                            gradeGeneral = findViewById(R.id.grade_semester);
+                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.valueOf(portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
+                        }
 
-                            // Thêm các TextView vào TableRow để hiển thị dữ liệu trong các cột
-                            TextView textViewColumn1 = new TextView(getApplicationContext());
-                            textViewColumn1.setText("1");
-                            textViewColumn1.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.1f));
-                            textViewColumn1.setGravity(Gravity.CENTER_HORIZONTAL);
-                            textViewColumn1.setBackgroundResource(R.drawable.cell1);
-                            row.addView(textViewColumn1);
-
-                            TextView textViewColumn2 = new TextView(getApplicationContext());
-                            textViewColumn2.setText("Phát triển ứng dụng di động");
-                            textViewColumn2.setBackgroundResource(R.drawable.cell2);
-                            textViewColumn2.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.35f));
-                            textViewColumn2.setGravity(Gravity.CENTER_HORIZONTAL);
-                            row.addView(textViewColumn2);
-
-                            TextView textViewColumn3 = new TextView(getApplicationContext());
-                            textViewColumn3.setText("zzz");
-                            textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
-                            textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
-                            textViewColumn3.setBackgroundResource(R.drawable.cell3);
-                            row.addView(textViewColumn3);
-
-                            TextView textViewColumn4 = new TextView(getApplicationContext());
-                            textViewColumn4.setText("aaa");
-                            textViewColumn4.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
-                            textViewColumn4.setGravity(Gravity.CENTER_HORIZONTAL);
-                            textViewColumn4.setBackgroundResource(R.drawable.cell4);
-                            row.addView(textViewColumn4);
-
-                            TextView textViewColumn5 = new TextView(getApplicationContext());
-                            textViewColumn5.setText("aaa");
-                            textViewColumn5.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.15f));
-                            textViewColumn5.setGravity(Gravity.CENTER_HORIZONTAL);
-                            textViewColumn5.setBackgroundResource(R.drawable.cell5);
-                            row.addView(textViewColumn5);
-
-                            // Thêm TableRow vào TableLayout
+                        for (TableRow row : rowsToShow) {
                             tableLayout.addView(row);
                         }
-                        break;
-                }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
 
             @Override
@@ -196,9 +299,9 @@ public class Grades extends AppCompatActivity {
 
     private void CreateAndShowInfoStudent() {
         gradesStuInf = findViewById(R.id.gradesStuInf);
-        //Intent intent = getIntent();
-        //String student_id_child = intent.getStringExtra("student_id").toString();
-        String student_id_child = "21020074";
+
+        Intent intent = getIntent();
+        String student_id_child = intent.getStringExtra("student_id").toString();
         reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -214,38 +317,5 @@ public class Grades extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
-    private void ConstructGradesButton() {
-        btnGradesHome = (ImageButton) findViewById(R.id.GradesHome);
-        btnGradesSearch = (ImageButton) findViewById(R.id.GradesSearch);
-        btnGradesProfile = (ImageButton) findViewById(R.id.GradesProfile);
-
-    }
-
-    private void ClickGradesButton() {
-
-//        btnGradesProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Grades.this, Profile.class));
-//            }
-//        });
-
-        btnGradesHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Grades.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnGradesSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Grades.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            }
-        });
-
     }
 }
