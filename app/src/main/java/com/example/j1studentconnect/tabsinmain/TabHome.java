@@ -50,6 +50,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sahana.horizontalcalendar.HorizontalCalendar;
 import com.sahana.horizontalcalendar.OnDateSelectListener;
 import com.sahana.horizontalcalendar.model.DateModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,8 @@ public class TabHome extends Fragment {
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
     public boolean onCreateArrrayList = false;
+    String student_id_childd, homeAvtURL;
+    String SelectedDate;
     AnimatorSet scaleUp, scaleDown;
     String student_id_childd, homeAvtURL;
     String SelectedDate;
@@ -162,6 +165,7 @@ public class TabHome extends Fragment {
             }
         });
         referencee = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_childd);
+
         ClickButton(view);
     }
 
@@ -508,6 +512,7 @@ public class TabHome extends Fragment {
         btnRequest = view.findViewById(R.id.request);
         btnGrades = view.findViewById(R.id.grades);
         btnGuide = view.findViewById(R.id.study_guide);
+        homeAvt = view.findViewById(R.id.home_avt);
     }
 
     private void ConstructLayout(View view){

@@ -32,6 +32,8 @@ public class LoginLauncher extends AppCompatActivity {
     Button btnchoose;
     int i, time = 400;
 
+    int i, time = 400;
+
     @Override
     public void onStart() {
         super.onStart();
@@ -65,7 +67,7 @@ public class LoginLauncher extends AppCompatActivity {
         logoUET.startAnimation(fadeIn);
         login.startAnimation(fadeIn);
         btnchoose.startAnimation(fadeIn);
-//        quotes.startAnimation(fadeIn);
+//         quotes.startAnimation(fadeIn);
         imageInLoginLauncher.startAnimation(fadeIn);
         String str = "Trên bước đường thành công không có dấu chân của kẻ lười biếng";
 
