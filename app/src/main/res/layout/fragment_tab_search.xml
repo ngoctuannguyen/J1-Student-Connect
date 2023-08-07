@@ -192,14 +192,6 @@
 
             </TableLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp"
-                android:text="@string/total_tc"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:ignore="TextSizeCheck" />
         </LinearLayout>
     </ScrollView>
 
