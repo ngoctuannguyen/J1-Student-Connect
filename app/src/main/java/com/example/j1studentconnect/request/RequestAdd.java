@@ -74,8 +74,7 @@ public class RequestAdd extends AppCompatActivity {
     Button submitDialog;
     String fileId, fileName;
 
-    ImageButton provideresultImg;
-
+    private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;
     ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
@@ -180,14 +179,20 @@ public class RequestAdd extends AppCompatActivity {
         cardResults = findViewById(R.id.card_study_results);
         cardPostpone = findViewById(R.id.card_postpone);
         cardReview = findViewById(R.id.card_review);
-        //relativeLayout = findViewById(R.id.provideresultLayout);
         cardStudentRequest = findViewById(R.id.card_student_card);
         cardBusRequest = findViewById(R.id.card_bus_request);
         cardStopLearning = findViewById(R.id.card_stop_learning);
         cardDegree = findViewById(R.id.card_degree_request);
         cardSocialAssistance = findViewById(R.id.social_assistance);
 
-        provideresultImg = findViewById(R.id.provideresultImg);
+        cardResultsImg = findViewById(R.id.provideresultImg);
+        cardPostponeImg = findViewById(R.id.postponerequestImg);
+        cardReviewImg = findViewById(R.id.reviewrequestImg);
+        cardStudentRequestImg = findViewById(R.id.studentcardImg);
+        cardBusRequestImg = findViewById(R.id.busrequestImg);
+        cardStopLearningImg = findViewById(R.id.stoplearningImg);
+        cardDegreeImg = findViewById(R.id.qualificationImg);
+        cardSocialAssistanceImg = findViewById(R.id.text_social_assistanceImg);
 
     }
 
@@ -261,12 +266,75 @@ public class RequestAdd extends AppCompatActivity {
             }
         });
 
-        provideresultImg.setOnClickListener(new View.OnClickListener() {
+        //Img
+
+        cardResultsImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRequest(Gravity.CENTER, 1);
             }
         });
+
+        cardPostponeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 2);
+            }
+        });
+
+        cardReviewImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 3);
+            }
+        });
+        cardStudentRequestImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 4);
+            }
+        });
+
+        cardBusRequestImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 5);
+            }
+        });
+
+        cardStopLearningImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 6);
+            }
+        });
+
+        cardDegreeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rqAdd, new FragmentStudyResultsRequest()).commit();
+                openRequest(Gravity.CENTER, 7);
+            }
+        });
+
+        cardSocialAssistanceImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRequest(Gravity.CENTER, 8);
+            }
+        });
+
 
     }
 

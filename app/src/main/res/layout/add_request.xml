@@ -184,12 +184,13 @@
 
 
                         <ImageButton
+                            android:id="@+id/postponerequestImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/postponerequest"
-                            android:src="@drawable/postpone"
                             android:layout_centerInParent="true"
-                            android:background="@null"/>
+                            android:background="@null"
+                            android:src="@drawable/postpone" />
 
                     </RelativeLayout>
 
@@ -228,6 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/reviewrequest"
+                            android:id="@+id/reviewrequestImg"
                             android:background="@null"
                             android:src="@drawable/review_exam"
                             android:layout_alignParentRight="true"/>
@@ -269,12 +271,13 @@
 
 
                         <ImageButton
+                            android:id="@+id/studentcardImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/studentcard"
+                            android:layout_centerInParent="true"
                             android:background="@null"
-                            android:src="@drawable/studentcard"
-                            android:layout_centerInParent="true"/>
+                            android:src="@drawable/studentcard" />
 
                     </RelativeLayout>
 
@@ -314,9 +317,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/busrequest"
+                            android:id="@+id/busrequestImg"
+                            android:layout_centerInParent="true"
                             android:background="@null"
-                            android:src="@drawable/busticket"
-                            android:layout_centerInParent="true"/>
+                            android:src="@drawable/busticket" />
 
                     </RelativeLayout>
 
@@ -357,9 +361,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/stoplearning"
-                            android:background="@null"
+                            android:id="@+id/stoplearningImg"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/quit_school"/>
+                            android:background="@null"
+                            android:src="@drawable/quit_school" />
 
                     </RelativeLayout>
 
@@ -397,12 +402,13 @@
 
 
                         <ImageButton
+                            android:id="@+id/qualificationImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/qualification"
-                            android:background="@null"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/graduate"/>
+                            android:background="@null"
+                            android:src="@drawable/graduate" />
 
                     </RelativeLayout>
 
@@ -439,6 +445,7 @@
 
 
                         <ImageButton
+                            android:id="@+id/text_social_assistanceImg"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_below="@+id/text_social_assistance"
