@@ -429,48 +429,48 @@ public class TabHome extends Fragment {
         firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = firebaseFirestore.collection("timetable").document("22026521").collection("semesterI");
 
-            //arrayListMon = new ArrayList<>();
-            arrayListMon.clear();
-            TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
-            tbInHomeAdapter.notifyDataSetChanged();
-            lessonInDayListView.setAdapter(tbInHomeAdapter);
-            collectionReference.document("Monday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Map<String, Object> data = document.getData();
-                            if (data != null) {
-                                for (Map.Entry<String, Object> entry : data.entrySet()) {
-                                    String field = entry.getKey();
-                                    Object value = entry.getValue();
+        //arrayListMon = new ArrayList<>();
+        arrayListMon.clear();
+        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
+        tbInHomeAdapter.notifyDataSetChanged();
+        lessonInDayListView.setAdapter(tbInHomeAdapter);
+        collectionReference.document("Monday").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> data = document.getData();
+                        if (data != null) {
+                            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                                String field = entry.getKey();
+                                Object value = entry.getValue();
 
-                                    if (value instanceof ArrayList<?> || value instanceof List<?>) {
-                                        List<String> subject1 = (List<String>) document.get(field);
-                                        if (subject1 != null) {
-                                                String timeLesson = subject1.get(1) + " - " + subject1.get(2);
-                                                String nameOfLesson = subject1.get(0);
-                                                String IdOfLesson = subject1.get(5);
-                                                String placeForLesson = subject1.get(3);
-                                                arrayListMon.add(new TimeTableInMain(timeLesson,
-                                                        nameOfLesson,
-                                                        IdOfLesson,
-                                                        placeForLesson));
-                                                TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
-                                                tbInHomeAdapter.notifyDataSetChanged();
-                                                lessonInDayListView.setAdapter(tbInHomeAdapter);
-                                        }
+                                if (value instanceof ArrayList<?> || value instanceof List<?>) {
+                                    List<String> subject1 = (List<String>) document.get(field);
+                                    if (subject1 != null) {
+                                        String timeLesson = subject1.get(1) + " - " + subject1.get(2);
+                                        String nameOfLesson = subject1.get(0);
+                                        String IdOfLesson = subject1.get(5);
+                                        String placeForLesson = subject1.get(3);
+                                        arrayListMon.add(new TimeTableInMain(timeLesson,
+                                                nameOfLesson,
+                                                IdOfLesson,
+                                                placeForLesson));
+                                        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(getContext(), arrayListMon);
+                                        tbInHomeAdapter.notifyDataSetChanged();
+                                        lessonInDayListView.setAdapter(tbInHomeAdapter);
                                     }
-
                                 }
+
                             }
                         }
-                    } else {
-                        Log.w("Error getting document.", task.getException());
                     }
+                } else {
+                    Log.w("Error getting document.", task.getException());
                 }
-            });
+            }
+        });
 
 
     }
@@ -511,7 +511,7 @@ public class TabHome extends Fragment {
 
     private void ConstructButton(View view){
         btnCalendar = view.findViewById(R.id.TimeTable);
-        btnCalendarHotkey =  view.findViewById(R.id.calendarHotKey);
+        btnCalendarHotkey =  view.findViewById(R.id.pomodoroHotkey);
         btnX = view.findViewById(R.id.x);
         btnRequest = view.findViewById(R.id.request);
         btnGrades = view.findViewById(R.id.grades);
