@@ -118,7 +118,7 @@ public class Grades extends AppCompatActivity {
 
             private void ShowGrades() {
                 tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
-                reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("results");
+                reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("subjects");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,14 +133,35 @@ public class Grades extends AppCompatActivity {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Integer student_id = snapshot.child("student_id").getValue(Integer.class);
-                            String name = snapshot.child("class_id").getValue(String.class);
-                            Integer portal = snapshot.child("portal_number").getValue(Integer.class);
-                            String score = snapshot.child("class_id2").getValue(String.class);
-                            Double gpa = snapshot.child("GPA").getValue(Double.class);
-                            //String semester = snapshot.child("semester_id").getValue(String.class);
-                            if (check_option == HKoption1 || check_option == HKoption2) {
+                            String name = snapshot.child("subject_id").getValue(String.class);
+//                            Integer portal = snapshot.child("portal_number").getValue(Integer.class);
+                            Integer portal = 2;
+//                            Double gpa = 3.5;
+                            Double gpa = snapshot.child("gpa").getValue(Double.class);
+                            String score;
+                            if (gpa.equals(4.0)) {
+                                score = "A+";
+                            } else if (gpa.equals(3.7)) {
+                                score = "A";
+                            } else if (gpa.equals(3.5)) {
+                                score = "B+";
+                            } else if (gpa.equals(3.0)) {
+                                score = "B";
+                            } else if (gpa.equals(2.5)) {
+                                score = "C+";
+                            } else if (gpa.equals(2.0)) {
+                                score = "C";
+                            } else if (gpa.equals(1.5)) {
+                                score = "D+";
+                            } else if (gpa.equals(1.0)) {
+                                score = "D";
+                            } else {
+                                score = "F";
+                            }
+                            String semester = snapshot.child("semester_id").getValue(String.class);
+                            if (check_option==HKoption1 || check_option==HKoption2) {
                                 if (student_id != null && student_id.equals(user_id)) {
-                                    if (0 == 0 /* && check_option==semester */) {
+                                    if (semester.equals(check_option)) {
                                         TableRow row = new TableRow(getApplicationContext());
 
                                         // Tạo các TextView chứa dữ liệu và thêm vào TableRow
