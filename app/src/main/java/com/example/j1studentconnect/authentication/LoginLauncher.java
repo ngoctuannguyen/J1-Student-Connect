@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -22,7 +25,12 @@ public class LoginLauncher extends AppCompatActivity {
     Button popup_menu;
     FirebaseAuth auth;
 
-    TextView appName;
+    TextView appName, quotes;
+
+    ImageView logoUET, imageInLoginLauncher;
+
+    Button btnchoose;
+    int i, time = 400;
 
     @Override
     public void onStart() {
@@ -44,105 +52,137 @@ public class LoginLauncher extends AppCompatActivity {
         popup_menu = findViewById(R.id.btn_choose);
         auth = FirebaseAuth.getInstance();
 
+        logoUET = findViewById(R.id.logo_uet);
+        TextView login = findViewById(R.id.login);
+        quotes = findViewById(R.id.quotes);
+        quotes.setText("");
+        btnchoose = findViewById(R.id.btn_choose);
         appName = findViewById(R.id.app_name);
+        imageInLoginLauncher = findViewById(R.id.image_in_login_launcher);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeIn.setDuration(3000);
+        logoUET.startAnimation(fadeIn);
+        login.startAnimation(fadeIn);
+        btnchoose.startAnimation(fadeIn);
+//        quotes.startAnimation(fadeIn);
+        imageInLoginLauncher.startAnimation(fadeIn);
+        String str = "Trên bước đường thành công không có dấu chân của kẻ lười biếng";
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.setText("J");
-            }
-        }, 300);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("1");
-            }
-        }, 350);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append(" S");
+                quotes.append("Trên");
             }
         }, 400);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append("t");
-            }
-        }, 450);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("u");
+                appName.append("1");
+                quotes.append(" bước");
             }
         }, 500);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append("d");
-            }
-        }, 550);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("e");
+                appName.append(" S");
+                quotes.append(" đường");
             }
         }, 600);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append("n");
-            }
-        }, 650);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 appName.append("t");
+                quotes.append(" thành");
             }
         }, 700);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append(" C");
-            }
-        }, 750);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("o");
+                appName.append("u");
+                quotes.append(" công");
             }
         }, 800);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                appName.append("n");
-            }
-        }, 850);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                appName.append("n");
+                appName.append("d");
+                quotes.append(" không");
             }
         }, 900);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("e");
+                quotes.append(" có");
             }
-        }, 950);
+        }, 1000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+                quotes.append(" dấu");
+            }
+        }, 1100);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("t");
+                quotes.append(" chân");
+            }
+        }, 1200);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append(" C");
+                quotes.append(" của");
+            }
+        }, 1300);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("o");
+                quotes.append(" kẻ");
+            }
+        }, 1400);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+                quotes.append(" lư");
+            }
+        }, 1500);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("n");
+                quotes.append("ời");
+            }
+        }, 1600);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                appName.append("e");
+                quotes.append(" b");
+            }
+        }, 1700);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("c");
+                quotes.append("i");
             }
-        }, 1000);
+        }, 1800);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 appName.append("t");
+                quotes.append("ếng");
             }
-        }, 1800);
+        }, 1900);
 
         popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override

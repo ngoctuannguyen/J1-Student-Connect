@@ -114,7 +114,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.example.j1studentconnect.profiletab.EditProfile;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.authentication.Login;
@@ -124,6 +124,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -131,7 +132,7 @@ public class TabProfile extends Fragment {
 
     TextView name, email, student_id, password, gender, birthday, student_class, phone, title_name;
 
-    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child;
+    String user_id, user_name, user_email, user_gender, user_class, user_birthday, user_phone, student_id_child, profile_imageURL;
     CircleImageView profile_image;
 
     Button logout, edit_profile;
@@ -213,7 +214,10 @@ public class TabProfile extends Fragment {
                     gender.setText(user_gender);
                     student_class.setText(user_class);
                     phone.setText(user_phone);
-
+                    if (snapshot.hasChild("imageURL")) {
+                        profile_imageURL = snapshot.child("imageURL").getValue(String.class);
+                        Picasso.get().load(profile_imageURL).into(profile_image);
+                    }
                 }
             }
             @Override

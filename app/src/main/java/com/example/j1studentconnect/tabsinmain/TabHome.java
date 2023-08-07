@@ -59,18 +59,20 @@ public class TabHome extends Fragment {
     View rootView;
     private ImageButton btnCalendar, btnCalendarHotkey, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
+    private ImageButton homeAvt;
     private CardView ConvenientCard;
     private TextView txtToday;
     private java.util.Calendar today = java.util.Calendar.getInstance();
     public static boolean recover = false;
     public boolean onCreateArrrayList = false;
     AnimatorSet scaleUp, scaleDown;
+    String student_id_childd, homeAvtURL;
     String SelectedDate;
     private RecyclerView lessonInDayListView;
     private FirebaseFirestore firebaseFirestore;
     List<TimeTableInMain> arrayListMon, arrayListTue, arrayListWed, arrayListThu, arrayListFri, arrayListSat;
     private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
-    DatabaseReference reference;
+    DatabaseReference reference, referencee;
     String student_id_child;
     Animator pressedButton;
     private static final String ARG_PARAM1 = "param1";
@@ -97,6 +99,7 @@ public class TabHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        student_id_childd = "21020337";
         scaleDown = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_down);
         scaleUp = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_up);
         if (getArguments() != null) {
@@ -158,6 +161,7 @@ public class TabHome extends Fragment {
                 Log.d("fff", SelectedDate);
             }
         });
+        referencee = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_childd);
         ClickButton(view);
     }
 
