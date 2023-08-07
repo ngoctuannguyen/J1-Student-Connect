@@ -123,6 +123,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -207,6 +208,7 @@ public class TabProfile extends Fragment {
         title_name = view.findViewById(R.id.title_name);
         edit_profile = view.findViewById(R.id.btn_edit_profile);
         logout = view.findViewById(R.id.btn_logout);
+        profile_image = view.findViewById(R.id.profile_image);
     }
 
     private void buttonsConstruct() {
@@ -248,8 +250,8 @@ public class TabProfile extends Fragment {
                     user_birthday = snapshot.child("birthday").getValue().toString();
                     user_phone = snapshot.child("phone").getValue().toString();
                     if (snapshot.hasChild("imageURL")) {
-                        profile_imageURL = snapshot.child("imageURL").getValue().toString();
-                        // Picasso.get().load(profile_imageURL).into(profile_image);
+                        profile_imageURL = snapshot.child("imageURL").getValue(String.class);
+                         Picasso.get().load(profile_imageURL).into(profile_image);
                     }
                     title_name.setText(user_name);
                     name.setText(user_name);

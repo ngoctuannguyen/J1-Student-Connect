@@ -50,6 +50,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sahana.horizontalcalendar.HorizontalCalendar;
 import com.sahana.horizontalcalendar.OnDateSelectListener;
 import com.sahana.horizontalcalendar.model.DateModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class TabHome extends Fragment {
     View rootView;
     private ImageButton btnCalendar, btnCalendarHotkey, btnAvatar, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
+    private ImageButton homeAvt;
     //private LinearLayout
     private CardView ConvenientCard;
     private TextView txtToday;
@@ -69,7 +71,7 @@ public class TabHome extends Fragment {
     public static boolean recover = false;
 
     public boolean onCreateArrrayList = false;
-
+    String student_id_childd, homeAvtURL;
     String SelectedDate;
     AnimatorSet scaleUp, scaleDown;
     private RecyclerView lessonInDayListView;
@@ -80,7 +82,7 @@ public class TabHome extends Fragment {
 
     private boolean setinMon = false, setinTue = false, setinWed = false, setinThu = false, setinFri = false, setinSat = false;
 
-    DatabaseReference reference;
+    DatabaseReference reference, referencee;
     Animator pressedButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -106,6 +108,7 @@ public class TabHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        student_id_childd = "21020337";
         scaleDown = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_down);
         scaleUp = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_up);
         if (getArguments() != null) {
@@ -187,6 +190,7 @@ public class TabHome extends Fragment {
 //
 //        TBInHomeAdapter tbInHomeAdapter = new TBInHomeAdapter(arrayList);
 //        lessonInDayListView.setAdapter(tbInHomeAdapter);
+        referencee = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_childd);
 
         ClickButton(view);
     }
@@ -562,6 +566,7 @@ public class TabHome extends Fragment {
         btnRequest = view.findViewById(R.id.request);
         btnGrades = view.findViewById(R.id.grades);
         btnGuide = view.findViewById(R.id.study_guide);
+        homeAvt = view.findViewById(R.id.home_avt);
     }
 
     private void ConstructLayout(View view){

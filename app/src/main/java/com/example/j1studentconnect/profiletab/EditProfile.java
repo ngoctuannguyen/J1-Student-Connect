@@ -24,11 +24,15 @@ import com.example.j1studentconnect.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -56,6 +60,7 @@ public class EditProfile extends AppCompatActivity {
         user_email = intentBefore.getStringExtra("email");
         user_id = intentBefore.getStringExtra("student_id");
         user_phone = intentBefore.getStringExtra("phone");
+        imageURL = intentBefore.getStringExtra("imageURL");
 
         name.setText(user_name);
         email.setText(user_email);
@@ -155,7 +160,14 @@ public class EditProfile extends AppCompatActivity {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                 while (!uriTask.isComplete());
                 Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
+                uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        imageURL = uri.toString();
+                        reference.child("imageURL").setValue(imageURL);
+                    }
+                });
+//                imageURL = urlImage.toString();
                 Toast.makeText(EditProfile.this, imageURL, Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -166,6 +178,6 @@ public class EditProfile extends AppCompatActivity {
 
 
 
-        reference.child("imageURL").setValue(imageURL);
+//        reference.child("imageURL").setValue(imageURL);
     }
 }
