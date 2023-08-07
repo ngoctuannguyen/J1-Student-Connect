@@ -198,7 +198,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
                 // if (cntRound != 4)
                 breakTime = true;
-                showNotification();
+                showNotificationRelax();
 
                 if (cntRound == 4) {
                     cntRound = 1;
@@ -217,21 +217,33 @@ public class PomodoroActivity extends AppCompatActivity {
         if (timeRunning) pomodoroTimer.start();
     }
 
-    private void showNotification() {
+    private void showNotificationWork() {
         // Tạo đối tượng âm thanh từ tệp trong thư mục res/raw (trong đây tên là notification_sound)
-        // Tạo đối tượng âm thanh từ tệp trong thư mục res/raw (trong đây tên là notification_sound)
-        //Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification_sound);
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification_sound_work);
 
         Intent intent = new Intent(this, PomodoroActivity.class);
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO")
                 .setContentTitle("VNU Pomodoro Timer")
                 .setContentText("Hết giờ học rồi, nghỉ ngơi chút nhé !!!!")
                 .setSmallIcon(R.drawable.icon_learning_pomodoro)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
-               // .setSound(soundUri);
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSound(soundUri);
 
-        if (breakTime == false)
-            notification.setContentText("Nghỉ thế là đủ rồi, tiếp tục tập trung thôi !!!");
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null)
+            notificationManager.notify(getNotiID(), notification.build());
+    }
+    private void showNotificationRelax() {
+        // Tạo đối tượng âm thanh từ tệp trong thư mục res/raw (trong đây tên là notification_sound)
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification_sound_relax);
+
+        Intent intent = new Intent(this, PomodoroActivity.class);
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "POMODORO2")
+                .setContentTitle("VNU Pomodoro Timer")
+                .setContentText("Nghỉ thế là đủ rồi, tiếp tục tập trung thôi !!!")
+                .setSmallIcon(R.drawable.icon_learning_pomodoro)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSound(soundUri);
 
         //.setAutoCancel(true);
         //.setSound(Uri.parse("https://firebasestorage.googleapis.com/v0/b/mynotes-8b6d5.appspot.com/o/mixkit-scanning-sci-fi-alarm-905.wav?alt=media&token=5bebfd2b-3bc3-45a4-8a2d-acb2f3f0e182"));
@@ -309,7 +321,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 //                        })
                 //                        .show();
                 breakTime = false;
-                showNotification();
+                showNotificationWork();
                 startTimer();
             }
 

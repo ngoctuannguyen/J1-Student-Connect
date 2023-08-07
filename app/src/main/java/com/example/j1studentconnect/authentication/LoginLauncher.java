@@ -20,7 +20,7 @@ import com.example.j1studentconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginLauncher extends AppCompatActivity {
+public class    LoginLauncher extends AppCompatActivity {
 
     Button popup_menu;
     FirebaseAuth auth;
@@ -36,12 +36,12 @@ public class LoginLauncher extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = auth.getCurrentUser();
-        if(currentUser != null) {
-            Intent intent = new Intent(LoginLauncher.this, MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            finish();
-        }
+//        if(currentUser != null) {
+//            Intent intent = new Intent(LoginLauncher.this, MainActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
+//            finish();
+//        }
     }
 
     @Override
