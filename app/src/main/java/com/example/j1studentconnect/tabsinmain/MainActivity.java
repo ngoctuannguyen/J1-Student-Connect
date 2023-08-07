@@ -36,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(tabMenuAdapter);
 
         Intent intentBefore = getIntent();
-        String signal = intentBefore.getStringExtra("signal").toString();
+        String temp_signal = "0";
+        if(intentBefore.getStringExtra("signal") != null) {
+            temp_signal = intentBefore.getStringExtra("signal").toString();
+        }
+        final String signal = temp_signal;
 
         state = findViewById(R.id.state_i);
         state.setText("5");

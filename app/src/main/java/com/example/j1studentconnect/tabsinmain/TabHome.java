@@ -114,7 +114,9 @@ public class TabHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
         Intent intentBefore = getActivity().getIntent();
-        student_id_child = intentBefore.getStringExtra("student_id").toString();
+        if(intentBefore.getStringExtra("student_id") != null) {
+            student_id_child = intentBefore.getStringExtra("student_id").toString();
+        }
         return rootView;
     }
 
