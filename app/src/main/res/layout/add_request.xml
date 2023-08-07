@@ -17,35 +17,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="10sp"
+            android:layout_height="80dp"
+            android:paddingTop="20sp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/add_request_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:paddingHorizontal="10sp"
-                android:paddingVertical="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_top_cardview"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:background="@drawable/rounded_top_cardview">
+                android:paddingHorizontal="10sp"
+                android:paddingVertical="10sp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5sp"
-                    android:src="@drawable/add_request"/>
+                    android:src="@drawable/add_request" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tạo yêu cầu"
                     android:gravity="center_vertical"
+                    android:text="Tạo yêu cầu"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -71,9 +71,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Trạng thái"
-                    android:textSize="18sp"
                     android:gravity="center"
+                    android:text="Trạng thái xử lý yêu \ncầu"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
