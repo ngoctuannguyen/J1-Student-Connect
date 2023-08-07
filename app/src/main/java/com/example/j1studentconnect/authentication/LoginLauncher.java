@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -31,6 +30,7 @@ public class LoginLauncher extends AppCompatActivity {
     ImageView logoUET, imageInLoginLauncher;
 
     Button btnchoose;
+    int i, time = 400;
 
     int i, time = 400;
 
@@ -53,6 +53,7 @@ public class LoginLauncher extends AppCompatActivity {
 
         popup_menu = findViewById(R.id.btn_choose);
         auth = FirebaseAuth.getInstance();
+
         logoUET = findViewById(R.id.logo_uet);
         TextView login = findViewById(R.id.login);
         quotes = findViewById(R.id.quotes);
@@ -66,7 +67,7 @@ public class LoginLauncher extends AppCompatActivity {
         logoUET.startAnimation(fadeIn);
         login.startAnimation(fadeIn);
         btnchoose.startAnimation(fadeIn);
-        //quotes.startAnimation(fadeIn);
+//         quotes.startAnimation(fadeIn);
         imageInLoginLauncher.startAnimation(fadeIn);
         String str = "Trên bước đường thành công không có dấu chân của kẻ lười biếng";
 
@@ -184,7 +185,6 @@ public class LoginLauncher extends AppCompatActivity {
                 quotes.append("ếng");
             }
         }, 1900);
-
 
         popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override

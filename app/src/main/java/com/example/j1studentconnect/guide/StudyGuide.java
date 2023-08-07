@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,58 +17,63 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.j1studentconnect.R;
+
 import com.example.j1studentconnect.profiletab.EditProfile;
 import com.example.j1studentconnect.searchtab.Search;
+import com.example.j1studentconnect.request.RequestAdd;
+import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.j1studentconnect.studyresults.Grades;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.example.j1studentconnect.tabsinmain.TabProfile;
 
 public class StudyGuide extends AppCompatActivity {
-    private ImageButton btnGuideHome, btnGuideSearch, btnGuideProfile;
     TextView link1, link2, link3, link4;
     TextView maths_sub, it_beginning, oop_sub, dsa_sub, db_sub, cv_temp, gain_exp, recruitment, lang_cer, mobile, web_dev, cyber_sec, ai_data;
 
+    private BottomNavigationView bottomNavigationView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.study_guide);
+
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(StudyGuide.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(StudyGuide.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(StudyGuide.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
         ConstructButton();
         addClickOnMathSub();
-        ConstructGuideButton();
-        ClickGuideButton();
-    }
-
-    private void ClickGuideButton() {
-        btnGuideHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return,R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnGuideSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-            }
-        });
-        btnGuideProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudyGuide.this, TabProfile.class));
-            }
-        });
-    }
-
-    private void ConstructGuideButton() {
-        btnGuideHome = (ImageButton) findViewById(R.id.GuideHome);
-        btnGuideSearch = (ImageButton) findViewById(R.id.GuideSearch);
-        btnGuideProfile = (ImageButton) findViewById(R.id.GuideProfile);
     }
 
     private void openRequest(int gravity, int type) {
