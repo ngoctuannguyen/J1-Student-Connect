@@ -50,16 +50,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sahana.horizontalcalendar.HorizontalCalendar;
 import com.sahana.horizontalcalendar.OnDateSelectListener;
 import com.sahana.horizontalcalendar.model.DateModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class TabHome extends Fragment {
     View rootView;
     private ImageButton btnCalendar, btnCalendarHotkey, btnX, btnRequest, btnGrades, btnGuide;
     private Button btnRecover;
-    private ImageButton homeAvt;
+    private CircleImageView homeAvt;
     private CardView ConvenientCard;
     private TextView txtToday;
     private java.util.Calendar today = java.util.Calendar.getInstance();
@@ -99,7 +102,6 @@ public class TabHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        student_id_childd = "21020337";
         scaleDown = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_down);
         scaleUp = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.anim.button_scale_up);
         if (getArguments() != null) {
@@ -124,6 +126,7 @@ public class TabHome extends Fragment {
         CreateAndShowInfoStudent(view);
         ConstructLayout(view);
         ConstructButton(view);
+
 
         HorizontalCalendar mHorizontalCalendar;
         mHorizontalCalendar = view.findViewById(R.id.horizontalCalendar);
@@ -161,7 +164,6 @@ public class TabHome extends Fragment {
                 Log.d("fff", SelectedDate);
             }
         });
-        referencee = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_childd);
         ClickButton(view);
     }
 
@@ -482,6 +484,10 @@ public class TabHome extends Fragment {
                 if (snapshot.hasChildren()){
                     Name.setText(snapshot.child("name").getValue().toString());
                     student_id.setText(snapshot.child("student_id").getValue().toString());
+                    if (snapshot.hasChild("imageURL")) {
+                        homeAvtURL = snapshot.child("imageURL").getValue(String.class);
+                        Picasso.get().load(homeAvtURL).into(homeAvt);
+                    }
                 }
             }
 
@@ -508,6 +514,7 @@ public class TabHome extends Fragment {
         btnRequest = view.findViewById(R.id.request);
         btnGrades = view.findViewById(R.id.grades);
         btnGuide = view.findViewById(R.id.study_guide);
+        homeAvt = view.findViewById(R.id.home_avt);
     }
 
     private void ConstructLayout(View view){
