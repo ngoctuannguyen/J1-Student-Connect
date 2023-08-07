@@ -47,6 +47,7 @@ import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -74,6 +75,7 @@ public class RequestAdd extends AppCompatActivity {
     Button file_archive;
     Button submitDialog;
     String fileId, fileName;
+    Uri uri;
     private ImageButton cardResultsImg, cardPostponeImg, cardReviewImg, cardStudentRequestImg, cardBusRequestImg, cardStopLearningImg, cardDegreeImg, cardSocialAssistanceImg;
     ActivityResultLauncher<String> getFile = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
@@ -106,7 +108,6 @@ public class RequestAdd extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         storage = FirebaseStorage.getInstance();
-        reference1 = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0");
 
         bottomNavigationView = findViewById(R.id.tab_menu);
         Intent intentBefore = getIntent();
@@ -147,7 +148,7 @@ public class RequestAdd extends AppCompatActivity {
         //addListenerOnSpinnerItemSelection();
         //addListenerOnButton();
         addClickOnCardRequest();
-//        CreateAndShowInfoStudent();
+        CreateAndShowInfoStudent();
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -469,7 +470,9 @@ public class RequestAdd extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(studentName, "Đang chờ", "", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    reference1 = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("requests").child(student_id_child).child(txtTitleOfDialog.getText().toString()).push();
+
+                    reference1.setValue(new RequestData(studentName, "Đang chờ", "", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
@@ -487,10 +490,18 @@ public class RequestAdd extends AppCompatActivity {
                             Toast.makeText(RequestAdd.this, "Submit failed!", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    StorageReference referencee = storage.getReference().child("archive_files/" + uid + "/" + txtTitleOfDialog.getText().toString() + "/" + currentDate + "/" + edtReason.getText().toString());
+                    StorageReference referencee = storage.getReference().child("archive_files/" + student_id_child + "/" + txtTitleOfDialog.getText().toString()).child(tempFile.getLastPathSegment());
                     referencee.putFile(tempFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String fileURL = uri.toString();
+                                    reference1.child("fileURL").setValue(fileURL);
+                                }
+                            });
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
                             Intent intentBefore = getIntent();
                             String studentId = intentBefore.getStringExtra("student_id").toString();
@@ -550,24 +561,24 @@ public class RequestAdd extends AppCompatActivity {
         }
     }
 
-//    private void CreateAndShowInfoStudent() {
-//        InfoAddRequest = findViewById(R.id.InfoAddRequest);
-//        Intent intentBefore = getIntent();
-//        String student_id_child = intentBefore.getStringExtra("student_id").toString();
-//        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.hasChildren()) {
-//                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
-//                    InfoAddRequest.setText(strshow);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-//    }
+    private void CreateAndShowInfoStudent() {
+        InfoAddRequest = findViewById(R.id.InfoAddRequest);
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
+                    InfoAddRequest.setText(strshow);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
 }

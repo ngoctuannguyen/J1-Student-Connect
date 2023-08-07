@@ -3,6 +3,7 @@ package com.example.j1studentconnect.request;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.searchtab.Search;
 import com.example.j1studentconnect.tabsinmain.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,14 +35,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RequestProcessing extends AppCompatActivity {
-
+    private BottomNavigationView bottomNavigationView;
     RequestProcessingAdapter requestProcessingAdapter;
     ExpandableListView expandableListView1;
     List<String> RequestTypeList;
+    String student_id_child;
     HashMap<String, List<String>> StateRequestList;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-    DatabaseReference requestRef = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("requests").child(currentUser.getUid());
+    DatabaseReference requestRef;
     private ImageButton btnRPHome, btnRPSearch, btnRPProfile;
     private LinearLayout btnRequestAdd;
     private java.util.Calendar today = java.util.Calendar.getInstance();
@@ -53,9 +56,40 @@ public class RequestProcessing extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         RequestTypeList = new ArrayList<>();
 
-        btnRPHome = findViewById(R.id.RequestProcessHome);
-        btnRPSearch = findViewById(R.id.RequestProcessSearch);
-        btnRPProfile = findViewById(R.id.RequestProcessProfile);
+        bottomNavigationView = findViewById(R.id.tab_menu);
+        Intent intentBefore = getIntent();
+        student_id_child = intentBefore.getStringExtra("student_id").toString();
+        requestRef = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("requests").child(student_id_child);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    Intent intent = new Intent(RequestProcessing.this, MainActivity.class);
+                    intent.putExtra("signal", "0");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_search) {
+                    Intent intent = new Intent(RequestProcessing.this, MainActivity.class);
+                    intent.putExtra("signal", "1");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.tab_profile) {
+                    Intent intent = new Intent(RequestProcessing.this, MainActivity.class);
+                    intent.putExtra("signal", "2");
+                    intent.putExtra("student_id", student_id_child);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         btnRequestAdd = findViewById(R.id.add_request_bar);
         CreateAndShowInfoStudent();
         ClickButtonInRequestProcessing();
@@ -289,21 +323,6 @@ public class RequestProcessing extends AppCompatActivity {
                 intent.putExtra("student_id", studentId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_activity_left_to_right_in_return, R.anim.anim_activity_left_to_right_out_return);
-            }
-        });
-        btnRPHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestProcessing.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_activity_slide_up_return, R.anim.anim_activity_slide_down_return);
-            }
-        });
-
-        btnRPSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RequestProcessing.this, Search.class));
-                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
             }
         });
 
