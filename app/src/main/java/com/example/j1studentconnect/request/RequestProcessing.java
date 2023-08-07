@@ -283,7 +283,11 @@ public class RequestProcessing extends AppCompatActivity {
         btnRequestAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RequestProcessing.this, RequestAdd.class));
+                Intent intentBefore = getIntent();
+                String studentId = intentBefore.getStringExtra("student_id").toString();
+                Intent intent = new Intent(RequestProcessing.this, RequestAdd.class);
+                intent.putExtra("student_id", studentId);
+                startActivity(intent);
                 overridePendingTransition(R.anim.anim_activity_left_to_right_in_return, R.anim.anim_activity_left_to_right_out_return);
             }
         });
@@ -310,12 +314,10 @@ public class RequestProcessing extends AppCompatActivity {
 //            }
 //        });
     }
-
     private void CreateAndShowInfoStudent() {
         TextView InfoProcessingRequest = findViewById(R.id.InfoProcessingRequest);
-        //Intent intentBefore = getActivity().getIntent();
-        //String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        String student_id_child = "22026521";
+        Intent intentBefore = getIntent();
+        String student_id_child = intentBefore.getStringExtra("student_id").toString();
         DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -331,4 +333,6 @@ public class RequestProcessing extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -68,6 +68,7 @@ public class RequestAdd extends AppCompatActivity {
     DatabaseReference reference, reference1;
     FirebaseStorage storage;
     Uri tempFile;
+    String studentName;
     public static String strRequest = "";
     EditText edtReason;
     Button file_archive;
@@ -146,7 +147,7 @@ public class RequestAdd extends AppCompatActivity {
         //addListenerOnSpinnerItemSelection();
         //addListenerOnButton();
         addClickOnCardRequest();
-        CreateAndShowInfoStudent();
+//        CreateAndShowInfoStudent();
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -212,6 +213,17 @@ public class RequestAdd extends AppCompatActivity {
         cardSocialAssistanceImg = findViewById(R.id.text_social_assistanceImg);    }
 
     private void addClickOnCardRequest() {
+        btnRequestProcessing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentBefore = getIntent();
+                String studentId = intentBefore.getStringExtra("student_id").toString();
+                Intent intent = new Intent(RequestAdd.this, RequestProcessing.class);
+                intent.putExtra("student_id", studentId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
+            }
+        });
         cardResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -442,11 +454,30 @@ public class RequestAdd extends AppCompatActivity {
                     String currentTime = hour + ":" + minute + ":" + second;
 
                     String currentDate = day + "-" + (month + 1) + "-" + year + "     " + currentTime;
-                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(currentUser.getDisplayName().toString(), "Đang chờ", "", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Intent intentBefore = getIntent();
+                    String student_id_child = intentBefore.getStringExtra("student_id").toString();
+                    DatabaseReference reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.hasChildren()) {
+                                studentName = snapshot.child("name").getValue().toString();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                    reference1.child("requests").child(uid).child(txtTitleOfDialog.getText().toString()).push().setValue(new RequestData(studentName, "Đang chờ", "", currentDate, edtReason.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                            Intent intentBefore = getIntent();
+                            String studentId = intentBefore.getStringExtra("student_id").toString();
+                            Intent intent = new Intent(RequestAdd.this, RequestAdd.class);
+                            intent.putExtra("student_id", studentId);
+                            startActivity(intent);
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -461,7 +492,11 @@ public class RequestAdd extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(RequestAdd.this, "Submit successfully!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RequestAdd.this, RequestAdd.class));
+                            Intent intentBefore = getIntent();
+                            String studentId = intentBefore.getStringExtra("student_id").toString();
+                            Intent intent = new Intent(RequestAdd.this, RequestAdd.class);
+                            intent.putExtra("student_id", studentId);
+                            startActivity(intent);
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -515,24 +550,24 @@ public class RequestAdd extends AppCompatActivity {
         }
     }
 
-    private void CreateAndShowInfoStudent() {
-        InfoAddRequest = findViewById(R.id.InfoAddRequest);
-        Intent intentBefore = getIntent();
-        String student_id_child = intentBefore.getStringExtra("student_id").toString();
-        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
-                    InfoAddRequest.setText(strshow);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
+//    private void CreateAndShowInfoStudent() {
+//        InfoAddRequest = findViewById(R.id.InfoAddRequest);
+//        Intent intentBefore = getIntent();
+//        String student_id_child = intentBefore.getStringExtra("student_id").toString();
+//        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("users").child(student_id_child);
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.hasChildren()) {
+//                    String strshow = "Họ tên SV: " + snapshot.child("name").getValue().toString() + "\nMSSV: " + snapshot.child("student_id").getValue().toString();
+//                    InfoAddRequest.setText(strshow);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//    }
 
 }
