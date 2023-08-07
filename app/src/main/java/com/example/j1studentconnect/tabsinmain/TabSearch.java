@@ -19,18 +19,18 @@ import android.widget.ImageButton;
 import com.example.j1studentconnect.R;
 import com.example.j1studentconnect.searchtab.SearchAdapter;
 import com.example.j1studentconnect.searchtab.StudentForSearch;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TabSearch extends Fragment {
-
-
     private View rootView;
-
-
     private ImageButton btnSearchHome, btnSearchProfile;
-
     private List<StudentForSearch> std_search;
     private RecyclerView recyclerViewSearch;
     private SearchAdapter searchAdapter;
@@ -152,11 +152,28 @@ public class TabSearch extends Fragment {
 
     private List<StudentForSearch> getListSearch() {
         std_search = new ArrayList<>();
-        std_search.add(new StudentForSearch("Nguyễn Tuấn Ngọc \n 22026521", "INT3120 50", "Tiếng Nhật trong Công nghệ thông tin", "3"));
-        std_search.add(new StudentForSearch("Lương Thị Thu Hương", "INT3120 50", "Phát triển ứng dụng di động", "3"));
-        std_search.add(new StudentForSearch("Hoàng Phi Hùng", "INT3120 50", "Phát triển ứng dụng di động", "3"));
-        std_search.add(new StudentForSearch("Bùi Thị Ngọc", "INT3120 50", "Phát triển ứng dụng di động", "3"));
-        std_search.add(new StudentForSearch("Nguyễn Hữu Cứ", "INT3120 50", "Phát triển ứng dụng di động", "3"));
+        DatabaseReference reference;
+        reference = FirebaseDatabase.getInstance("https://j1-student-connect-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("1srn9ku9VkZvIf9dugTTPEcr2tRk3tkWl0MWxjzT1lp0").child("search");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot temp: snapshot.getChildren()) {
+                        String tmp_name = temp.child("name").getValue().toString();
+                        String tmp_id = temp.child("student_id").getValue().toString();
+                        String tmp_class_id = temp.child("class_id").getValue().toString();
+                        String tmp_class = temp.child("class_name").getValue().toString();
+                        String tmp_tc = temp.child("portal_number").getValue().toString();
+                        std_search.add(new StudentForSearch(tmp_name + "\n" + tmp_id, tmp_class_id, tmp_class, tmp_tc));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return std_search;
     }
 }

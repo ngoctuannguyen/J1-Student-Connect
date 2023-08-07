@@ -39,12 +39,6 @@ public class Login extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = auth.getCurrentUser();
-//        if(currentUser != null){
-//            Intent intent = new Intent(Login.this, MainActivity.class);
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.anim_activity_left_to_right_in, R.anim.anim_activity_left_to_right_out);
-//            finish();
-//        }
     }
 
     @Override
@@ -164,5 +158,10 @@ public class Login extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }
