@@ -125,18 +125,16 @@ public class Grades extends AppCompatActivity {
                         tableLayout.removeAllViews(); // Xóa bảng hiện tại (nếu có)
 
                         int stt = 1;
-                        Integer portal_semester = 0;
+                        Double portal_semester = 0.00;
                         Double gpa_semester = 0.00;
-                        Integer portal_total = 0;
+                        Double portal_total = 0.00;
                         Double gpa_total = 0.00;
                         List<TableRow> rowsToShow = new ArrayList<>();
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Integer student_id = snapshot.child("student_id").getValue(Integer.class);
-                            String name = snapshot.child("subject_id").getValue(String.class);
-//                            Integer portal = snapshot.child("portal_number").getValue(Integer.class);
-                            Integer portal = 2;
-//                            Double gpa = 3.5;
+                            String name = snapshot.child("subject_name").getValue(String.class);
+                            Double portal = snapshot.child("portal_number").getValue(Double.class);
                             Double gpa = snapshot.child("gpa").getValue(Double.class);
                             String score;
                             if (gpa.equals(4.0)) {
@@ -180,7 +178,7 @@ public class Grades extends AppCompatActivity {
                                         row.addView(textViewColumn2);
 
                                         TextView textViewColumn3 = new TextView(getApplicationContext());
-                                        textViewColumn3.setText(String.valueOf(portal));
+                                        textViewColumn3.setText(String.format("%.0f", portal));
                                         textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
                                         textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
                                         textViewColumn3.setBackgroundResource(R.drawable.cell3);
@@ -232,7 +230,7 @@ public class Grades extends AppCompatActivity {
                                     row.addView(textViewColumn2);
 
                                     TextView textViewColumn3 = new TextView(getApplicationContext());
-                                    textViewColumn3.setText(String.valueOf(portal));
+                                    textViewColumn3.setText(String.format("%.0f", portal));
                                     textViewColumn3.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.2f));
                                     textViewColumn3.setGravity(Gravity.CENTER_HORIZONTAL);
                                     textViewColumn3.setBackgroundResource(R.drawable.cell3);
@@ -262,24 +260,22 @@ public class Grades extends AppCompatActivity {
 
                         if (portal_semester != 0) {
                             gpa_semester /= portal_semester;
-                            gpa_semester = (double) (Math.round(gpa_semester*100)/100);
                         } else {
                             gpa_semester = 0.00;
                         }
 
                         if (portal_total != 0) {
                             gpa_total /= portal_total;
-                            gpa_total = (double) (Math.round(gpa_total*100)/100);
                         } else {
                             gpa_total = 0.00;
                         }
 
                         if (check_option==HKoption1 || check_option==HKoption2) {
                             gradeSemester = findViewById(R.id.grade_semester);
-                            gradeSemester.setText("Tổng tín chỉ: " + String.valueOf(portal_semester) + "\nĐiểm trung bình hệ 4: " + String.format("%.2f", gpa_semester));
+                            gradeSemester.setText("Tổng tín chỉ: " + String.format("%.0f", portal_semester) + "\nĐiểm trung bình hệ 4: " + String.format("%.2f", gpa_semester));
 
                             gradeGeneral = findViewById(R.id.grade_general);
-                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.valueOf(portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
+                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.format("%.0f", portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
                         } else if (check_option=="Toàn khóa") {
                             gradeSemester = findViewById(R.id.grade_general);
                             String str = "Xếp loại học lực\n";
@@ -299,7 +295,7 @@ public class Grades extends AppCompatActivity {
                             gradeSemester.setText(str);
 
                             gradeGeneral = findViewById(R.id.grade_semester);
-                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.valueOf(portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
+                            gradeGeneral.setText("Tổng tín chỉ tích lũy: " + String.format("%.0f", portal_total) + "\nĐiểm trung bình tích lũy hệ 4: " + String.format("%.2f", gpa_total));
                         }
 
                         for (TableRow row : rowsToShow) {
