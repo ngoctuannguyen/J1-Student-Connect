@@ -170,6 +170,7 @@ public class TabProfile extends Fragment {
         title_name = view.findViewById(R.id.title_name);
         edit_profile = view.findViewById(R.id.btn_edit_profile);
         logout = view.findViewById(R.id.btn_logout);
+        profile_image = view.findViewById(R.id.profile_image);
     }
 
     private void buttonsConstruct() {
