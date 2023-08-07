@@ -129,7 +129,7 @@ public class TabSearch extends Fragment {
         });
 
 
-        }
+    }
 
     private void filter(String text, String index) {
         List<StudentForSearch> filterList = new ArrayList<>();

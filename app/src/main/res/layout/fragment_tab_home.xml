@@ -30,21 +30,22 @@
             android:text="@string/app_name_short"
             android:textColor="@color/black"
             android:textSize="50sp"
+            android:layout_marginRight="60dp"
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/Notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@null"
-            android:contentDescription="notification"
-            android:src="@drawable/baseline_notifications_24" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/Notification"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@null"-->
+<!--            android:contentDescription="notification"-->
+<!--            android:src="@drawable/baseline_notifications_24" />-->
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +91,7 @@
                 android:gravity="bottom"
                 android:text="null"
                 android:textColor="@color/grey" />
-          
+
             <ImageButton
                 android:id="@+id/pomodoroHotkey"
                 android:layout_width="wrap_content"
@@ -104,13 +105,6 @@
 
         </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/calendarHotKey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="Calendar"
-            android:src="@drawable/calendar" />
 
     </LinearLayout>
 
