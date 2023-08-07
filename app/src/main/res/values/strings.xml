@@ -91,6 +91,8 @@
 
     <!--    Pomodoro-->
     <string name="channel_name">pomodoro_channel</string>
+    <string name="channel_name_2">pomodoro_channel2</string>
     <string name="channel_desc">FFFFF</string>
+    <string name="channel_desc2">CCCCC</string>
 
 </resources>
