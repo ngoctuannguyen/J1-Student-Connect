@@ -12,26 +12,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/request_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:background="@drawable/gradient_bg_blue">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:paddingTop="20sp"
-            android:orientation="horizontal">
+            android:layout_width="416dp"
+            android:layout_height="71dp"
+            android:orientation="horizontal"
+            android:paddingTop="20sp">
 
             <LinearLayout
                 android:id="@+id/add_request_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="bottom"
-                android:paddingHorizontal="10sp"
-                android:paddingVertical="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_top_cardview"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:background="@drawable/rounded_top_cardview">
+                android:paddingHorizontal="10sp"
+                android:paddingVertical="10sp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -42,10 +42,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tạo yêu cầu"
                     android:gravity="center_vertical"
+                    android:text="Tạo yêu cầu"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -53,14 +53,14 @@
                 android:id="@+id/request_handing_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_alignParentBottom="true"
-                android:paddingHorizontal="10sp"
-                android:paddingVertical="10sp"
+                android:layout_gravity="bottom"
+                android:layout_toRightOf="@+id/add_request_bar"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_gravity="bottom"
-                android:layout_toRightOf="@+id/add_request_bar">
+                android:paddingHorizontal="10sp"
+                android:paddingVertical="10sp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -72,9 +72,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="center"
                     android:text="Trạng thái"
                     android:textSize="18sp"
-                    android:gravity="center"
                     android:textStyle="bold" />
 
             </LinearLayout>
